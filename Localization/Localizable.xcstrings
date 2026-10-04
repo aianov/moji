@@ -1,0 +1,4807 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%@ h" : {"comment" : "Interval in hours.", "localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "%@ ч"}}}},
+    "%@ keeps slipping" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "%@ никак не запоминается"}}}},
+    "%@ mo" : {"comment" : "Interval in months, short.", "localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "%@ мес"}}}},
+    "%@ y" : {"comment" : "Interval in years, short.", "localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "%@ г"}}}},
+    "%lld cards" : {"localizations" : {"en" : {"variations" : {"plural" : {"one" : {"stringUnit" : {"state" : "translated", "value" : "%lld card"}}, "other" : {"stringUnit" : {"state" : "translated", "value" : "%lld cards"}}}}}, "ru" : {"variations" : {"plural" : {"few" : {"stringUnit" : {"state" : "translated", "value" : "%lld карточки"}}, "many" : {"stringUnit" : {"state" : "translated", "value" : "%lld карточек"}}, "one" : {"stringUnit" : {"state" : "translated", "value" : "%lld карточка"}}, "other" : {"stringUnit" : {"state" : "translated", "value" : "%lld карточки"}}}}}}},
+    "%lld d" : {"comment" : "Interval in days, short.", "localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "%lld д"}}}},
+    "%lld in 30 days · days studied: %lld" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "%1$lld за 30 дней · дней с занятиями: %2$lld"}}}},
+    "%lld in all" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "всего %lld"}}}},
+    "%lld min" : {"comment" : "Interval in minutes.", "localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "%lld мин"}}}},
+    "%lld words" : {"localizations" : {"en" : {"variations" : {"plural" : {"one" : {"stringUnit" : {"state" : "translated", "value" : "%lld word"}}, "other" : {"stringUnit" : {"state" : "translated", "value" : "%lld words"}}}}}, "ru" : {"variations" : {"plural" : {"few" : {"stringUnit" : {"state" : "translated", "value" : "%lld слова"}}, "many" : {"stringUnit" : {"state" : "translated", "value" : "%lld слов"}}, "one" : {"stringUnit" : {"state" : "translated", "value" : "%lld слово"}}, "other" : {"stringUnit" : {"state" : "translated", "value" : "%lld слова"}}}}}}},
+    "%lld words, most frequent first" : {"localizations" : {"en" : {"variations" : {"plural" : {"one" : {"stringUnit" : {"state" : "translated", "value" : "%lld word, most frequent first"}}, "other" : {"stringUnit" : {"state" : "translated", "value" : "%lld words, most frequent first"}}}}}, "ru" : {"variations" : {"plural" : {"few" : {"stringUnit" : {"state" : "translated", "value" : "%lld слова, от частых к редким"}}, "many" : {"stringUnit" : {"state" : "translated", "value" : "%lld слов, от частых к редким"}}, "one" : {"stringUnit" : {"state" : "translated", "value" : "%lld слово, от частых к редким"}}, "other" : {"stringUnit" : {"state" : "translated", "value" : "%lld слова, от частых к редким"}}}}}}},
+    "30 days" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "30 дней"}}}},
+    "<%@ h" : {"comment" : "Answer button interval, less than N hours.", "localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "<%@ ч"}}}},
+    "<%lld min" : {"comment" : "Answer button interval, less than N minutes.", "localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "<%lld мин"}}}},
+    "A day this week" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "В день за неделю"}}}},
+    "A lapse is a review card you pressed Again on. A leech is a card that lapses again and again." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Провал: на карточке из повторений нажато «Снова». Пиявка: карточка, которая проваливается снова и снова."}}}},
+    "About the words" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "О словах"}}}},
+    "Advanced" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Дополнительно"}}}},
+    "After reviews" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "После повторений"}}}},
+    "Again" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Снова"}}}},
+    "All" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Все"}}}},
+    "All %lld words become mature reviews and come back now and then over the next weeks." : {"localizations" : {"en" : {"variations" : {"plural" : {"one" : {"stringUnit" : {"state" : "translated", "value" : "%lld word becomes a mature review and comes back now and then over the next weeks."}}, "other" : {"stringUnit" : {"state" : "translated", "value" : "All %lld words become mature reviews and come back now and then over the next weeks."}}}}}, "ru" : {"variations" : {"plural" : {"few" : {"stringUnit" : {"state" : "translated", "value" : "Все %lld слова станут зрелыми и будут иногда возвращаться в ближайшие недели."}}, "many" : {"stringUnit" : {"state" : "translated", "value" : "Все %lld слов станут зрелыми и будут иногда возвращаться в ближайшие недели."}}, "one" : {"stringUnit" : {"state" : "translated", "value" : "%lld слово станет зрелым и будет иногда возвращаться в ближайшие недели."}}, "other" : {"stringUnit" : {"state" : "translated", "value" : "Все %lld слова станут зрелыми и будут иногда возвращаться в ближайшие недели."}}}}}}},
+    "All %lld words become new again. Notes and flags stay." : {"localizations" : {"en" : {"variations" : {"plural" : {"one" : {"stringUnit" : {"state" : "translated", "value" : "%lld word becomes new again. Notes and flags stay."}}, "other" : {"stringUnit" : {"state" : "translated", "value" : "All %lld words become new again. Notes and flags stay."}}}}}, "ru" : {"variations" : {"plural" : {"few" : {"stringUnit" : {"state" : "translated", "value" : "Все %lld слова снова станут новыми. Заметки и флажки останутся."}}, "many" : {"stringUnit" : {"state" : "translated", "value" : "Все %lld слов снова станут новыми. Заметки и флажки останутся."}}, "one" : {"stringUnit" : {"state" : "translated", "value" : "%lld слово снова станет новым. Заметки и флажки останутся."}}, "other" : {"stringUnit" : {"state" : "translated", "value" : "Все %lld слова снова станут новыми. Заметки и флажки останутся."}}}}}}},
+    "All but the word itself" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Везде, кроме самого слова"}}}},
+    "All done for today. New words and reviews come back tomorrow." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "На сегодня всё. Новые слова и повторения вернутся завтра."}}}},
+    "All sections" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Все разделы"}}}},
+    "All time" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "За всё время"}}}},
+    "Answer by typing the reading" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Отвечать вводом чтения"}}}},
+    "Answers a day" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Ответов в день"}}}},
+    "Answers: %lld · %@" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Ответов: %1$lld · %2$@"}}}},
+    "Before reviews" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Перед повторениями"}}}},
+    "Blue" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Синий"}}}},
+    "Browse" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Обзор"}}}},
+    "Browse words" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Обзор слов"}}}},
+    "Buried" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Отложенные"}}}},
+    "Bury siblings" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Откладывать родственные карточки"}}}},
+    "Bury until tomorrow" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Отложить до завтра"}}}},
+    "Card: Japanese to meaning" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Карточка: японский → значение"}}}},
+    "Card: meaning to Japanese" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Карточка: значение → японский"}}}},
+    "Cards" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Карточки"}}}},
+    "Cards in learning come back at %@. Open Words then to finish them." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Карточки в изучении вернутся в %@. Открой тогда Слова и доделай их."}}}},
+    "Cards you pressed Again on. This extra round doesn't change when they come back." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Карточки, на которых было нажато «Снова». Этот дополнительный круг не меняет, когда они вернутся."}}}},
+    "Changed by you" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Изменено вручную"}}}},
+    "Coming up" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Впереди"}}}},
+    "Custom study" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Выборочное изучение"}}}},
+    "Daily limits" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Дневные лимиты"}}}},
+    "Day" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "День"}}}},
+    "Day streak" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Дней подряд"}}}},
+    "Days in a row with words" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Дней подряд со словами"}}}},
+    "Deck options" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Настройки колоды"}}}},
+    "Display and input" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Показ и ввод"}}}},
+    "Done for now" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Пока всё"}}}},
+    "Due" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Повтор"}}}},
+    "Due %@" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Срок: %@"}}}},
+    "Due at %@" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Срок в %@"}}}},
+    "Due date, then frequency" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "По сроку, затем по частоте"}}}},
+    "Due date, then random" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "По сроку, затем случайно"}}}},
+    "Due in %lld days" : {"localizations" : {"en" : {"variations" : {"plural" : {"one" : {"stringUnit" : {"state" : "translated", "value" : "Due in %lld day"}}, "other" : {"stringUnit" : {"state" : "translated", "value" : "Due in %lld days"}}}}}, "ru" : {"variations" : {"plural" : {"few" : {"stringUnit" : {"state" : "translated", "value" : "Через %lld дня"}}, "many" : {"stringUnit" : {"state" : "translated", "value" : "Через %lld дней"}}, "one" : {"stringUnit" : {"state" : "translated", "value" : "Через %lld день"}}, "other" : {"stringUnit" : {"state" : "translated", "value" : "Через %lld дня"}}}}}}},
+    "Due in the next %lld days" : {"localizations" : {"en" : {"variations" : {"plural" : {"one" : {"stringUnit" : {"state" : "translated", "value" : "Due in the next %lld day"}}, "other" : {"stringUnit" : {"state" : "translated", "value" : "Due in the next %lld days"}}}}}, "ru" : {"variations" : {"plural" : {"few" : {"stringUnit" : {"state" : "translated", "value" : "Срок в ближайшие %lld дня"}}, "many" : {"stringUnit" : {"state" : "translated", "value" : "Срок в ближайшие %lld дней"}}, "one" : {"stringUnit" : {"state" : "translated", "value" : "Срок в ближайший %lld день"}}, "other" : {"stringUnit" : {"state" : "translated", "value" : "Срок в ближайшие %lld дня"}}}}}}},
+    "Due now" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Пора повторить"}}}},
+    "Due now: %lld · new today: %lld" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Повторить сейчас: %1$lld · новых сегодня: %2$lld"}}}},
+    "Due today" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Срок сегодня"}}}},
+    "Due tomorrow" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Срок завтра"}}}},
+    "Ease" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Лёгкость"}}}},
+    "Easy" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Легко"}}}},
+    "Easy bonus" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Бонус за «Легко»"}}}},
+    "Easy interval" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Интервал для «Легко»"}}}},
+    "Erase all word progress" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Стереть весь прогресс слов"}}}},
+    "Erase all word progress?" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Стереть весь прогресс слов?"}}}},
+    "Erasing removes the state of every card, their history and the daily counts. Notes and options stay." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Сотрутся состояние каждой карточки, их история и дневные счётчики. Заметки и настройки останутся."}}}},
+    "Every answer is already saved. Finish the queue to count today for your streak." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Каждый ответ уже сохранён. Пройди очередь до конца, чтобы день засчитался в серию."}}}},
+    "Every word becomes new again. This can't be undone." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Все слова снова станут новыми. Это нельзя отменить."}}}},
+    "Every word is in your reviews. Come back tomorrow." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Все слова уже в повторениях. Возвращайся завтра."}}}},
+    "Examples" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Примеры"}}}},
+    "Extra practice" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Дополнительная практика"}}}},
+    "Flag" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Флажок"}}}},
+    "Flag: %@" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Флажок: %@"}}}},
+    "Flagged" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "С флажком"}}}},
+    "Forget: make it new again" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Забыть: снова сделать новым"}}}},
+    "Forgotten cards" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Забытые карточки"}}}},
+    "Forgotten in the last %lld days" : {"localizations" : {"en" : {"variations" : {"plural" : {"one" : {"stringUnit" : {"state" : "translated", "value" : "Forgotten in the last %lld day"}}, "other" : {"stringUnit" : {"state" : "translated", "value" : "Forgotten in the last %lld days"}}}}}, "ru" : {"variations" : {"plural" : {"few" : {"stringUnit" : {"state" : "translated", "value" : "Забытые за последние %lld дня"}}, "many" : {"stringUnit" : {"state" : "translated", "value" : "Забытые за последние %lld дней"}}, "one" : {"stringUnit" : {"state" : "translated", "value" : "Забытые за последний %lld день"}}, "other" : {"stringUnit" : {"state" : "translated", "value" : "Забытые за последние %lld дня"}}}}}}},
+    "Furigana on the front" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Фуригана на лицевой стороне"}}}},
+    "Good" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Хорошо"}}}},
+    "Graduating interval" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Интервал выпуска"}}}},
+    "Green" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Зелёный"}}}},
+    "Hard" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Трудно"}}}},
+    "Hard interval" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Интервал для «Трудно»"}}}},
+    "History" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "История"}}}},
+    "I know this word" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Я знаю это слово"}}}},
+    "In %@: %@" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "В %1$@: %2$@"}}}},
+    "Interval" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Интервал"}}}},
+    "Interval modifier" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Множитель интервала"}}}},
+    "Its due cards and its new cards within today's limit, nothing from other sections." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Его карточки к повторению и новые в пределах дневного лимита, без других разделов."}}}},
+    "Kanji in this word" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Кандзи в этом слове"}}}},
+    "Kanji, kana, romaji or meaning" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Кандзи, кана, ромадзи или значение"}}}},
+    "Keep studying" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Продолжить"}}}},
+    "Kind" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Тип"}}}},
+    "Known: %lld of %lld" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Выучено: %1$lld из %2$lld"}}}},
+    "Lapses" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Провалы"}}}},
+    "Last 30 days" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Последние 30 дней"}}}},
+    "Last 7 days" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Последние 7 дней"}}}},
+    "Last year" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Последний год"}}}},
+    "Learned %lld · learning %lld · new %lld" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Выучено: %1$lld · в изучении: %2$lld · новые: %3$lld"}}}},
+    "Learning" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Изучение"}}}},
+    "Learning cards at %@" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Карточки в изучении в %@"}}}},
+    "Learning steps" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Шаги изучения"}}}},
+    "Leech action" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Что делать с пиявкой"}}}},
+    "Leech after lapses" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Пиявка после провалов"}}}},
+    "Leeches" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Пиявки"}}}},
+    "Left" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Осталось"}}}},
+    "Loading the deck…" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Загружаю колоду…"}}}},
+    "Longest intervals first" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Сначала длинные интервалы"}}}},
+    "Mark section %lld as known?" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Отметить раздел %lld как выученный?"}}}},
+    "Mark section as known" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Отметить раздел как выученный"}}}},
+    "Mature" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Зрелые"}}}},
+    "Mature %lld of %lld, learning %lld" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Выучено %1$lld из %2$lld, в изучении %3$lld"}}}},
+    "Maximum interval" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Максимальный интервал"}}}},
+    "Minimum interval" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Минимальный интервал"}}}},
+    "Mix with reviews" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Вперемешку с повторениями"}}}},
+    "Mnemonic, nuance, anything that helps" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Мнемоника, оттенки смысла, всё, что помогает"}}}},
+    "More new cards" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Ещё новых карточек"}}}},
+    "More reviews" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Ещё повторений"}}}},
+    "Most frequent first" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Сначала самые частые"}}}},
+    "Never" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Никогда"}}}},
+    "New" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Новые"}}}},
+    "New card order" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Порядок новых карточек"}}}},
+    "New cards" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Новые карточки"}}}},
+    "New cards a day" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Новых карточек в день"}}}},
+    "New cards also count toward the review limit, like in Anki." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Новые карточки тоже входят в лимит повторений, как в Anki."}}}},
+    "New cards and reviews" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Новые и повторения"}}}},
+    "New interval after a lapse" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Новый интервал после провала"}}}},
+    "Next" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Следующий показ"}}}},
+    "Next day starts at" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Новый день начинается в"}}}},
+    "Next intervals on the buttons" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Интервалы на кнопках"}}}},
+    "No reviews yet" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Повторений пока нет"}}}},
+    "No words found" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Слов не найдено"}}}},
+    "No words here" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Здесь нет слов"}}}},
+    "No. %lld" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "№ %lld"}}}},
+    "None" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Нигде"}}}},
+    "Not started" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Не начат"}}}},
+    "Not studied yet" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Ещё не изучалось"}}}},
+    "Nothing to study right now" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Сейчас нечего учить"}}}},
+    "One section only" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Только один раздел"}}}},
+    "Only for today. Tomorrow the usual limits from the deck options come back." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Только на сегодня. Завтра вернутся обычные лимиты из настроек колоды."}}}},
+    "Only tag it" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Только пометить"}}}},
+    "Only this section" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Только этот раздел"}}}},
+    "Open the kanji" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Открыть кандзи"}}}},
+    "Opens the Words tab" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Открывает вкладку Слова"}}}},
+    "Options" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Настройки"}}}},
+    "Orange" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Оранжевый"}}}},
+    "Order" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Порядок"}}}},
+    "Over every kanji" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Над каждым кандзи"}}}},
+    "Overdue since %@" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Просрочено с %@"}}}},
+    "Pink" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Розовый"}}}},
+    "Play audio on the answer" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Звук при показе ответа"}}}},
+    "Play the sentence" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Прослушать предложение"}}}},
+    "Play the word" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Прослушать слово"}}}},
+    "Purple" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Фиолетовый"}}}},
+    "Raise today's new limit" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Поднять лимит новых на сегодня"}}}},
+    "Raise today's review limit" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Поднять лимит повторений на сегодня"}}}},
+    "Random" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Случайно"}}}},
+    "Readings: %@" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Чтения: %@"}}}},
+    "Red" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Красный"}}}},
+    "Relearn" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Переучивание"}}}},
+    "Relearning" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Переучивание"}}}},
+    "Relearning steps" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Шаги переучивания"}}}},
+    "Remove the leech tag" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Снять метку пиявки"}}}},
+    "Replay buttons" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Кнопки повтора звука"}}}},
+    "Reset section" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Сбросить раздел"}}}},
+    "Reset section %lld?" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Сбросить раздел %lld?"}}}},
+    "Restore Anki's defaults" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Вернуть настройки Anki по умолчанию"}}}},
+    "Reverse cards" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Обратные карточки"}}}},
+    "Reverse cards show the meaning and ask for the Japanese word. With burying on, a word's two cards never come on the same day." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Обратные карточки показывают значение и просят японское слово. Если откладывание включено, две карточки одного слова не выпадут в один день."}}}},
+    "Review" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Повторение"}}}},
+    "Review ahead" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Повторить заранее"}}}},
+    "Review forgotten cards" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Повторить забытые карточки"}}}},
+    "Review order" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Порядок повторений"}}}},
+    "Reviews" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Повторения"}}}},
+    "Reviews a day" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Повторений в день"}}}},
+    "Reviews due each day of the next month. Today includes cards already overdue." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Повторения на каждый день следующего месяца. В сегодняшние входят уже просроченные карточки."}}}},
+    "Reviews due soon, studied now. Early answers grow the interval a little less, like in Anki." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Повторения, срок которых скоро наступит, проходятся сейчас. Ранний ответ увеличивает интервал чуть меньше, как в Anki."}}}},
+    "Right: %@ · %@" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Правильно: %1$@ · %2$@"}}}},
+    "Say it in Japanese" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Скажи по-японски"}}}},
+    "Search words" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Поиск слов"}}}},
+    "Section" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Раздел"}}}},
+    "Section %lld" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Раздел %lld"}}}},
+    "Section %lld actions" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Действия с разделом %lld"}}}},
+    "Section %lld only" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Только раздел %lld"}}}},
+    "Sections" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Разделы"}}}},
+    "Set due date" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Назначить срок"}}}},
+    "Shortest intervals first" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Сначала короткие интервалы"}}}},
+    "Show answer" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Показать ответ"}}}},
+    "Show the words" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Показать слова"}}}},
+    "Start" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Начать"}}}},
+    "Starting ease" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Начальная лёгкость"}}}},
+    "State" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Состояние"}}}},
+    "Statistics" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Статистика"}}}},
+    "Steps are minutes unless you add s, h or d: 1m 10m 1h. Press Return to save them." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Шаги в минутах, если не добавить s, h или d: 1m 10m 1h. Нажми Return, чтобы сохранить."}}}},
+    "Stop" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Остановиться"}}}},
+    "Stop for now?" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Остановиться?"}}}},
+    "Study" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Учить"}}}},
+    "Study section %lld" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Учить раздел %lld"}}}},
+    "Study this section" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Учить этот раздел"}}}},
+    "Suspend" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Приостановить"}}}},
+    "Suspend the card" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Приостановить карточку"}}}},
+    "Suspended" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Приостановленные"}}}},
+    "Swipe a turned card left for Again or right for Good. Words play first, then the sentence when it has a real recording." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Смахни перевёрнутую карточку влево для «Снова» или вправо для «Хорошо». Сначала звучит слово, потом предложение, если у него есть живая запись."}}}},
+    "Swipe to grade" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Оценка смахиванием"}}}},
+    "Tagged as a leech" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Помечено как пиявка"}}}},
+    "Tagged as a leech and suspended" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Помечено как пиявка и приостановлено"}}}},
+    "That's all for today. New cards and reviews come back tomorrow." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "На сегодня всё. Новые карточки и повторения вернутся завтра."}}}},
+    "The scheduler is Anki's SM-2: ease starts at %@, Again takes %@ off, Hard %@, Easy adds %@. Intervals get a little random spread so cards don't bunch up." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Планировщик как в Anki, SM-2: лёгкость начинается с %1$@, «Снова» снимает %2$@, «Трудно» снимает %3$@, «Легко» добавляет %4$@. Интервалы слегка разбрасываются, чтобы карточки не скапливались."}}}},
+    "The share of review cards you remembered, without Again. Anki aims for about %@-%@." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Доля повторений без «Снова». Anki стремится примерно к %1$@-%2$@."}}}},
+    "The word list isn't in this build yet." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Списка слов пока нет в этой сборке."}}}},
+    "These words keep slipping. Look at them in the browser, add a note, or study them on their own." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Эти слова никак не запоминаются. Посмотри их в обзоре, добавь заметку или поучи отдельно."}}}},
+    "This word is no longer in the deck." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Этого слова больше нет в колоде."}}}},
+    "Timer on the card" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Таймер на карточке"}}}},
+    "Today's limits" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Лимиты на сегодня"}}}},
+    "Tomorrow %lld, this week %lld" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Завтра %1$lld, за неделю %2$lld"}}}},
+    "Total" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Всего"}}}},
+    "True retention" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Настоящее запоминание"}}}},
+    "Turquoise" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Бирюзовый"}}}},
+    "Type the reading" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Введи чтение"}}}},
+    "Unbury" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Вернуть сегодня"}}}},
+    "Undo the last answer" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Отменить последний ответ"}}}},
+    "Unsuspend" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Возобновить"}}}},
+    "Without Again" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Без «Снова»"}}}},
+    "Without Again: %lld of %lld" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Без «Снова»: %1$lld из %2$lld"}}}},
+    "Words" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Слова"}}}},
+    "Words %lld-%lld" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Слова %1$lld-%2$lld"}}}},
+    "Words menu" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Меню слов"}}}},
+    "Yesterday" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Вчера"}}}},
+    "You typed it right" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Ответ верный"}}}},
+    "You typed: %@" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Твой ответ: %@"}}}},
+    "Young" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Молодые"}}}},
+    "Young cards have intervals under 21 days, mature ones 21 days or more." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "У молодых карточек интервал меньше 21 дня, у зрелых 21 день и больше."}}}},
+    "Your note" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Твоя заметка"}}}},
+    "adverb" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "наречие"}}}},
+    "auxiliary" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "вспомогательный глагол"}}}},
+    "buried" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "отложено"}}}},
+    "conjunction" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "союз"}}}},
+    "counter" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "счётный суффикс"}}}},
+    "expression" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "выражение"}}}},
+    "extra practice" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "доп. практика"}}}},
+    "i-adjective" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "и-прилагательное"}}}},
+    "interjection" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "междометие"}}}},
+    "learning" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "изучение"}}}},
+    "leech" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "пиявка"}}}},
+    "mature" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "зрелое"}}}},
+    "na-adjective" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "на-прилагательное"}}}},
+    "new" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "новое"}}}},
+    "noun" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "существительное"}}}},
+    "noun, also with する" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "существительное, бывает с する"}}}},
+    "number" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "число"}}}},
+    "particle" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "частица"}}}},
+    "pre-noun word" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "предыменное слово"}}}},
+    "prefix" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "приставка"}}}},
+    "pronoun" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "местоимение"}}}},
+    "relearning" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "переучивание"}}}},
+    "reverse" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "обратная"}}}},
+    "review" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "повторение"}}}},
+    "suffix" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "суффикс"}}}},
+    "suspended" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "приостановлено"}}}},
+    "verb" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "глагол"}}}},
+    "voice: %@" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "голос: %@"}}}},
+    "young" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "молодое"}}}},
+    "食べる, taberu, eat" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "食べる, taberu, есть"}}}},
+    "%@ · %@ in %@" : {
+      "comment" : "Activity summary: days, sessions, year.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ · %2$@ за %3$@ год"
+          }
+        }
+      }
+    },
+    "%@ · batch %lld of %lld" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ · группа %2$lld из %3$lld"
+          }
+        }
+      }
+    },
+    "%@ · rest day" : {
+      "comment" : "A day in the activity graph with nothing finished.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ · день отдыха"
+          }
+        }
+      }
+    },
+    "%@ always show the character: their romaji is the same as another kana's." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ всегда показываются знаком: их ромадзи совпадает с другой каной."
+          }
+        }
+      }
+    },
+    "%@, %@, %@, mastered" : {
+      "comment" : "VoiceOver: a kanji cell, glyph, romaji, meaning.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@, %2$@, %3$@, выучено"
+          }
+        }
+      }
+    },
+    "%@, %@, mastered" : {
+      "comment" : "VoiceOver: a kana cell, glyph and romaji.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@, %2$@, выучено"
+          }
+        }
+      }
+    },
+    "%@, done" : {
+      "comment" : "VoiceOver: a weekday with a finished session.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@, готово"
+          }
+        }
+      }
+    },
+    "%@, mastered %lld of %lld, seen %lld" : {
+      "comment" : "VoiceOver: a kanji theme tile on the profile, theme name and counts.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@, выучено %2$lld из %3$lld, встречено %4$lld"
+          }
+        }
+      }
+    },
+    "%@, strength %lld of %lld" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@, освоение %2$lld из %3$lld"
+          }
+        }
+      }
+    },
+    "%lld" : {
+      "shouldTranslate" : false
+    },
+    "%lld characters" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld character"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld characters"
+                }
+              }
+            }
+          }
+        },
+        "ru" : {
+          "variations" : {
+            "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld знака"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld знаков"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld знак"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld знака"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld characters get full mastery. Lessons skip past them and bring them back now and then for review." : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld character gets full mastery. Lessons skip past it and bring it back now and then for review."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld characters get full mastery. Lessons skip past them and bring them back now and then for review."
+                }
+              }
+            }
+          }
+        },
+        "ru" : {
+          "variations" : {
+            "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld знака станут выученными. Уроки пропустят их и иногда будут возвращать на повторение."
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld знаков станут выученными. Уроки пропустят их и иногда будут возвращать на повторение."
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld знак станет выученным. Уроки пропустят его и иногда будут возвращать на повторение."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld знака станут выученными. Уроки пропустят их и иногда будут возвращать на повторение."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld day streak" : {
+      "comment" : "Streak line on the profile; the number is set large.",
+      "localizations" : {
+        "ru" : {
+          "variations" : {
+            "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld дня подряд"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld дней подряд"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld день подряд"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld дня подряд"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld days" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld day"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld days"
+                }
+              }
+            }
+          }
+        },
+        "ru" : {
+          "variations" : {
+            "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld дня"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld дней"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld день"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld дня"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld kanji" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld кандзи"
+          }
+        }
+      }
+    },
+    "%lld kanji, the most common first" : {
+      "comment" : "Under the theme description at the top of a kanji theme page.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld кандзи, самые частые сначала"
+          }
+        }
+      }
+    },
+    "%lld mistakes" : {
+      "comment" : "VoiceOver: how many mistakes it took to write a character.",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld mistake"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld mistakes"
+                }
+              }
+            }
+          }
+        },
+        "ru" : {
+          "variations" : {
+            "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld ошибки"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld ошибок"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld ошибка"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld ошибки"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld of %lld" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld из %2$lld"
+          }
+        }
+      }
+    },
+    "%lld of %lld right" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Верно %1$lld из %2$lld"
+          }
+        }
+      }
+    },
+    "%lld of %lld without mistakes" : {
+      "comment" : "Writing block result: characters written without a single mistake, of all characters in the group.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld из %2$lld без ошибок"
+          }
+        }
+      }
+    },
+    "%lld sessions" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld session"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld sessions"
+                }
+              }
+            }
+          }
+        },
+        "ru" : {
+          "variations" : {
+            "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld занятия"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld занятий"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld занятие"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld занятия"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld to write" : {
+      "comment" : "Writing: how many more times characters are to be written in this block.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ещё %lld"
+          }
+        }
+      }
+    },
+    "%lld writings left" : {
+      "comment" : "VoiceOver: how many more times characters are to be written in this block.",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld writing left"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld writings left"
+                }
+              }
+            }
+          }
+        },
+        "ru" : {
+          "variations" : {
+            "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Осталось написать %lld раза"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Осталось написать %lld раз"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Осталось написать %lld раз"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Осталось написать %lld раза"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld/%lld" : {
+      "shouldTranslate" : false
+    },
+    "%lld%%" : {
+      "shouldTranslate" : false
+    },
+    "Abstract words for thinking and discussing" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отвлечённые слова для мыслей и споров"
+          }
+        }
+      }
+    },
+    "Accuracy" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Точность"
+          }
+        }
+      }
+    },
+    "Actions" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Действия"
+          }
+        }
+      }
+    },
+    "Activity" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Активность"
+          }
+        }
+      }
+    },
+    "Add a symbol to change the sound" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Значок меняет звук"
+          }
+        }
+      }
+    },
+    "Add small characters to make new syllables" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Маленькие знаки дают новые слоги"
+          }
+        }
+      }
+    },
+    "Add the Japanese keyboard: Settings › General › Keyboard › Keyboards › Add New Keyboard › Japanese" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавь японскую клавиатуру: Настройки › Основные › Клавиатура › Клавиатуры › Новые клавиатуры › Японская"
+          }
+        }
+      }
+    },
+    "All of %@" : {
+      "comment" : "Menu item: the whole page.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вся страница «%@»"
+          }
+        }
+      }
+    },
+    "All pairs matched" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Все пары собраны"
+          }
+        }
+      }
+    },
+    "All written" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Всё написано"
+          }
+        }
+      }
+    },
+    "Also: %@" : {
+      "comment" : "Other readings of a kanji: にち · nichi, じつ · jitsu.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Также: %@"
+          }
+        }
+      }
+    },
+    "Animal signs and old calendar names" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Знаки животных и старые названия в календаре"
+          }
+        }
+      }
+    },
+    "Animal world" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мир животных"
+          }
+        }
+      }
+    },
+    "Animals" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Животные"
+          }
+        }
+      }
+    },
+    "Answer by" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Как отвечать"
+          }
+        }
+      }
+    },
+    "Answer mode" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Режим ответа"
+          }
+        }
+      }
+    },
+    "Answer mode: %@, %@" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Режим ответа: %1$@, %2$@"
+          }
+        }
+      }
+    },
+    "Answer with" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Чем отвечать"
+          }
+        }
+      }
+    },
+    "Answer: %@ · %@" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ответ: %1$@ · %2$@"
+          }
+        }
+      }
+    },
+    "Answer: %@ · %@ · %@" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ответ: %1$@ · %2$@ · %3$@"
+          }
+        }
+      }
+    },
+    "Answers" : {
+      "comment" : "Lesson summary stat: right answers out of all.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ответы"
+          }
+        }
+      }
+    },
+    "Answers you gave still count toward mastery. The lesson starts over next time." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ответы уже засчитаны в освоение. В следующий раз урок начнётся заново."
+          }
+        }
+      }
+    },
+    "Appearance" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Оформление"
+          }
+        }
+      }
+    },
+    "Back to stage %lld" : {
+      "comment" : "Writing: after a mistake the character is written again at a lower stage.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Назад к этапу %lld"
+          }
+        }
+      }
+    },
+    "Basic characters" : {
+      "comment" : "Menu name of the untitled first section of a kana chart.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Основные знаки"
+          }
+        }
+      }
+    },
+    "Batch %lld, current: %@" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Группа %1$lld, текущая: %2$@"
+          }
+        }
+      }
+    },
+    "Batch %lld, learned: %@" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Группа %1$lld, выучена: %2$@"
+          }
+        }
+      }
+    },
+    "Batch %lld, needs review: %@" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Группа %1$lld, пора повторить: %2$@"
+          }
+        }
+      }
+    },
+    "Batch %lld, not started: %@" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Группа %1$lld, не начата: %2$@"
+          }
+        }
+      }
+    },
+    "Battles, arms and soldiers" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Битвы, оружие и солдаты"
+          }
+        }
+      }
+    },
+    "Beasts, birds, fish and insects" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Звери, птицы, рыбы и насекомые"
+          }
+        }
+      }
+    },
+    "Being & having" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Быть и иметь"
+          }
+        }
+      }
+    },
+    "Best combo" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Лучшее комбо"
+          }
+        }
+      }
+    },
+    "Best streak" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Лучшая серия"
+          }
+        }
+      }
+    },
+    "Big & small" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Большое и маленькое"
+          }
+        }
+      }
+    },
+    "Birds & beasts" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Птицы и звери"
+          }
+        }
+      }
+    },
+    "Blossoms, reeds and wild herbs" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Соцветия, тростник и дикие травы"
+          }
+        }
+      }
+    },
+    "Body & health" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тело и здоровье"
+          }
+        }
+      }
+    },
+    "Both ways" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "В обе стороны"
+          }
+        }
+      }
+    },
+    "Buddhist words, shrines and dynasties" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Буддийские слова, святилища и династии"
+          }
+        }
+      }
+    },
+    "Building blocks" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кирпичики"
+          }
+        }
+      }
+    },
+    "Calendars, dawns, moments and speed" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Календари, рассветы, мгновения и скорость"
+          }
+        }
+      }
+    },
+    "Cancel" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отмена"
+          }
+        }
+      }
+    },
+    "Ceremonies, family and community" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обряды, семья и община"
+          }
+        }
+      }
+    },
+    "Character" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Характер"
+          }
+        }
+      }
+    },
+    "Character %@. Double tap to hear it." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Знак %@. Коснись дважды, чтобы послушать."
+          }
+        }
+      }
+    },
+    "Characters are read by native Japanese speakers. The recordings are inside the app, so it works offline." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Знаки читают японцы-носители. Записи лежат внутри приложения, интернет не нужен."
+          }
+        }
+      }
+    },
+    "Chat & manga" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Чаты и манга"
+          }
+        }
+      }
+    },
+    "Check" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Проверить"
+          }
+        }
+      }
+    },
+    "City" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Город"
+          }
+        }
+      }
+    },
+    "Classes, tests, words and writing" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Занятия, экзамены, слова и письмо"
+          }
+        }
+      }
+    },
+    "Classical Japanese" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Классический японский"
+          }
+        }
+      }
+    },
+    "Clear search" : {
+      "comment" : "VoiceOver: the x button in the character search field.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Очистить поиск"
+          }
+        }
+      }
+    },
+    "Close" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Закрыть"
+          }
+        }
+      }
+    },
+    "Close and try again." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Закрой и попробуй ещё раз."
+          }
+        }
+      }
+    },
+    "Colors" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Цвета"
+          }
+        }
+      }
+    },
+    "Combo" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сочетания"
+          }
+        }
+      }
+    },
+    "COMBO ×%lld" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "КОМБО ×%lld"
+          }
+        }
+      }
+    },
+    "Continue" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Продолжить"
+          }
+        }
+      }
+    },
+    "Cooking, dishes and drinks" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Готовка, блюда и напитки"
+          }
+        }
+      }
+    },
+    "Correct" : {
+      "comment" : "Summary stat: share of right answers.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Верно"
+          }
+        }
+      }
+    },
+    "Correct!" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Верно!"
+          }
+        }
+      }
+    },
+    "Correct! ×%lld" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Верно! ×%lld"
+          }
+        }
+      }
+    },
+    "Couldn't start this lesson" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не удалось начать урок"
+          }
+        }
+      }
+    },
+    "Couldn't start this session" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не удалось начать сессию"
+          }
+        }
+      }
+    },
+    "Counters & units" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Счётные слова и меры"
+          }
+        }
+      }
+    },
+    "Counting things, money and order" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Счёт предметов, деньги и порядок"
+          }
+        }
+      }
+    },
+    "Counting words and old measures" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Счётные суффиксы и старинные меры"
+          }
+        }
+      }
+    },
+    "Counting, measures, sides and lines" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Счёт, меры, стороны и линии"
+          }
+        }
+      }
+    },
+    "Crafts & clothing" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ремёсла и одежда"
+          }
+        }
+      }
+    },
+    "Crime, courts and disasters" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Преступления, суды и бедствия"
+          }
+        }
+      }
+    },
+    "Crops, trees and fields" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Урожай, деревья и поля"
+          }
+        }
+      }
+    },
+    "Dakuon and Handakuon" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дакуон и хандакуон"
+          }
+        }
+      }
+    },
+    "Dark" : {
+      "comment" : "Theme.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тёмная"
+          }
+        }
+      }
+    },
+    "Day %lld of your streak" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "День серии: %lld"
+          }
+        }
+      }
+    },
+    "Days" : {
+      "comment" : "Stat: days practiced in total.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дней"
+          }
+        }
+      }
+    },
+    "Days & seasons" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дни и сезоны"
+          }
+        }
+      }
+    },
+    "Days, seasons and the clock" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дни, сезоны и часы"
+          }
+        }
+      }
+    },
+    "Days, seasons, calendars and moments" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дни, сезоны, календари и мгновения"
+          }
+        }
+      }
+    },
+    "Describing" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Описание"
+          }
+        }
+      }
+    },
+    "Directions" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Направления"
+          }
+        }
+      }
+    },
+    "Discard" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить"
+          }
+        }
+      }
+    },
+    "Discard session" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить сессию"
+          }
+        }
+      }
+    },
+    "Discard this session?" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить эту сессию?"
+          }
+        }
+      }
+    },
+    "Done" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Готово"
+          }
+        }
+      }
+    },
+    "Done for today. See you tomorrow." : {
+      "comment" : "Profile streak card when today counts but no current page is named.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "На сегодня готово. До завтра."
+          }
+        }
+      }
+    },
+    "Done for today: %@. See you tomorrow." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "На сегодня готово: %@. До завтра."
+          }
+        }
+      }
+    },
+    "Double the following consonant" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удваивает следующую согласную"
+          }
+        }
+      }
+    },
+    "Draw the stroke to the end" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Доведи черту до конца"
+          }
+        }
+      }
+    },
+    "Each question picks a side at random." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Для каждого вопроса сторона выпадает случайно."
+          }
+        }
+      }
+    },
+    "Each question picks the list or the keyboard at random." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Для каждого вопроса случайно выпадает список или клавиатура."
+          }
+        }
+      }
+    },
+    "Emotions and attitudes" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Эмоции и отношение"
+          }
+        }
+      }
+    },
+    "Emotions, attitudes, virtues and vices" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Эмоции, отношение, достоинства и пороки"
+          }
+        }
+      }
+    },
+    "Emperors, lords, samurai and the court" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Императоры, князья, самураи и двор"
+          }
+        }
+      }
+    },
+    "Eras, rulers, ruins and far lands" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Эпохи, правители, руины и дальние страны"
+          }
+        }
+      }
+    },
+    "Erase" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Стереть"
+          }
+        }
+      }
+    },
+    "Erase all progress" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Стереть весь прогресс"
+          }
+        }
+      }
+    },
+    "Erase all progress?" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Стереть весь прогресс?"
+          }
+        }
+      }
+    },
+    "Every kanji theme uses this mode" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Этот режим стоит во всех темах кандзи"
+          }
+        }
+      }
+    },
+    "Every page uses this mode" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Этот режим стоит на всех страницах"
+          }
+        }
+      }
+    },
+    "Everyday actions" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Повседневные действия"
+          }
+        }
+      }
+    },
+    "Everyday words" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Частые слова"
+          }
+        }
+      }
+    },
+    "Existing, filling, belonging and lasting" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Существовать, наполнять, принадлежать, длиться"
+          }
+        }
+      }
+    },
+    "Fabric, sewing, pottery and jewels" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ткани, шитьё, керамика и украшения"
+          }
+        }
+      }
+    },
+    "Family & friends" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Семья и друзья"
+          }
+        }
+      }
+    },
+    "Family, friends and everyone else" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Семья, друзья и все остальные"
+          }
+        }
+      }
+    },
+    "Family, friends and how people are called" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Семья, друзья и как называют людей"
+          }
+        }
+      }
+    },
+    "Feeling ill, the doctor and getting well" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Болезни, врачи и выздоровление"
+          }
+        }
+      }
+    },
+    "Feelings" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Чувства"
+          }
+        }
+      }
+    },
+    "Feelings & character" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Чувства и характер"
+          }
+        }
+      }
+    },
+    "Finish a lesson or a practice session to start a streak." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пройди урок или сессию практики, чтобы начать серию."
+          }
+        }
+      }
+    },
+    "Finish a lesson or a practice session today to keep it going." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пройди сегодня урок или сессию практики, чтобы серия не прервалась."
+          }
+        }
+      }
+    },
+    "Flowers & grasses" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Цветы и травы"
+          }
+        }
+      }
+    },
+    "Food" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Еда"
+          }
+        }
+      }
+    },
+    "Formal & literary" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Книжный язык"
+          }
+        }
+      }
+    },
+    "Formal Japanese" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Официальный японский"
+          }
+        }
+      }
+    },
+    "From head to toe, and the doctor" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "С головы до ног, и к врачу"
+          }
+        }
+      }
+    },
+    "From head to toe, inside and out" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "С головы до пят, снаружи и внутри"
+          }
+        }
+      }
+    },
+    "From the market and the garden" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "С рынка и с огорода"
+          }
+        }
+      }
+    },
+    "From white to indigo" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "От белого до индиго"
+          }
+        }
+      }
+    },
+    "Fruit & vegetables" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фрукты и овощи"
+          }
+        }
+      }
+    },
+    "Furniture, containers and things you use" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мебель, посуда и вещи в обиходе"
+          }
+        }
+      }
+    },
+    "Gems, silks and shades in names" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Самоцветы, шелка и оттенки в именах"
+          }
+        }
+      }
+    },
+    "Giving & getting" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Давать и получать"
+          }
+        }
+      }
+    },
+    "Go from point to point" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Веди от точки к точке"
+          }
+        }
+      }
+    },
+    "Go to lessons" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "К урокам"
+          }
+        }
+      }
+    },
+    "Going places" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ходить и ездить"
+          }
+        }
+      }
+    },
+    "Going, coming, rising, falling and sports" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Идти, приходить, подниматься, падать и спорт"
+          }
+        }
+      }
+    },
+    "Government and the news" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Власть и новости"
+          }
+        }
+      }
+    },
+    "Grabbing, rubbing, wrapping and digging" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Хватать, тереть, заворачивать и копать"
+          }
+        }
+      }
+    },
+    "Handling, changing, breaking and fixing" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Брать, менять, ломать и чинить"
+          }
+        }
+      }
+    },
+    "Hands at work" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Руки за работой"
+          }
+        }
+      }
+    },
+    "Hard exercise" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сложное задание"
+          }
+        }
+      }
+    },
+    "Hard exercise: counts twice" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сложное задание: засчитано дважды"
+          }
+        }
+      }
+    },
+    "Hard exercises" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сложные задания"
+          }
+        }
+      }
+    },
+    "Hats, ladders, saddles and inkstones" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Шляпы, лестницы, сёдла и тушечницы"
+          }
+        }
+      }
+    },
+    "Health & medicine" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Здоровье и медицина"
+          }
+        }
+      }
+    },
+    "Here's the answer" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вот ответ"
+          }
+        }
+      }
+    },
+    "Hiragana" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Хирагана"
+          }
+        }
+      }
+    },
+    "History & culture" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "История и культура"
+          }
+        }
+      }
+    },
+    "Hold the vowel for an extra beat" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Гласная звучит на долю дольше"
+          }
+        }
+      }
+    },
+    "Holding back" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сдерживание"
+          }
+        }
+      }
+    },
+    "Home & things" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дом и вещи"
+          }
+        }
+      }
+    },
+    "Home & tools" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дом и инструменты"
+          }
+        }
+      }
+    },
+    "How do you read this kanji?" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Как читается этот кандзи?"
+          }
+        }
+      }
+    },
+    "I don't know" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не знаю"
+          }
+        }
+      }
+    },
+    "I know it" : {
+      "comment" : "Character card: sets full mastery.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Знаю"
+          }
+        }
+      }
+    },
+    "Ideas" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Идеи"
+          }
+        }
+      }
+    },
+    "In names" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "В именах"
+          }
+        }
+      }
+    },
+    "In this lesson" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "В этом уроке"
+          }
+        }
+      }
+    },
+    "Internet, shows, music, chat and manga" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Интернет, шоу, музыка, чаты и манга"
+          }
+        }
+      }
+    },
+    "Jewels & colors" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Драгоценности и цвета"
+          }
+        }
+      }
+    },
+    "Jobs, offices, prices and the economy" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Профессии, офис, цены и экономика"
+          }
+        }
+      }
+    },
+    "Judging, guessing, remembering and doubting" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Судить, угадывать, помнить и сомневаться"
+          }
+        }
+      }
+    },
+    "Kana: NHK WORLD-JAPAN, Easy Japanese. Words: JapanesePod101. A few words: AivisSpeech, voice morioki." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кана: NHK WORLD-JAPAN, Easy Japanese. Слова: JapanesePod101. Несколько слов: AivisSpeech, голос morioki."
+          }
+        }
+      }
+    },
+    "Kanji" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кандзи"
+          }
+        }
+      }
+    },
+    "Kanji themes" : {
+      "comment" : "VoiceOver: the row of theme chips above the kanji page.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Темы кандзи"
+          }
+        }
+      }
+    },
+    "Kanji you know" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Знакомые кандзи"
+          }
+        }
+      }
+    },
+    "Kanji · %@" : {
+      "comment" : "Header of a finished lesson or session on a kanji theme page.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кандзи · %@"
+          }
+        }
+      }
+    },
+    "Katakana" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Катакана"
+          }
+        }
+      }
+    },
+    "Keep" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Оставить"
+          }
+        }
+      }
+    },
+    "Keep learning" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Продолжить урок"
+          }
+        }
+      }
+    },
+    "Keep practicing" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Продолжить практику"
+          }
+        }
+      }
+    },
+    "Keyboard" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Клавиатура"
+          }
+        }
+      }
+    },
+    "Kitchen" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кухня"
+          }
+        }
+      }
+    },
+    "Known" : {
+      "comment" : "Character card: full mastery reached.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выучено"
+          }
+        }
+      }
+    },
+    "Land, sea & sky" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Земля, море и небо"
+          }
+        }
+      }
+    },
+    "Law & safety" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Закон и безопасность"
+          }
+        }
+      }
+    },
+    "Learn" : {
+      "comment" : "Tab and page with the lessons.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Уроки"
+          }
+        }
+      }
+    },
+    "Leave" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выйти"
+          }
+        }
+      }
+    },
+    "Leave this lesson?" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выйти из урока?"
+          }
+        }
+      }
+    },
+    "Less" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Меньше"
+          }
+        }
+      }
+    },
+    "Lesson complete" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Урок пройден"
+          }
+        }
+      }
+    },
+    "Lessons, sessions, mastery and your streak history will be gone. This can't be undone." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Уроки, сессии, освоение и история серии пропадут. Это нельзя отменить."
+          }
+        }
+      }
+    },
+    "Light" : {
+      "comment" : "Theme.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Светлая"
+          }
+        }
+      }
+    },
+    "Light, dawns, shores and peaks in names" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Свет, рассветы, берега и вершины в именах"
+          }
+        }
+      }
+    },
+    "Linking words of news and documents" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Связки новостей и документов"
+          }
+        }
+      }
+    },
+    "List" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Список"
+          }
+        }
+      }
+    },
+    "List and keyboard" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Список и клавиатура"
+          }
+        }
+      }
+    },
+    "Literary verbs" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Книжные глаголы"
+          }
+        }
+      }
+    },
+    "Long vowels" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Долгие гласные"
+          }
+        }
+      }
+    },
+    "Look & feel" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вид и фактура"
+          }
+        }
+      }
+    },
+    "Mark %@ as known?" : {
+      "comment" : "%@ is a chart section.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отметить «%@» как выученное?"
+          }
+        }
+      }
+    },
+    "Mark a section as known" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отметить раздел как выученный"
+          }
+        }
+      }
+    },
+    "Mark all %@ as known" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отметить всю страницу «%@» как выученную"
+          }
+        }
+      }
+    },
+    "Mark all of %@ as known?" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отметить всю страницу «%@» как выученную?"
+          }
+        }
+      }
+    },
+    "Mark as known" : {
+      "comment" : "Confirms marking characters as known.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отметить"
+          }
+        }
+      }
+    },
+    "Mastered %lld of %lld, seen %lld" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выучено %1$lld из %2$lld, встречено %3$lld"
+          }
+        }
+      }
+    },
+    "Mastery" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Освоение"
+          }
+        }
+      }
+    },
+    "Mastery of %lld characters goes back to zero. Answer history stays." : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mastery of %lld character goes back to zero. Answer history stays."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mastery of %lld characters goes back to zero. Answer history stays."
+                }
+              }
+            }
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Освоение обнулится у знаков: %lld. История ответов останется."
+          }
+        }
+      }
+    },
+    "Match %lld of %lld" : {
+      "comment" : "VoiceOver: the 2/5 counter in the character search field.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Совпадение %1$lld из %2$lld"
+          }
+        }
+      }
+    },
+    "Match the pairs" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Собери пары"
+          }
+        }
+      }
+    },
+    "Matched, with mix-ups" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Собрано, но с путаницей"
+          }
+        }
+      }
+    },
+    "Matches, sumo, board games and pastimes" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Матчи, сумо, настольные игры и досуг"
+          }
+        }
+      }
+    },
+    "Meals & drinks" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Блюда и напитки"
+          }
+        }
+      }
+    },
+    "Meals, fruit, cooking and drinks" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Блюда, фрукты, готовка и напитки"
+          }
+        }
+      }
+    },
+    "Meaning or reading" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Значение или чтение"
+          }
+        }
+      }
+    },
+    "Media" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Медиа"
+          }
+        }
+      }
+    },
+    "Media & internet" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Медиа и интернет"
+          }
+        }
+      }
+    },
+    "Mind & words" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мысли и слова"
+          }
+        }
+      }
+    },
+    "Moji keeps everything on this iPhone." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moji хранит всё на этом iPhone."
+          }
+        }
+      }
+    },
+    "Money & business" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Деньги и бизнес"
+          }
+        }
+      }
+    },
+    "More" : {
+      "comment" : "Legend of the activity graph: less to more.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Больше"
+          }
+        }
+      }
+    },
+    "More actions" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ещё действия"
+          }
+        }
+      }
+    },
+    "Motion" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подъём и падение"
+          }
+        }
+      }
+    },
+    "Mountains, coasts and weather" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Горы, побережья и погода"
+          }
+        }
+      }
+    },
+    "Movement" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Движение"
+          }
+        }
+      }
+    },
+    "Names" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Имена"
+          }
+        }
+      }
+    },
+    "Names & places" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Имена и места"
+          }
+        }
+      }
+    },
+    "Nature" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Природа"
+          }
+        }
+      }
+    },
+    "New character" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Новый знак"
+          }
+        }
+      }
+    },
+    "New kanji" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Новый кандзи"
+          }
+        }
+      }
+    },
+    "News, documents, old books and poems" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Новости, документы, старые книги и стихи"
+          }
+        }
+      }
+    },
+    "Next year" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Следующий год"
+          }
+        }
+      }
+    },
+    "No matches" : {
+      "comment" : "VoiceOver: the character search found nothing on this page.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Совпадений нет"
+          }
+        }
+      }
+    },
+    "No mistakes" : {
+      "comment" : "VoiceOver: a character was written without a single mistake.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Без ошибок"
+          }
+        }
+      }
+    },
+    "No mistakes in this pass." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "В этот раз без ошибок."
+          }
+        }
+      }
+    },
+    "No stroke order for these characters" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Для этих знаков нет порядка черт"
+          }
+        }
+      }
+    },
+    "Not quite" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не совсем"
+          }
+        }
+      }
+    },
+    "Numbers & counting" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Числа и счёт"
+          }
+        }
+      }
+    },
+    "Numbers & shapes" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Числа и формы"
+          }
+        }
+      }
+    },
+    "Off the line" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мимо линии"
+          }
+        }
+      }
+    },
+    "Offers, requests, gifts and handovers" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Предложения, просьбы, подарки и передача"
+          }
+        }
+      }
+    },
+    "Old arts" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Старинные искусства"
+          }
+        }
+      }
+    },
+    "Old forms" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Старые формы"
+          }
+        }
+      }
+    },
+    "Old grammar words of books and poems" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Старая грамматика книг и стихов"
+          }
+        }
+      }
+    },
+    "Old Japan" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Старая Япония"
+          }
+        }
+      }
+    },
+    "Old shapes and variants seen in names" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Старые формы и варианты в именах"
+          }
+        }
+      }
+    },
+    "Old shapes still seen in names, signs and old books" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Старые начертания: в именах, на вывесках и в старых книгах"
+          }
+        }
+      }
+    },
+    "Old tools" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Старинные вещи"
+          }
+        }
+      }
+    },
+    "Online" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Онлайн"
+          }
+        }
+      }
+    },
+    "People" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Люди"
+          }
+        }
+      }
+    },
+    "People around you" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Люди вокруг"
+          }
+        }
+      }
+    },
+    "Pets, wild beasts, birds and fish" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Питомцы, дикие звери, птицы и рыбы"
+          }
+        }
+      }
+    },
+    "Phones, posts and the internet" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Телефоны, посты и интернет"
+          }
+        }
+      }
+    },
+    "Pick the answer from four options." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбираешь ответ из четырёх вариантов."
+          }
+        }
+      }
+    },
+    "Pick what you hear" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбери, что слышишь"
+          }
+        }
+      }
+    },
+    "Plants" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Растения"
+          }
+        }
+      }
+    },
+    "Plants & farming" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Растения и земледелие"
+          }
+        }
+      }
+    },
+    "Play %@" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Послушать %@"
+          }
+        }
+      }
+    },
+    "Play the sound" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Послушать"
+          }
+        }
+      }
+    },
+    "Poems, music and calligraphy" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Стихи, музыка и каллиграфия"
+          }
+        }
+      }
+    },
+    "Politics" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Политика"
+          }
+        }
+      }
+    },
+    "Politics, law and community" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Политика, закон и община"
+          }
+        }
+      }
+    },
+    "Posts, edits, shows and reviews" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Посты, правки, шоу и отзывы"
+          }
+        }
+      }
+    },
+    "Posts, paperwork and getting things done" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Должности, бумаги и доведённые до конца дела"
+          }
+        }
+      }
+    },
+    "Practice" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Практика"
+          }
+        }
+      }
+    },
+    "Practice again" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пройти ещё раз"
+          }
+        }
+      }
+    },
+    "Previous mistake" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Прошлая ошибка"
+          }
+        }
+      }
+    },
+    "Previous year" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Предыдущий год"
+          }
+        }
+      }
+    },
+    "Prices, jobs and the economy" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Цены, работа и экономика"
+          }
+        }
+      }
+    },
+    "Profile" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Профиль"
+          }
+        }
+      }
+    },
+    "Qualities" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Качества"
+          }
+        }
+      }
+    },
+    "Reading in romaji" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Чтение ромадзи"
+          }
+        }
+      }
+    },
+    "Refusing, blocking, ending and calming" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отказать, преградить, прекратить, усмирить"
+          }
+        }
+      }
+    },
+    "Relatives, partners and how people are called" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Родня, спутники и как называют людей"
+          }
+        }
+      }
+    },
+    "Religion" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Религия"
+          }
+        }
+      }
+    },
+    "Removes lesson progress, saved sessions, mastery, word cards and the streak history from this iPhone." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удаляет с этого iPhone прогресс уроков, сохранённые сессии, освоение, карточки слов и историю серии."
+          }
+        }
+      }
+    },
+    "Research, matter and machines" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Исследования, вещество и машины"
+          }
+        }
+      }
+    },
+    "Reset" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сбросить"
+          }
+        }
+      }
+    },
+    "Reset %@?" : {
+      "comment" : "%@ is a chart section.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сбросить «%@»?"
+          }
+        }
+      }
+    },
+    "Reset all of %@?" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сбросить освоение всей страницы «%@»?"
+          }
+        }
+      }
+    },
+    "Reset mastery" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сбросить освоение"
+          }
+        }
+      }
+    },
+    "Review complete" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Повторение пройдено"
+          }
+        }
+      }
+    },
+    "Review lesson" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Урок повторения"
+          }
+        }
+      }
+    },
+    "Rice, meat, tea and tastes" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Рис, мясо, чай и вкусы"
+          }
+        }
+      }
+    },
+    "Rising, falling, floating and wandering" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подъём, падение, плавание и скитания"
+          }
+        }
+      }
+    },
+    "Rites & spirits" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обряды и духи"
+          }
+        }
+      }
+    },
+    "Romaji" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ромадзи"
+          }
+        }
+      }
+    },
+    "Rooms, furniture, clothes and tools" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Комнаты, мебель, одежда и инструменты"
+          }
+        }
+      }
+    },
+    "Save and exit" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сохранить и выйти"
+          }
+        }
+      }
+    },
+    "Saved for the %@ page. A change applies from the next question: a saved session keeps the question it stopped on." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сохраняется для страницы «%@». Изменение действует со следующего вопроса: сохранённая сессия продолжится с того же вопроса."
+          }
+        }
+      }
+    },
+    "Saying, asking, praising and scolding" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сказать, спросить, похвалить и отругать"
+          }
+        }
+      }
+    },
+    "School & language" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Школа и язык"
+          }
+        }
+      }
+    },
+    "School, classes, research and machines" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Школа, занятия, исследования и машины"
+          }
+        }
+      }
+    },
+    "Science & technology" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Наука и техника"
+          }
+        }
+      }
+    },
+    "Search characters" : {
+      "comment" : "VoiceOver: the search field above Start lesson and Start practice.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поиск знаков"
+          }
+        }
+      }
+    },
+    "Seeing, hearing, thinking and saying" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Видеть, слышать, думать и говорить"
+          }
+        }
+      }
+    },
+    "Seeing, saying, judging and ideas" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Видеть, говорить, судить и идеи"
+          }
+        }
+      }
+    },
+    "Seen" : {
+      "comment" : "Character card stat: times asked.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Встречено"
+          }
+        }
+      }
+    },
+    "Session complete" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сессия пройдена"
+          }
+        }
+      }
+    },
+    "Set mastery" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Изменить освоение"
+          }
+        }
+      }
+    },
+    "Set mastery to %lld of %lld" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поставить освоение %1$lld из %2$lld"
+          }
+        }
+      }
+    },
+    "Settings" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Настройки"
+          }
+        }
+      }
+    },
+    "Shapes & positions" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Формы и положение"
+          }
+        }
+      }
+    },
+    "Show the answer" : {
+      "comment" : "VoiceOver: the lightbulb button inside the answer field that fills in the answer.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показать ответ"
+          }
+        }
+      }
+    },
+    "Sides, edges, lines and order" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Стороны, края, линии и порядок"
+          }
+        }
+      }
+    },
+    "Size, colors, textures and qualities" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Размер, цвета, фактура и качества"
+          }
+        }
+      }
+    },
+    "Size, feel, taste and looks" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Размер, ощущения, вкус и вид"
+          }
+        }
+      }
+    },
+    "Sky & water" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Небо и вода"
+          }
+        }
+      }
+    },
+    "Small words that build many others" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Короткие слова, из которых строятся другие"
+          }
+        }
+      }
+    },
+    "Small っ" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Маленькая っ"
+          }
+        }
+      }
+    },
+    "Small ッ" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Маленькая ッ"
+          }
+        }
+      }
+    },
+    "Soaring, drawing water, peeking and more" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Парить, черпать воду, подглядывать и не только"
+          }
+        }
+      }
+    },
+    "Society" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Общество"
+          }
+        }
+      }
+    },
+    "Society & life" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Общество и жизнь"
+          }
+        }
+      }
+    },
+    "Speak characters" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Озвучивать знаки"
+          }
+        }
+      }
+    },
+    "Speaking" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Речь"
+          }
+        }
+      }
+    },
+    "Sports & games" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Спорт и игры"
+          }
+        }
+      }
+    },
+    "Stage %lld of %lld" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Этап %1$lld из %2$lld"
+          }
+        }
+      }
+    },
+    "Start a lesson on batch %lld" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Начать урок по группе %lld"
+          }
+        }
+      }
+    },
+    "Start lesson" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Начать урок"
+          }
+        }
+      }
+    },
+    "Start practice" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Начать практику"
+          }
+        }
+      }
+    },
+    "Streak started: day 1" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Серия началась: день 1"
+          }
+        }
+      }
+    },
+    "Streets & buildings" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Улицы и здания"
+          }
+        }
+      }
+    },
+    "Strength & greatness" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сила и величие"
+          }
+        }
+      }
+    },
+    "Strict, sharp, gentle, strange and more" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Строгое, острое, мягкое, странное и не только"
+          }
+        }
+      }
+    },
+    "Stroke order" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Порядок черт"
+          }
+        }
+      }
+    },
+    "Stroke order: KanjiVG by Ulrich Apel, kanjivg.tagaini.net, CC BY-SA 3.0." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Порядок черт: KanjiVG, автор Ульрих Апель, kanjivg.tagaini.net, CC BY-SA 3.0."
+          }
+        }
+      }
+    },
+    "Study & science" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Учёба и наука"
+          }
+        }
+      }
+    },
+    "Sun, rain, mountains and seas" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Солнце, дождь, горы и моря"
+          }
+        }
+      }
+    },
+    "Surnames, places and given names" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фамилии, места и личные имена"
+          }
+        }
+      }
+    },
+    "Surnames, prefectures and cities" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фамилии, префектуры и города"
+          }
+        }
+      }
+    },
+    "System" : {
+      "comment" : "Theme: follow the iPhone.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Системная"
+          }
+        }
+      }
+    },
+    "Take a break?" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сделать перерыв?"
+          }
+        }
+      }
+    },
+    "Tap a day" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нажми на день"
+          }
+        }
+      }
+    },
+    "Temples & old China" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Храмы и древний Китай"
+          }
+        }
+      }
+    },
+    "Temples, funerals, ghosts and fortune" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Храмы, похороны, призраки и судьба"
+          }
+        }
+      }
+    },
+    "Temples, rites, spirits and fortune" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Храмы, обряды, духи и судьба"
+          }
+        }
+      }
+    },
+    "Texture, temperature and age" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фактура, температура и возраст"
+          }
+        }
+      }
+    },
+    "The bar ー holds the vowel for an extra beat" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Черта ー тянет гласную на долю дольше"
+          }
+        }
+      }
+    },
+    "The body" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тело"
+          }
+        }
+      }
+    },
+    "The building blocks of common words" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кирпичики частых слов"
+          }
+        }
+      }
+    },
+    "The next lesson goes over these characters once more." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Следующий урок ещё раз повторит эти знаки."
+          }
+        }
+      }
+    },
+    "The pairs you mixed up come back at the end." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Перепутанные пары вернутся в конце."
+          }
+        }
+      }
+    },
+    "The past" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Прошлое"
+          }
+        }
+      }
+    },
+    "The past, old arts, the court and war" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Прошлое, старинные искусства, двор и война"
+          }
+        }
+      }
+    },
+    "Theme" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тема"
+          }
+        }
+      }
+    },
+    "Thinking" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мышление"
+          }
+        }
+      }
+    },
+    "Thinking & talking" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мысли и речь"
+          }
+        }
+      }
+    },
+    "This stroke starts elsewhere" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Эта черта начинается не здесь"
+          }
+        }
+      }
+    },
+    "Timber and groves, often in surnames" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Древесина и рощи, часто в фамилиях"
+          }
+        }
+      }
+    },
+    "Time" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Время"
+          }
+        }
+      }
+    },
+    "Time & pace" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Время и темп"
+          }
+        }
+      }
+    },
+    "To review" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "На повторение"
+          }
+        }
+      }
+    },
+    "Today" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сегодня"
+          }
+        }
+      }
+    },
+    "Towns, buildings, transport and directions" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Города, здания, транспорт и направления"
+          }
+        }
+      }
+    },
+    "Towns, shops, stations and halls" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Города, магазины, станции и залы"
+          }
+        }
+      }
+    },
+    "Trace over the outline" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обведи по контуру"
+          }
+        }
+      }
+    },
+    "Traditional shapes of kanji you know" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Традиционное начертание знакомых кандзи"
+          }
+        }
+      }
+    },
+    "Trains, ships and the road" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поезда, корабли и дороги"
+          }
+        }
+      }
+    },
+    "Transport" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Транспорт"
+          }
+        }
+      }
+    },
+    "Trees" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Деревья"
+          }
+        }
+      }
+    },
+    "Trees, flowers, crops and fields" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Деревья, цветы, урожай и поля"
+          }
+        }
+      }
+    },
+    "Try this stroke again" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Попробуй эту черту ещё раз"
+          }
+        }
+      }
+    },
+    "Type how this reads" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Напиши, как это читается"
+          }
+        }
+      }
+    },
+    "Type in romaji" : {
+      "comment" : "Placeholder of the typing field.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ромадзи"
+          }
+        }
+      }
+    },
+    "Type the reading in romaji, or the kanji on the Japanese keyboard." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вводишь чтение ромадзи или кандзи на японской клавиатуре."
+          }
+        }
+      }
+    },
+    "Type the romaji, or the kana on the Japanese keyboard." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вводишь ромадзи или кану на японской клавиатуре."
+          }
+        }
+      }
+    },
+    "Type this kanji's reading" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Напиши чтение этого кандзи"
+          }
+        }
+      }
+    },
+    "Type this sound in romaji" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Напиши этот звук ромадзи"
+          }
+        }
+      }
+    },
+    "Type what you hear" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Напиши, что слышишь"
+          }
+        }
+      }
+    },
+    "Up next: batch %lld" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дальше: группа %lld"
+          }
+        }
+      }
+    },
+    "Up, down, near, far and the four winds" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Верх, низ, близко, далеко и стороны света"
+          }
+        }
+      }
+    },
+    "Use in every kanji theme" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Включить во всех темах кандзи"
+          }
+        }
+      }
+    },
+    "Use on all pages" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Включить на всех страницах"
+          }
+        }
+      }
+    },
+    "Verbs for hands and everyday things" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Глаголы для рук и повседневных дел"
+          }
+        }
+      }
+    },
+    "Verbs for moving around" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Глаголы перемещения"
+          }
+        }
+      }
+    },
+    "Verbs you use every day" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Глаголы на каждый день"
+          }
+        }
+      }
+    },
+    "Version" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Версия"
+          }
+        }
+      }
+    },
+    "Virtues and blessings in names" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Достоинства и благословения в именах"
+          }
+        }
+      }
+    },
+    "Virtues, vices and manners" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Достоинства, пороки и манеры"
+          }
+        }
+      }
+    },
+    "Voice" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Голос"
+          }
+        }
+      }
+    },
+    "War & weapons" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Война и оружие"
+          }
+        }
+      }
+    },
+    "Weather & the world" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Погода и мир вокруг"
+          }
+        }
+      }
+    },
+    "Weather, land, sea and sky" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Погода, земля, море и небо"
+          }
+        }
+      }
+    },
+    "What does this kanji mean?" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Что значит этот кандзи?"
+          }
+        }
+      }
+    },
+    "What sound does this make?" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Как это читается?"
+          }
+        }
+      }
+    },
+    "Which character do you hear?" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Какой знак звучит?"
+          }
+        }
+      }
+    },
+    "Which character makes this sound?" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Какой знак так читается?"
+          }
+        }
+      }
+    },
+    "Which kanji do you hear?" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Какой кандзи звучит?"
+          }
+        }
+      }
+    },
+    "Which kanji means this?" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Какой кандзи это значит?"
+          }
+        }
+      }
+    },
+    "Wide, lofty and brave in names" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Широта, высота и отвага в именах"
+          }
+        }
+      }
+    },
+    "Wild animals, fish and legends" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дикие животные, рыбы и легенды"
+          }
+        }
+      }
+    },
+    "Wisdom & kindness" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мудрость и доброта"
+          }
+        }
+      }
+    },
+    "Words from messages, games and comics" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Слова из переписки, игр и комиксов"
+          }
+        }
+      }
+    },
+    "Work & money" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Работа и деньги"
+          }
+        }
+      }
+    },
+    "Work & office" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Работа и офис"
+          }
+        }
+      }
+    },
+    "Write it from memory" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Напиши по памяти"
+          }
+        }
+      }
+    },
+    "Write the kanji that means this" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Напиши кандзи с этим значением"
+          }
+        }
+      }
+    },
+    "Write these characters" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Напиши эти знаки"
+          }
+        }
+      }
+    },
+    "Write these kanji" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Напиши эти кандзи"
+          }
+        }
+      }
+    },
+    "Write this character" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Напиши этот знак"
+          }
+        }
+      }
+    },
+    "Write this kanji" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Напиши этот кандзи"
+          }
+        }
+      }
+    },
+    "Write this sound in hiragana" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Напиши этот звук хираганой"
+          }
+        }
+      }
+    },
+    "Write this sound in katakana" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Напиши этот звук катаканой"
+          }
+        }
+      }
+    },
+    "Writing area" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поле для письма"
+          }
+        }
+      }
+    },
+    "Wrong direction" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не в ту сторону"
+          }
+        }
+      }
+    },
+    "You see %@ and answer a." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Видишь %@, отвечаешь ромадзи."
+          }
+        }
+      }
+    },
+    "You see %@ and give its meaning, or type its reading." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Видишь %@ и выбираешь значение или вводишь чтение."
+          }
+        }
+      }
+    },
+    "You see a and answer %@." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Видишь ромадзи, отвечаешь %@."
+          }
+        }
+      }
+    },
+    "You see a meaning and answer with the kanji." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Видишь значение, отвечаешь кандзи."
+          }
+        }
+      }
+    },
+    "You wrote every character from memory." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Каждый знак написан по памяти."
+          }
+        }
+      }
+    },
+    "Your place is saved: %lld of %lld done. Continue any time from the %@ page." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Место сохранено: пройдено %1$lld из %2$lld. Продолжить можно в любой момент со страницы «%3$@»."
+          }
+        }
+      }
+    },
+    "Your saved %@ session will be deleted. Mastery you earned in it stays." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сохранённая сессия страницы «%@» будет удалена. Освоение, набранное в ней, останется."
+          }
+        }
+      }
+    },
+    "Zodiac & calendar" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зодиак и календарь"
+          }
+        }
+      }
+    },
+    "あ, ka, 日" : {
+      "comment" : "Placeholder of the character search field: a kana, a romaji, a kanji.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "あ, ka, 日"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

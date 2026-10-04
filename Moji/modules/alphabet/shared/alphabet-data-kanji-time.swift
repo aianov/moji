@@ -1,0 +1,112 @@
+import Foundation
+
+extension MojiAlphabetData {
+    static let kanjiTime = MojiPageDefinition(
+        page: .kanji(.time),
+        idPrefix: "j",
+        sections: [
+            MojiSectionDefinition(
+                key: "days",
+                title: "Days & seasons",
+                subtitle: "Days, seasons and the clock",
+                columns: 4,
+                cells: [
+                    .kanji("日", "hi", "ひ", "day, sun"),
+                    .kanji("年", "toshi", "とし", "year"),
+                    .kanji("時", "toki", "とき", "time, hour"),
+                    .kanji("月", "tsuki", "つき", "moon, month"),
+                    .kanji("分", "fun", "ふん", "minute, part"),
+                    .kanji("後", "ato", "あと", "after, behind"),
+                    .kanji("前", "mae", "まえ", "before, front"),
+                    .kanji("間", "aida", "あいだ", "between, interval"),
+                    .kanji("今", "ima", "いま", "now"),
+                    .kanji("代", "dai", "だい", "generation, substitute"),
+                    .kanji("最", "sai", "さい", "most"),
+                    .kanji("期", "ki", "き", "period, term"),
+                    .kanji("初", "haji(me)", "はじ(め)", "first"),
+                    .kanji("午", "go", "ご", "midday (a.m./p.m.)"),
+                    .kanji("先", "saki", "さき", "ahead, previous"),
+                    .kanji("次", "tsugi", "つぎ", "next"),
+                    .kanji("昨", "saku", "さく", "yesterday (昨日)"),
+                    .kanji("始", "haji(maru)", "はじ(まる)", "begin"),
+                    .kanji("朝", "asa", "あさ", "morning"),
+                    .kanji("終", "o(waru)", "お(わる)", "end"),
+                    .kanji("急", "iso(gu)", "いそ(ぐ)", "hurry"),
+                    .kanji("早", "haya(i)", "はや(い)", "early"),
+                    .kanji("毎", "mai", "まい", "every"),
+                    .kanji("去", "kyo", "きょ", "past, leave"),
+                    .kanji("末", "sue", "すえ", "end of (week, year)"),
+                    .kanji("夜", "yoru", "よる", "night"),
+                    .kanji("候", "kou", "こう", "climate, candidate"),
+                    .kanji("週", "shuu", "しゅう", "week"),
+                    .kanji("春", "haru", "はる", "spring"),
+                    .kanji("秋", "aki", "あき", "autumn"),
+                    .kanji("夏", "natsu", "なつ", "summer"),
+                    .kanji("遅", "oso(i)", "おそ(い)", "late, slow"),
+                    .kanji("季", "ki", "き", "season"),
+                    .kanji("夕", "yuu", "ゆう", "evening"),
+                    .kanji("節", "setsu", "せつ", "node, period"),
+                    .kanji("曜", "you", "よう", "weekday"),
+                    .kanji("秒", "byou", "びょう", "second"),
+                    .kanji("冬", "fuyu", "ふゆ", "winter"),
+                    .kanji("昼", "hiru", "ひる", "noon, daytime"),
+                    .kanji("昔", "mukashi", "むかし", "long ago"),
+                    .kanji("晩", "ban", "ばん", "nightfall"),
+                    .kanji("頃", "koro", "ころ", "around (time)")
+                ]
+            ),
+            MojiSectionDefinition(
+                key: "pace",
+                title: "Time & pace",
+                subtitle: "Calendars, dawns, moments and speed",
+                columns: 4,
+                cells: [
+                    .kanji("翌", "yoku", "よく", "the following (翌日)"),
+                    .kanji("暫", "shibara(ku)", "しばら(く)", "a while (暫く)"),
+                    .kanji("旬", "shun", "しゅん", "in season, ten days (上旬)"),
+                    .kanji("即", "soku", "そく", "immediate, namely (即座)"),
+                    .kanji("瞬", "shun", "しゅん", "blink, moment (瞬間)"),
+                    .kanji("恒", "kou", "こう", "constant, regular (恒例)"),
+                    .kanji("暇", "hima", "ひま", "free time (暇)"),
+                    .kanji("徐", "jo", "じょ", "gradually, slowly (徐々に)"),
+                    .kanji("涯", "gai", "がい", "lifetime, horizon (生涯)"),
+                    .kanji("頻", "hin", "ひん", "frequent (頻繁)"),
+                    .kanji("憩", "kei", "けい", "rest break, repose (休憩)"),
+                    .kanji("暦", "koyomi", "こよみ", "calendar (西暦)"),
+                    .kanji("迅", "jin", "じん", "swift (迅速)"),
+                    .kanji("悠", "yuu", "ゆう", "leisurely, eternal (悠々)"),
+                    .kanji("暁", "akatsuki", "あかつき", "daybreak (暁)"),
+                    .kanji("閑", "kan", "かん", "quiet, leisure (閑静)"),
+                    .kanji("漸", "youya(ku)", "ようや(く)", "at last, by degrees (漸く)"),
+                    .kanji("宵", "yoi", "よい", "early night (今宵)"),
+                    .kanji("旦", "tan", "たん", "dawn, New Year's Day (元旦)"),
+                    .kanji("刹", "setsu", "せつ", "instant, temple (刹那)"),
+                    .kanji("遡", "sakanobo(ru)", "さかのぼ(る)", "go back, trace upstream (遡る)")
+                ]
+            ),
+            MojiSectionDefinition(
+                key: "zodiac",
+                title: "Zodiac & calendar",
+                subtitle: "Animal signs and old calendar names",
+                columns: 4,
+                cells: [
+                    .kanji("辰", "tatsu", "たつ", "Dragon sign (辰年)"),
+                    .kanji("寅", "tora", "とら", "Tiger sign (寅年)"),
+                    .kanji("巳", "mi", "み", "Snake sign (巳年)"),
+                    .kanji("皐", "satsuki", "さつき", "May, marsh (皐月)"),
+                    .kanji("丑", "ushi", "うし", "Ox sign (丑年)"),
+                    .kanji("朔", "saku", "さく", "new moon, first day (朔日)"),
+                    .kanji("卯", "u", "う", "Rabbit sign (卯年)"),
+                    .kanji("酉", "tori", "とり", "Rooster sign (酉年)"),
+                    .kanji("壬", "jin", "じん", "ninth calendar sign (壬)"),
+                    .kanji("亥", "i", "い", "Boar sign (亥年)"),
+                    .kanji("戊", "bo", "ぼ", "fifth calendar sign (戊)"),
+                    .kanji("庚", "kou", "こう", "seventh calendar sign (庚)"),
+                    .kanji("晦", "misoka", "みそか", "last day of the month (大晦日)"),
+                    .kanji("閏", "uruu", "うるう", "leap year (閏年)")
+                ]
+            )
+        ],
+        lessonOrder: "日年時月分後前間今代最期初午先次昨始朝終急早毎去末夜候週春秋夏遅季夕節曜秒翌冬暫昼旬即昔瞬恒暇晩徐涯頻辰憩暦迅悠暁寅閑頃漸巳皐宵丑朔卯酉壬旦亥刹遡戊庚晦閏"
+    )
+}
