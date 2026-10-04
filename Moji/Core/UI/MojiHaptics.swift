@@ -21,6 +21,11 @@ enum MojiHaptics {
         notificationGenerator.prepare()
     }
 
+    static func warning() {
+        notificationGenerator.notificationOccurred(.warning)
+        notificationGenerator.prepare()
+    }
+
     static func impact() {
         impactGenerator.impactOccurred()
         impactGenerator.prepare()

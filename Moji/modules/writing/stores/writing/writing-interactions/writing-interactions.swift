@@ -83,7 +83,7 @@ final class WritingInteractionsStore {
             MojiHaptics.error()
             let isStrokeRetry = service.block?.verdict == .strokeAgain
             pause(isStrokeRetry ? Self.strokeRetryPause : Self.stageDropPause)
-        case nil:
+        case .paused, nil:
             break
         }
     }
@@ -133,6 +133,8 @@ final class WritingInteractionsStore {
         assign(\.ink, tracer?.ink ?? [])
         assign(\.isTouching, tracer?.isTouching ?? false)
         assign(\.reachedEnd, tracer?.hasReachedEnd ?? false)
+        assign(\.isPaused, tracer?.isPaused ?? false)
+        assign(\.resumePoint, tracer?.resumePoint)
         assign(\.phase, block.phase)
         assign(\.writingsLeft, block.writingsLeft)
         assign(\.writingsDone, block.writingsDone)

@@ -4,6 +4,7 @@ enum MojiAnswerInput: String, Codable, CaseIterable, Identifiable, Sendable {
     case list
     case keyboard
     case mixed
+    case drawing
 
     var id: String { rawValue }
 }
@@ -31,5 +32,9 @@ struct MojiAnswerMode: Codable, Equatable, Hashable, Sendable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         input = (try? container.decode(MojiAnswerInput.self, forKey: .input)) ?? Self.standard.input
         side = (try? container.decode(MojiAnswerSide.self, forKey: .side)) ?? Self.standard.side
+    }
+
+    var askedSide: MojiAnswerSide {
+        input == .drawing ? .character : side
     }
 }

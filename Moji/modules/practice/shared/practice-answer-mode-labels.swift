@@ -6,6 +6,7 @@ extension MojiAnswerInput {
         case .list: String(localized: "List")
         case .keyboard: String(localized: "Keyboard")
         case .mixed: String(localized: "List and keyboard")
+        case .drawing: String(localized: "Drawing")
         }
     }
 
@@ -14,6 +15,7 @@ extension MojiAnswerInput {
         case .list: "list.bullet"
         case .keyboard: "keyboard"
         case .mixed: "shuffle"
+        case .drawing: "hand.draw"
         }
     }
 
@@ -27,6 +29,10 @@ extension MojiAnswerInput {
                 : String(localized: "Type the romaji, or the kana on the Japanese keyboard.")
         case .mixed:
             String(localized: "Each question picks the list or the keyboard at random.")
+        case .drawing:
+            script.isKanji
+                ? String(localized: "See the meaning and draw the kanji stroke by stroke.")
+                : String(localized: "See the romaji and draw the character stroke by stroke.")
         }
     }
 }

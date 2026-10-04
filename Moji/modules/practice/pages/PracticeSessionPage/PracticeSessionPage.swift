@@ -36,7 +36,7 @@ struct PracticeSessionPage: View {
                         .contentShape(Rectangle())
                         .onTapGesture { interactions.dismissKeyboard() }
 
-                        PracticeQuestionView(model: model, reveal: reveal)
+                        PracticeQuestionView(model: model, reveal: reveal, board: service.drawingBoard)
                     }
                 }
             case .finished(let summary):

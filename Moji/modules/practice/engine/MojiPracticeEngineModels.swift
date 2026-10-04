@@ -8,6 +8,7 @@ enum MojiQuizDirection: String, Codable, Sendable {
 enum MojiQuizInput: String, Codable, Sendable {
     case choice
     case typing
+    case drawing
 }
 
 struct MojiQuizQuestion: Codable, Equatable, Sendable {
@@ -37,10 +38,37 @@ struct MojiQuizQuestion: Codable, Equatable, Sendable {
     }
 }
 
+struct MojiDrawnAnswer: Codable, Equatable, Sendable {
+    static let allowedMistakes = 1
+
+    let failures: Int
+    let hints: Int
+    let isFinished: Bool
+
+    var mistakes: Int {
+        failures + hints
+    }
+
+    var isCorrect: Bool {
+        isFinished && mistakes <= Self.allowedMistakes
+    }
+
+    var isSettled: Bool {
+        isCorrect || mistakes > Self.allowedMistakes
+    }
+}
+
+extension MojiDrawnAnswer {
+    init(_ drawing: MojiMemoryDrawing) {
+        self.init(failures: drawing.failures, hints: drawing.hints, isFinished: drawing.isDrawn)
+    }
+}
+
 struct MojiQuizAnswer: Codable, Equatable, Sendable {
     let characterID: String
     let chosenID: String?
     var typed: String? = nil
+    var drawn: MojiDrawnAnswer? = nil
     let isCorrect: Bool
     let answeredAt: Date
 }
@@ -345,6 +373,7 @@ struct MojiAnswerSubmission: Sendable {
     let thinkSeconds: Double
     let answeredAt: Date
     var typed: String? = nil
+    var drawn: MojiDrawnAnswer? = nil
 }
 
 struct MojiPracticeCompletion: Equatable, Sendable {

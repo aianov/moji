@@ -95,14 +95,14 @@ private struct PracticeAnswerModeButton: View {
             size: CharacterSearchField.height,
             horizontalPadding: 14,
             accessibilityLabel: String(
-                localized: "Answer mode: \(mode.input.title), \(mode.side.title(for: script))"
+                localized: "Answer mode: \(mode.input.title), \(mode.askedSide.title(for: script))"
             ),
             action: action
         ) {
             HStack(spacing: 6) {
                 Image(systemName: mode.input.systemImage)
                     .font(.system(size: 13, weight: .semibold))
-                Text(verbatim: mode.side.arrow(for: script))
+                Text(verbatim: mode.askedSide.arrow(for: script))
                     .font(.system(size: 14, weight: .semibold))
                     .typesettingLanguage(Locale.Language(identifier: "ja"))
                 Image(systemName: "chevron.down")

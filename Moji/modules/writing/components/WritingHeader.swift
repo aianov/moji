@@ -106,6 +106,11 @@ struct WritingStatusLine: View {
                     }
                 }
                 .transition(.opacity)
+            } else if service.isPaused {
+                Text("Finish the line from the dot")
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundStyle(theme.text.primary)
+                    .transition(.opacity)
             } else {
                 Text(service.stage.caption)
                     .font(.system(size: 15, weight: .medium))
@@ -119,6 +124,7 @@ struct WritingStatusLine: View {
         .minimumScaleFactor(0.8)
         .frame(maxWidth: .infinity, minHeight: 40)
         .animation(.easeOut(duration: 0.2), value: service.failure)
+        .animation(.easeOut(duration: 0.2), value: service.isPaused)
         .animation(.easeOut(duration: 0.2), value: service.stage)
     }
 }

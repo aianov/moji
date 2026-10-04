@@ -14,11 +14,12 @@ struct WritingBlockView: View {
                 VStack(spacing: 6) {
                     WritingHeader()
                     WritingStatusLine()
-                    WritingCanvas()
-                    Spacer(minLength: 0)
+                    WritingCanvas(source: service, onTouch: { WritingInteractionsStore.shared.handle($0) })
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 10)
+                .padding(.bottom, 12)
                 .transition(.opacity)
             } else if service.isUnavailable {
                 WritingUnavailableView()

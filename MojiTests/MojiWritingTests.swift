@@ -290,19 +290,84 @@ struct MojiStrokeTracingTests {
         #expect(turnedEvents.last == .failed(.backwards))
     }
 
-    @Test("Lifting the finger before point B fails, a tap on A does nothing")
-    func liftedEarly() throws {
+    @Test("Lifting the finger before point B pauses the stroke and keeps its ink, a tap on A does nothing")
+    func liftingEarlyPauses() throws {
         let path = try WritingFixture.path("口", stroke: 1)
         let corner = path.points.enumerated().max { $0.element.x - $0.element.y < $1.element.x - $1.element.y }!.offset
         var tracer = MojiStrokeTracer(path: path)
         let events = WritingFixture.trace(&tracer, WritingFixture.finger(along: path, to: path.distances[corner]))
-        #expect(events.last == .failed(.liftedEarly))
+        #expect(events.last == .paused)
+        #expect(tracer.phase == .paused)
+        #expect(tracer.isPaused)
+        #expect(!tracer.isTouching)
+        #expect(abs(tracer.progress - path.distances[corner]) < 0.03)
+        #expect(tracer.ink == path.prefix(through: tracer.progress))
+        let stop = try #require(tracer.resumePoint)
+        #expect(MojiStrokePath.distance(stop, path.point(at: tracer.progress)) < 0.0001)
 
         var tapped = MojiStrokeTracer(path: path)
         #expect(tapped.begin(at: path.start) == .began)
         #expect(tapped.end(at: path.start) == nil)
         #expect(tapped.phase == .waiting)
         #expect(tapped.begin(at: path.start) == .began)
+    }
+
+    @Test("A paused stroke goes on from the stop point to B by the same rules")
+    func resumeFromTheStopPoint() throws {
+        let path = try WritingFixture.path("口", stroke: 1)
+        var tracer = MojiStrokeTracer(path: path)
+        WritingFixture.trace(&tracer, WritingFixture.finger(along: path, to: path.length * 0.55))
+        #expect(tracer.phase == .paused)
+        let kept = tracer.progress
+
+        let rest = WritingFixture.finger(along: path, from: kept, wobble: 0.02)
+        let events = WritingFixture.trace(&tracer, rest)
+        #expect(events.first == .began)
+        #expect(events.contains(.reachedEnd))
+        #expect(events.last == .completed)
+        #expect(tracer.ink == path.points)
+
+        var turned = MojiStrokeTracer(path: path)
+        WritingFixture.trace(&turned, WritingFixture.finger(along: path, to: path.length * 0.55))
+        let resume = turned.progress
+        #expect(turned.begin(at: path.point(at: resume)) == .began)
+        #expect(turned.resumePoint.map { MojiStrokePath.distance($0, path.point(at: resume)) < 0.0001 } == true)
+        let back = Array(WritingFixture.finger(along: path, from: resume * 0.3, to: resume).reversed())
+        let turnedEvents = WritingFixture.trace(&turned, back, lift: false)
+        #expect(turnedEvents.last == .failed(.backwards))
+    }
+
+    @Test("While paused, touching down away from the stop point is a wrong start, a tap on it changes nothing")
+    func pausedStarts() throws {
+        let path = try WritingFixture.path("口", stroke: 1)
+        var tracer = MojiStrokeTracer(path: path)
+        WritingFixture.trace(&tracer, WritingFixture.finger(along: path, to: path.length * 0.55))
+        let kept = tracer.progress
+        let ink = tracer.ink
+        let stop = try #require(tracer.resumePoint)
+        #expect(MojiStrokePath.distance(path.start, stop) > MojiTraceTolerance.standard.startRadius)
+
+        var tapped = tracer
+        #expect(tapped.begin(at: stop) == .began)
+        #expect(tapped.end(at: stop) == nil)
+        #expect(tapped.phase == .paused)
+        #expect(tapped.progress == kept)
+        #expect(tapped.ink == ink)
+
+        var cancelled = tracer
+        #expect(cancelled.begin(at: stop) == .began)
+        cancelled.cancel()
+        #expect(cancelled.phase == .paused)
+        #expect(cancelled.progress == kept)
+
+        #expect(tracer.begin(at: path.start) == .failed(.wrongStart))
+        #expect(tracer.phase == .failed(.wrongStart))
+        #expect(tracer.touchDown == path.start)
+        #expect(tracer.move(to: stop) == nil)
+        #expect(tracer.end(at: path.end) == nil)
+        tracer.reset()
+        #expect(tracer.phase == .waiting)
+        #expect(tracer.ink.isEmpty)
     }
 
     @Test("Going past point B after reaching it still counts")
@@ -481,6 +546,40 @@ struct MojiWritingStageTests {
         #expect(block.isFinished)
         #expect(block.writingsDone == 4)
         #expect(block.mistakes == 1)
+    }
+
+    @Test("Lifting early at stage 3 costs nothing: the stroke goes on from where it stopped")
+    func pauseCostsNothing() throws {
+        var block = try #require(MojiWritingBlock(cards: [try card("十")]))
+        _ = WritingFixture.write(&block)
+        block.advance()
+        _ = WritingFixture.write(&block)
+        block.advance()
+        #expect(block.pass.stage == .memory)
+
+        let first = try #require(block.pass.currentPath)
+        let half = WritingFixture.finger(along: first, to: first.length * 0.5)
+        _ = block.touchBegan(at: half[0])
+        for point in half.dropFirst() {
+            _ = block.touchMoved(to: point)
+        }
+        #expect(block.touchEnded(at: half.last) == .paused(stroke: 0))
+        #expect(block.phase == .writing)
+        #expect(block.mistakes == 0)
+        #expect(block.writingsLeft == 1)
+        #expect(block.pass.tracer?.isPaused == true)
+
+        let kept = try #require(block.pass.tracer?.progress)
+        let rest = WritingFixture.finger(along: first, from: kept)
+        _ = block.touchBegan(at: rest[0])
+        for point in rest.dropFirst() {
+            _ = block.touchMoved(to: point)
+        }
+        #expect(block.touchEnded(at: rest.last) == .strokeDone(stroke: 0))
+        #expect(WritingFixture.write(&block).last == .written)
+        block.advance()
+        #expect(block.isFinished)
+        #expect(block.mistakes == 0)
     }
 
     @Test("At stage 1 a failed stroke is drawn again, the strokes before it stay")

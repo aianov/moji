@@ -16,6 +16,8 @@ final class WritingServicesStore {
     var ink: [CGPoint] = []
     var isTouching = false
     var reachedEnd = false
+    var isPaused = false
+    var resumePoint: CGPoint?
     var phase: MojiWritingPhase = .writing
     var failure: WritingFailure?
     var writingsLeft = 0
@@ -60,6 +62,8 @@ final class WritingServicesStore {
         ink = []
         isTouching = false
         reachedEnd = false
+        isPaused = false
+        resumePoint = nil
         phase = .writing
         failure = nil
         writingsLeft = 0
@@ -71,5 +75,23 @@ final class WritingServicesStore {
         tickedStroke = nil
         pauseToken = nil
         onFinish = nil
+    }
+}
+
+extension WritingServicesStore: WritingCanvasSource {
+    var showsWholePhantom: Bool {
+        stage.showsPhantom && phase != .written
+    }
+
+    var showsCurrentStroke: Bool {
+        (stage.showsPhantom && phase == .writing) || failure != nil || isPaused
+    }
+
+    var showsPoints: Bool {
+        (stage.showsPoints && phase == .writing) || failure != nil || isPaused
+    }
+
+    var isWritten: Bool {
+        phase == .written
     }
 }

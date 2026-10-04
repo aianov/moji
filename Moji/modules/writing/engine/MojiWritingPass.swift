@@ -4,6 +4,7 @@ import Foundation
 enum MojiWritingEvent: Equatable, Sendable {
     case reachedEnd(stroke: Int)
     case strokeDone(stroke: Int)
+    case paused(stroke: Int)
     case written
     case failed(MojiTraceFailure, stroke: Int)
 }
@@ -80,6 +81,8 @@ struct MojiWritingPass: Equatable, Sendable {
         switch event {
         case .reachedEnd:
             return .reachedEnd(stroke: strokeIndex)
+        case .paused:
+            return .paused(stroke: strokeIndex)
         case .completed:
             let done = strokeIndex
             strokeIndex += 1

@@ -66,12 +66,14 @@ struct PracticeBottomPanel: View {
                         .frame(maxWidth: .infinity)
                 }
 
-                ProgressCapsuleButton(
-                    title: String(localized: "Check"),
-                    role: .primary,
-                    action: { interactions.check() }
-                )
-                .disabled(model.isTyped ? !service.canSubmitTypedAnswer : service.selectedOptionID == nil)
+                if !model.isDrawn {
+                    ProgressCapsuleButton(
+                        title: String(localized: "Check"),
+                        role: .primary,
+                        action: { interactions.check() }
+                    )
+                    .disabled(model.isTyped ? !service.canSubmitTypedAnswer : service.selectedOptionID == nil)
+                }
             }
             .transition(.opacity)
         }
@@ -88,7 +90,7 @@ struct PracticeBottomPanel: View {
             .font(.system(size: 19, weight: .semibold))
             .foregroundStyle(color(for: reveal))
 
-            if !reveal.isCorrect || model.isTyped {
+            if !reveal.isCorrect || model.isTyped || model.isDrawn {
                 let lines = model.answerLines(typed: reveal.isCorrect ? reveal.typed : nil)
                 Text(lines[0])
                     .font(.system(size: 16, weight: .semibold))
@@ -113,7 +115,7 @@ struct PracticeBottomPanel: View {
             let streak = model.combo + 1
             return streak >= 5 ? String(localized: "Correct! ×\(streak)") : String(localized: "Correct!")
         }
-        if reveal.chosenID == nil, reveal.typed == nil {
+        if reveal.isGivenUp {
             return String(localized: "Here's the answer")
         }
         return String(localized: "Not quite")

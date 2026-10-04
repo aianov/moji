@@ -4,9 +4,13 @@ enum MojiAnswerChecker {
     static func isCorrect(
         chosenID: String?,
         typed: String?,
+        drawn: MojiDrawnAnswer? = nil,
         question: MojiQuizQuestion,
         answer: MojiCharacter?
     ) -> Bool {
+        if question.input == .drawing {
+            return answer?.id == question.characterID && drawn?.isCorrect == true
+        }
         guard let typed else {
             return chosenID == question.characterID
         }

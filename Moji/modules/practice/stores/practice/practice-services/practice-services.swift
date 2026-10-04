@@ -16,6 +16,7 @@ final class PracticeServicesStore {
     var isKeyboardDismissed = false
     var hintRevision = 0
     var selectedOptionID: String?
+    var drawingBoard: PracticeDrawingBoard?
 
     @ObservationIgnored var questionShownAt: Date?
     @ObservationIgnored var pendingAnswer: Task<MojiPracticeAnswerOutcome?, Never>?
@@ -62,6 +63,12 @@ final class PracticeServicesStore {
             .map(\.glyph)
     }
 
+    func hasUndrawableKanji(on page: MojiPage) -> Bool {
+        guard page.isKanji else { return false }
+        let composer = MojiQuizComposer(catalog: .shared)
+        return MojiAlphabetCatalog.shared.pool(page).contains { !composer.canDraw($0) }
+    }
+
     var canSubmitTypedAnswer: Bool {
         !typedAnswer.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
@@ -105,6 +112,7 @@ final class PracticeServicesStore {
         isComposingTypedAnswer = false
         isKeyboardDismissed = false
         selectedOptionID = nil
+        drawingBoard = nil
         questionShownAt = nil
         pendingAnswer = nil
         exitsAfterSheet = false

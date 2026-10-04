@@ -95,7 +95,7 @@ struct MojiWritingBlock: Equatable, Sendable {
         case .failed(let failure, _):
             verdict = cards[cursor].fail()
             phase = .failed(failure)
-        case .reachedEnd, .strokeDone, nil:
+        case .reachedEnd, .strokeDone, .paused, nil:
             break
         }
         return event

@@ -3,6 +3,7 @@ import SwiftUI
 struct PracticeQuestionView: View {
     let model: PracticeQuestionModel
     let reveal: PracticeReveal?
+    var board: PracticeDrawingBoard? = nil
 
     private var theme: AppTheme { ThemeStore.shared.currentTheme }
     private var interactions: PracticeInteractionsStore { .shared }
@@ -15,8 +16,6 @@ struct PracticeQuestionView: View {
                     .transition(contentTransition)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .contentShape(Rectangle())
-            .onTapGesture { interactions.dismissKeyboard() }
 
             if model.isTyped {
                 PracticeAnswerField(model: model, reveal: reveal)
@@ -34,16 +33,31 @@ struct PracticeQuestionView: View {
         }
     }
 
+    @ViewBuilder
     private var content: some View {
+        if model.isDrawn {
+            drawingContent
+        } else {
+            answerContent
+                .contentShape(Rectangle())
+                .onTapGesture { interactions.dismissKeyboard() }
+        }
+    }
+
+    private var instruction: some View {
+        Text(model.instruction)
+            .font(.system(size: 22, weight: .bold))
+            .foregroundStyle(theme.text.primary)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 20)
+            .padding(.top, 14)
+    }
+
+    private var answerContent: some View {
         VStack(spacing: 0) {
-            Text(model.instruction)
-                .font(.system(size: 22, weight: .bold))
-                .foregroundStyle(theme.text.primary)
+            instruction
                 .lineLimit(2)
                 .minimumScaleFactor(0.8)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 20)
-                .padding(.top, 14)
 
             promptCard
 
@@ -58,6 +72,31 @@ struct PracticeQuestionView: View {
                     }
                 }
                 .padding(.horizontal, 20)
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private var drawingContent: some View {
+        VStack(spacing: 0) {
+            instruction
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
+
+            PracticeDrawingPrompt(prompt: model.prompt)
+                .padding(.horizontal, 20)
+                .padding(.top, 12)
+
+            if let board, board.questionID == model.id {
+                PracticeDrawingStatusLine(board: board)
+                    .padding(.horizontal, 20)
+                    .padding(.top, 4)
+
+                PracticeDrawingCanvas(board: board, isAnswered: reveal != nil)
+                    .padding(.horizontal, 20)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+            } else {
+                Spacer(minLength: 0)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -84,7 +123,7 @@ struct PracticeQuestionView: View {
                 .frame(maxWidth: 250, maxHeight: 250)
                 .padding(.vertical, 16)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-        case .romaji, .character:
+        case .romaji, .character, .drawing:
             card
                 .frame(maxWidth: .infinity, minHeight: 72, maxHeight: 220)
                 .padding(.horizontal, 20)

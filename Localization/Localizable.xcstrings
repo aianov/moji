@@ -1675,12 +1675,53 @@
         }
       }
     },
-    "Draw the stroke to the end" : {
+    "Draw the kanji that means this" : {
       "localizations" : {
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Доведи черту до конца"
+            "value" : "Нарисуй кандзи с этим значением"
+          }
+        }
+      }
+    },
+    "Draw this sound in hiragana" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нарисуй этот звук хираганой"
+          }
+        }
+      }
+    },
+    "Draw this sound in katakana" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нарисуй этот звук катаканой"
+          }
+        }
+      }
+    },
+    "Drawing" : {
+      "comment" : "Answer mode: draw the character on the canvas.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Рисование"
+          }
+        }
+      }
+    },
+    "Drawing always asks you to draw the character, so this choice is off for now." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "В рисовании ты всегда рисуешь знак, поэтому этот выбор пока не действует."
           }
         }
       }
@@ -1911,6 +1952,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Пройди сегодня урок или сессию практики, чтобы серия не прервалась."
+          }
+        }
+      }
+    },
+    "Finish the line from the dot" : {
+      "comment" : "The finger was lifted mid-stroke: carry on from the pulsing dot.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Доведи линию от точки"
           }
         }
       }
@@ -2363,6 +2415,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Темы кандзи"
+          }
+        }
+      }
+    },
+    "Kanji without stroke order data come as a list." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кандзи без данных о порядке черт идут списком."
           }
         }
       }
@@ -3608,6 +3670,26 @@
         }
       }
     },
+    "See the meaning and draw the kanji stroke by stroke." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Видишь значение и рисуешь кандзи по чертам."
+          }
+        }
+      }
+    },
+    "See the romaji and draw the character stroke by stroke." : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Видишь ромадзи и рисуешь знак по чертам."
+          }
+        }
+      }
+    },
     "Seeing, hearing, thinking and saying" : {
       "localizations" : {
         "ru" : {
@@ -3689,6 +3771,17 @@
         }
       }
     },
+    "Show a hint" : {
+      "comment" : "VoiceOver: the lightbulb on the drawing canvas; it shows the current stroke and counts as a mistake.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показать подсказку"
+          }
+        }
+      }
+    },
     "Show the answer" : {
       "comment" : "VoiceOver: the lightbulb button inside the answer field that fills in the answer.",
       "localizations" : {
@@ -3696,6 +3789,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Показать ответ"
+          }
+        }
+      }
+    },
+    "Show the whole character" : {
+      "comment" : "VoiceOver: the lightbulb on the drawing canvas after one mistake; it shows the whole character.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показать знак целиком"
           }
         }
       }

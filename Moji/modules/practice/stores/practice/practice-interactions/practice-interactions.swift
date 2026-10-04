@@ -9,7 +9,7 @@ final class PracticeInteractionsStore {
     private static let maxTypedLength = 24
 
     private var actions: PracticeActionsStore { .shared }
-    private var service: PracticeServicesStore { .shared }
+    var service: PracticeServicesStore { .shared }
     private var preferences: MojiPreferencesStore { .shared }
 
     private init() {}
@@ -33,14 +33,14 @@ final class PracticeInteractionsStore {
     }
 
     func select(_ optionID: String) {
-        guard case .question(let model) = service.stage, !model.isTyped,
+        guard case .question(let model) = service.stage, model.answerStyle == .choice,
               service.selectedOptionID != optionID else { return }
         MojiHaptics.selection()
         service.selectedOptionID = optionID
     }
 
     func check() {
-        guard case .question(let model) = service.stage else { return }
+        guard case .question(let model) = service.stage, !model.isDrawn else { return }
         if model.isTyped {
             checkTypedAnswer()
             return
@@ -50,6 +50,10 @@ final class PracticeInteractionsStore {
     }
 
     func dontKnow() {
+        guard case .question(let model) = service.stage else { return }
+        if model.isDrawn {
+            giveUpDrawing(model)
+        }
         reveal(chosenID: nil, typed: nil)
     }
 
@@ -227,14 +231,19 @@ final class PracticeInteractionsStore {
         actions.copyAnswerModeAction(from: page, to: MojiAlphabetCatalog.shared.pages(.kanji))
     }
 
-    private func reveal(chosenID: String?, typed: String?) {
+    func reveal(chosenID: String?, typed: String?, drawn: MojiDrawnAnswer? = nil) {
         guard case .question(let model) = service.stage else { return }
-        let isCorrect = typed.map { model.accepts($0) } ?? (chosenID == model.correctOptionID)
+        let isCorrect: Bool
+        if model.isDrawn {
+            isCorrect = drawn?.isCorrect == true
+        } else {
+            isCorrect = typed.map { model.accepts($0) } ?? (chosenID == model.correctOptionID)
+        }
         let now = Date()
 
         service.stage = .revealed(
             model,
-            PracticeReveal(chosenID: chosenID, isCorrect: isCorrect, typed: typed)
+            PracticeReveal(chosenID: chosenID, isCorrect: isCorrect, typed: typed, drawn: drawn)
         )
         if isCorrect {
             MojiHaptics.success()
@@ -252,7 +261,8 @@ final class PracticeInteractionsStore {
             chosenID: chosenID,
             thinkSeconds: service.questionShownAt.map { now.timeIntervalSince($0) } ?? 0,
             answeredAt: now,
-            typed: typed
+            typed: typed,
+            drawn: drawn
         )
         let actions = actions
         service.pendingAnswer = Task {
@@ -265,6 +275,7 @@ final class PracticeInteractionsStore {
         service.isComposingTypedAnswer = false
         service.isKeyboardDismissed = false
         service.selectedOptionID = nil
+        startDrawing(model)
         service.stage = .question(model)
         service.questionShownAt = Date()
     }

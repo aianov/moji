@@ -5,6 +5,7 @@ struct MojiQuizComposer: Sendable {
     static let lookAlikeOptionLimit = 2
 
     let catalog: MojiAlphabetCatalog
+    var strokes: MojiStrokeLibrary? = MojiStrokeLibrary.shared
 
     func makeOrder<R: RandomNumberGenerator>(
         page: MojiPage,
@@ -20,16 +21,26 @@ struct MojiQuizComposer: Sendable {
     ) -> MojiQuizQuestion? {
         guard let answer = catalog.character(characterID) else { return nil }
 
-        let direction = self.direction(for: answer, side: mode.side, using: &generator)
+        let direction = self.direction(for: answer, side: mode.askedSide, using: &generator)
         let input = self.input(mode.input, using: &generator)
 
-        guard input == .choice else {
+        switch input {
+        case .typing:
             return MojiQuizQuestion(
                 characterID: answer.id,
                 direction: direction,
                 optionIDs: [],
                 input: .typing
             )
+        case .drawing where direction == .romajiToGlyph && canDraw(answer):
+            return MojiQuizQuestion(
+                characterID: answer.id,
+                direction: direction,
+                optionIDs: [],
+                input: .drawing
+            )
+        case .choice, .drawing:
+            break
         }
 
         var optionIDs = distractors(
@@ -59,7 +70,13 @@ struct MojiQuizComposer: Sendable {
                 && question.optionIDs.allSatisfy { catalog.character($0) != nil }
         case .typing:
             return true
+        case .drawing:
+            return question.direction == .romajiToGlyph && canDraw(answer)
         }
+    }
+
+    func canDraw(_ character: MojiCharacter) -> Bool {
+        strokes?.canWrite(character.glyph) ?? false
     }
 
     private func direction<R: RandomNumberGenerator>(
@@ -91,6 +108,8 @@ struct MojiQuizComposer: Sendable {
             .typing
         case .mixed:
             Bool.random(using: &generator) ? .typing : .choice
+        case .drawing:
+            .drawing
         }
     }
 

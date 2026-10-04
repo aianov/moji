@@ -56,6 +56,8 @@ struct PracticeAnswerModeSheet: View {
                     }
                     .pickerStyle(.inline)
                     .labelsHidden()
+                    .disabled(mode.input == .drawing)
+                    .opacity(mode.input == .drawing ? 0.45 : 1)
                 } header: {
                     Text("Answer with")
                 } footer: {
@@ -100,11 +102,27 @@ struct PracticeAnswerModeSheet: View {
 
     @ViewBuilder
     private func sideFooter(_ mode: MojiAnswerMode) -> some View {
-        if !page.isKanji, mode.side == .character {
-            let kana = service.glyphFirstKana(for: page)
-            if !kana.isEmpty {
-                Text("\(kana.formatted(.list(type: .and))) always show the character: their romaji is the same as another kana's.")
+        if mode.input == .drawing {
+            VStack(alignment: .leading, spacing: 6) {
+                Text("Drawing always asks you to draw the character, so this choice is off for now.")
+                if page.isKanji {
+                    if service.hasUndrawableKanji(on: page) {
+                        Text("Kanji without stroke order data come as a list.")
+                    }
+                } else {
+                    glyphFirstNote
+                }
             }
+        } else if !page.isKanji, mode.side == .character {
+            glyphFirstNote
+        }
+    }
+
+    @ViewBuilder
+    private var glyphFirstNote: some View {
+        let kana = service.glyphFirstKana(for: page)
+        if !kana.isEmpty {
+            Text("\(kana.formatted(.list(type: .and))) always show the character: their romaji is the same as another kana's.")
         }
     }
 }

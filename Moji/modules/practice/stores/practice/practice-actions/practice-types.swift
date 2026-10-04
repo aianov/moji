@@ -18,12 +18,18 @@ struct PracticeReveal: Equatable {
     let chosenID: String?
     let isCorrect: Bool
     var typed: String? = nil
+    var drawn: MojiDrawnAnswer? = nil
+
+    var isGivenUp: Bool {
+        chosenID == nil && typed == nil && drawn == nil
+    }
 }
 
 enum PracticeAnswerStyle: Hashable {
     case choice
     case romaji
     case character
+    case drawing
 }
 
 struct PracticePromptModel: Equatable {
@@ -61,6 +67,7 @@ struct PracticeQuestionModel: Identifiable, Equatable {
     let prompt: PracticePromptModel
     let options: [PracticeOptionModel]
     let answer: MojiCharacter
+    var figure: MojiWritingFigure? = nil
 
     var id: String {
         "\(sessionID.uuidString)#\(index)"
@@ -75,12 +82,16 @@ struct PracticeQuestionModel: Identifiable, Equatable {
     }
 
     var isTyped: Bool {
-        answerStyle != .choice
+        answerStyle == .romaji || answerStyle == .character
+    }
+
+    var isDrawn: Bool {
+        answerStyle == .drawing
     }
 
     var hintText: String {
         switch answerStyle {
-        case .choice: ""
+        case .choice, .drawing: ""
         case .romaji: answer.romaji.filter { $0 != "(" && $0 != ")" }
         case .character: answer.glyph
         }
@@ -122,7 +133,8 @@ struct PracticeQuestionModel: Identifiable, Equatable {
 
     static func make(
         session: MojiPracticeSession,
-        catalog: MojiAlphabetCatalog
+        catalog: MojiAlphabetCatalog,
+        strokes: MojiStrokeLibrary? = MojiStrokeLibrary.shared
     ) -> PracticeQuestionModel? {
         guard let question = session.current,
               let answer = catalog.character(question.characterID) else {
@@ -135,6 +147,8 @@ struct PracticeQuestionModel: Identifiable, Equatable {
             answerStyle = .choice
         case .typing:
             answerStyle = question.direction == .glyphToRomaji ? .romaji : .character
+        case .drawing:
+            answerStyle = .drawing
         }
 
         var options: [PracticeOptionModel] = []
@@ -143,6 +157,13 @@ struct PracticeQuestionModel: Identifiable, Equatable {
                 catalog.character(id).map { option(for: $0, direction: question.direction) }
             }
             guard options.contains(where: { $0.id == answer.id }) else { return nil }
+        }
+
+        var figure: MojiWritingFigure?
+        if answerStyle == .drawing {
+            guard question.direction == .romajiToGlyph,
+                  let drawn = strokes?.figure(for: answer.glyph) else { return nil }
+            figure = drawn
         }
 
         return PracticeQuestionModel(
@@ -161,7 +182,8 @@ struct PracticeQuestionModel: Identifiable, Equatable {
             ),
             prompt: prompt(for: answer, direction: question.direction, answerStyle: answerStyle),
             options: options,
-            answer: answer
+            answer: answer,
+            figure: figure
         )
     }
 
@@ -253,6 +275,12 @@ struct PracticeQuestionModel: Identifiable, Equatable {
             case .hiragana: String(localized: "Write this sound in hiragana")
             case .katakana: String(localized: "Write this sound in katakana")
             case .kanji: String(localized: "Write the kanji that means this")
+            }
+        case (.drawing, _):
+            switch script {
+            case .hiragana: String(localized: "Draw this sound in hiragana")
+            case .katakana: String(localized: "Draw this sound in katakana")
+            case .kanji: String(localized: "Draw the kanji that means this")
             }
         }
     }

@@ -154,7 +154,8 @@ private struct QuestionPreview: View {
                                 chosenID: model.options.first { $0.id != model.correctOptionID }?.id,
                                 isCorrect: false
                             )
-                            : nil
+                            : nil,
+                        board: model.figure.map { PracticeDrawingBoard(questionID: model.id, figure: $0) }
                     )
                 }
             }
@@ -197,6 +198,14 @@ private struct QuestionPreview: View {
 
 #Preview("Question · typed kana") {
     QuestionPreview(page: .katakana, reveal: false, mode: MojiAnswerMode(input: .keyboard, side: .character))
+}
+
+#Preview("Question · drawn kana") {
+    QuestionPreview(page: .hiragana, reveal: false, mode: MojiAnswerMode(input: .drawing, side: .mixed))
+}
+
+#Preview("Question · drawn kanji") {
+    QuestionPreview(page: .kanji(.nature), reveal: false, mode: MojiAnswerMode(input: .drawing, side: .mixed))
 }
 
 #Preview("Session complete") {

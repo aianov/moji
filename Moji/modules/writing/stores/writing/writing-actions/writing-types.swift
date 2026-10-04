@@ -19,7 +19,6 @@ struct WritingFailure: Equatable {
         case .wrongStart: String(localized: "This stroke starts elsewhere")
         case .offLine: String(localized: "Off the line")
         case .backwards: String(localized: "Wrong direction")
-        case .liftedEarly: String(localized: "Draw the stroke to the end")
         }
     }
 

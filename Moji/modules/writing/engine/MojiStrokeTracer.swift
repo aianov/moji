@@ -47,13 +47,13 @@ enum MojiTraceFailure: String, Equatable, Sendable {
     case wrongStart
     case offLine
     case backwards
-    case liftedEarly
 }
 
 enum MojiTracePhase: Equatable, Sendable {
     case waiting
     case tracing
     case reachedEnd
+    case paused
     case completed
     case failed(MojiTraceFailure)
 }
@@ -61,6 +61,7 @@ enum MojiTracePhase: Equatable, Sendable {
 enum MojiTraceEvent: Equatable, Sendable {
     case began
     case reachedEnd
+    case paused
     case completed
     case failed(MojiTraceFailure)
 }
@@ -71,9 +72,10 @@ struct MojiStrokeTracer: Equatable, Sendable {
 
     private(set) var phase: MojiTracePhase = .waiting
     private(set) var progress: CGFloat = 0
-    private(set) var travel: CGFloat = 0
     private(set) var touchDown: CGPoint?
     private var last: CGPoint?
+    private var touchDownProgress: CGFloat = 0
+    private var resumedFrom: CGFloat?
 
     init(path: MojiStrokePath, tolerance: MojiTraceTolerance = .standard) {
         self.path = path
@@ -88,8 +90,23 @@ struct MojiStrokeTracer: Equatable, Sendable {
         phase == .tracing || phase == .reachedEnd
     }
 
+    var isPaused: Bool {
+        phase == .paused
+    }
+
     var hasReachedEnd: Bool {
         phase == .reachedEnd || phase == .completed
+    }
+
+    var resumePoint: CGPoint? {
+        switch phase {
+        case .paused:
+            path.point(at: progress)
+        case .tracing, .reachedEnd:
+            resumedFrom.map { path.point(at: $0) }
+        case .waiting, .completed, .failed:
+            nil
+        }
     }
 
     var fraction: CGFloat {
@@ -103,20 +120,31 @@ struct MojiStrokeTracer: Equatable, Sendable {
             []
         case .completed:
             path.points
+        case .paused:
+            path.prefix(through: progress)
         case .tracing, .reachedEnd, .failed:
             touchDown == nil ? [] : path.prefix(through: progress)
         }
     }
 
     mutating func begin(at point: CGPoint) -> MojiTraceEvent? {
-        guard phase == .waiting else { return nil }
+        let anchor: CGFloat
+        switch phase {
+        case .waiting:
+            anchor = 0
+        case .paused:
+            anchor = progress
+        case .tracing, .reachedEnd, .completed, .failed:
+            return nil
+        }
         touchDown = point
-        guard MojiStrokePath.distance(point, path.start) <= tolerance.startRadius else {
+        guard MojiStrokePath.distance(point, path.point(at: anchor)) <= tolerance.startRadius else {
             return fail(.wrongStart)
         }
+        resumedFrom = isPaused ? anchor : nil
         last = point
-        travel = 0
-        progress = path.closest(to: point, within: 0...tolerance.startRadius).position
+        progress = max(anchor, path.closest(to: point, within: anchor...(anchor + tolerance.startRadius)).position)
+        touchDownProgress = progress
         phase = .tracing
         guard reachesEnd(from: point) else { return .began }
         phase = .reachedEnd
@@ -132,7 +160,6 @@ struct MojiStrokeTracer: Equatable, Sendable {
         for index in 1...steps {
             let share = CGFloat(index) / CGFloat(steps)
             let sample = CGPoint(x: from.x + (point.x - from.x) * share, y: from.y + (point.y - from.y) * share)
-            travel += gap / CGFloat(steps)
             last = sample
             if let next = follow(sample) {
                 event = next
@@ -153,27 +180,41 @@ struct MojiStrokeTracer: Equatable, Sendable {
             phase = .completed
             return .completed
         case .tracing:
-            guard travel >= tolerance.tapSlop else {
-                reset()
-                return nil
-            }
-            return fail(.liftedEarly)
-        case .waiting, .completed, .failed:
+            return lift()
+        case .waiting, .paused, .completed, .failed:
             return event
         }
     }
 
     mutating func cancel() {
         guard isTouching else { return }
-        reset()
+        _ = lift()
     }
 
     mutating func reset() {
         phase = .waiting
         progress = 0
-        travel = 0
         touchDown = nil
         last = nil
+        touchDownProgress = 0
+        resumedFrom = nil
+    }
+
+    private mutating func lift() -> MojiTraceEvent? {
+        last = nil
+        guard progress - touchDownProgress >= tolerance.tapSlop else {
+            guard let resumedFrom else {
+                reset()
+                return nil
+            }
+            progress = resumedFrom
+            self.resumedFrom = nil
+            phase = .paused
+            return nil
+        }
+        resumedFrom = nil
+        phase = .paused
+        return .paused
     }
 
     private mutating func follow(_ sample: CGPoint) -> MojiTraceEvent? {

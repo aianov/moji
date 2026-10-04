@@ -48,10 +48,29 @@ enum WritingInk {
     }
 }
 
-struct WritingCanvas: View {
+@MainActor
+protocol WritingCanvasSource: AnyObject {
+    var figure: MojiWritingFigure? { get }
+    var strokeIndex: Int { get }
+    var currentStroke: [CGPoint]? { get }
+    var doneStrokes: [[CGPoint]] { get }
+    var ink: [CGPoint] { get }
+    var isTouching: Bool { get }
+    var reachedEnd: Bool { get }
+    var resumePoint: CGPoint? { get }
+    var failure: WritingFailure? { get }
+    var passToken: Int { get }
+    var showsWholePhantom: Bool { get }
+    var showsCurrentStroke: Bool { get }
+    var showsPoints: Bool { get }
+    var isWritten: Bool { get }
+}
+
+struct WritingCanvas<Source: WritingCanvasSource>: View {
+    let source: Source
+    let onTouch: @MainActor (WritingTouch) -> Void
+
     private var theme: AppTheme { ThemeStore.shared.currentTheme }
-    private var service: WritingServicesStore { .shared }
-    private var interactions: WritingInteractionsStore { .shared }
 
     var body: some View {
         GeometryReader { geometry in
@@ -59,12 +78,12 @@ struct WritingCanvas: View {
             let shape = RoundedRectangle(cornerRadius: 28, style: .continuous)
 
             ZStack {
-                WritingGuides(centers: service.figure?.cellCenters ?? [0.5], side: side)
-                WritingPhantomLayer(side: side)
-                WritingDoneInkLayer(side: side)
-                WritingLiveInkLayer(side: side)
-                WritingMarkerLayer(side: side)
-                WritingTouchSurface(onTouch: { interactions.handle($0) })
+                WritingGuides(centers: source.figure?.cellCenters ?? [0.5], side: side)
+                WritingPhantomLayer(source: source, side: side)
+                WritingDoneInkLayer(source: source, side: side)
+                WritingLiveInkLayer(source: source, side: side)
+                WritingMarkerLayer(source: source, side: side)
+                WritingTouchSurface(onTouch: onTouch)
             }
             .frame(width: side, height: side)
             .background(shape.fill(theme.bg._300))
@@ -101,26 +120,25 @@ private struct WritingGuides: View {
     }
 }
 
-private struct WritingPhantomLayer: View {
+private struct WritingPhantomLayer<Source: WritingCanvasSource>: View {
+    let source: Source
     let side: CGFloat
 
     private var theme: AppTheme { ThemeStore.shared.currentTheme }
-    private var service: WritingServicesStore { .shared }
 
     var body: some View {
-        let isFailed = service.failure != nil
-        let showsWhole = service.stage.showsPhantom && service.phase != .written
-        let showsCurrent = (service.stage.showsPhantom && service.phase == .writing) || isFailed
+        let showsWhole = source.showsWholePhantom
+        let showsCurrent = source.showsCurrentStroke
 
         ZStack {
-            if let figure = service.figure {
+            if let figure = source.figure {
                 let width = WritingInk.lineWidth(side: side, figure: figure)
                 if showsWhole {
                     WritingInk.path(figure.strokes, side: side)
                         .stroke(theme.text.primary.opacity(theme.isDark ? 0.14 : 0.09), style: WritingInk.style(width))
                         .transition(.opacity)
                 }
-                if showsCurrent, let stroke = service.currentStroke {
+                if showsCurrent, let stroke = source.currentStroke {
                     WritingInk.path(stroke, side: side)
                         .stroke(theme.text.primary.opacity(theme.isDark ? 0.26 : 0.17), style: WritingInk.style(width))
                         .transition(.opacity)
@@ -134,18 +152,18 @@ private struct WritingPhantomLayer: View {
     }
 }
 
-private struct WritingDoneInkLayer: View {
+private struct WritingDoneInkLayer<Source: WritingCanvasSource>: View {
+    let source: Source
     let side: CGFloat
 
     private var theme: AppTheme { ThemeStore.shared.currentTheme }
-    private var service: WritingServicesStore { .shared }
 
     var body: some View {
-        let isWritten = service.phase == .written
+        let isWritten = source.isWritten
 
         ZStack {
-            if let figure = service.figure {
-                WritingInk.path(service.doneStrokes, side: side)
+            if let figure = source.figure {
+                WritingInk.path(source.doneStrokes, side: side)
                     .stroke(
                         isWritten ? MojiTint.correct : theme.text.primary,
                         style: WritingInk.style(WritingInk.lineWidth(side: side, figure: figure))
@@ -158,18 +176,18 @@ private struct WritingDoneInkLayer: View {
     }
 }
 
-private struct WritingLiveInkLayer: View {
+private struct WritingLiveInkLayer<Source: WritingCanvasSource>: View {
+    let source: Source
     let side: CGFloat
 
     private var theme: AppTheme { ThemeStore.shared.currentTheme }
-    private var service: WritingServicesStore { .shared }
 
     var body: some View {
-        let isFailed = service.failure != nil
+        let isFailed = source.failure != nil
 
         ZStack {
-            if let figure = service.figure, !service.ink.isEmpty {
-                WritingInk.path(service.ink, side: side)
+            if let figure = source.figure, !source.ink.isEmpty {
+                WritingInk.path(source.ink, side: side)
                     .stroke(
                         isFailed ? MojiTint.wrong : theme.text.primary,
                         style: WritingInk.style(WritingInk.lineWidth(side: side, figure: figure))
@@ -182,29 +200,29 @@ private struct WritingLiveInkLayer: View {
     }
 }
 
-private struct WritingMarkerLayer: View {
+private struct WritingMarkerLayer<Source: WritingCanvasSource>: View {
+    let source: Source
     let side: CGFloat
 
     private var theme: AppTheme { ThemeStore.shared.currentTheme }
-    private var service: WritingServicesStore { .shared }
 
     var body: some View {
-        let failure = service.failure
-        let showsPoints = (service.stage.showsPoints && service.phase == .writing) || failure != nil
+        let failure = source.failure
+        let showsPoints = source.showsPoints
 
         ZStack {
-            if let figure = service.figure {
+            if let figure = source.figure {
                 let diameter = WritingInk.markerDiameter(side: side, figure: figure)
 
-                if showsPoints, let stroke = service.currentStroke, let start = stroke.first, let end = stroke.last {
+                if showsPoints, let stroke = source.currentStroke, let start = stroke.first, let end = stroke.last {
                     WritingPointPair(
-                        start: WritingInk.point(start, side: side),
+                        start: WritingInk.point(source.resumePoint ?? start, side: side),
                         end: WritingInk.point(end, side: side),
                         diameter: diameter,
-                        isTouching: service.isTouching,
-                        reachedEnd: service.reachedEnd
+                        isTouching: source.isTouching,
+                        reachedEnd: source.reachedEnd
                     )
-                    .id("\(service.passToken).\(service.strokeIndex)")
+                    .id("\(source.passToken).\(source.strokeIndex)")
                 }
 
                 if let failure, failure.reason == .wrongStart, let touch = failure.touch {

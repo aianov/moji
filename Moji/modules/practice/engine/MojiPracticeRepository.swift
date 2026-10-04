@@ -48,11 +48,12 @@ actor MojiPracticeRepository {
 
     init(
         resources: MojiPracticeResourceRepository,
-        catalog: MojiAlphabetCatalog
+        catalog: MojiAlphabetCatalog,
+        strokes: MojiStrokeLibrary? = MojiStrokeLibrary.shared
     ) {
         self.resources = resources
         self.catalog = catalog
-        self.composer = MojiQuizComposer(catalog: catalog)
+        self.composer = MojiQuizComposer(catalog: catalog, strokes: strokes)
     }
 
     func setPublisher(_ publish: @escaping @Sendable (MojiPracticeRepositorySnapshot) async -> Void) {
@@ -114,17 +115,20 @@ actor MojiPracticeRepository {
             return nil
         }
 
+        let isDrawing = question.input == .drawing
         let isCorrect = MojiAnswerChecker.isCorrect(
             chosenID: submission.chosenID,
             typed: submission.typed,
+            drawn: submission.drawn,
             question: question,
             answer: catalog.character(question.characterID)
         )
         session.answers.append(
             MojiQuizAnswer(
                 characterID: question.characterID,
-                chosenID: submission.typed == nil ? submission.chosenID : nil,
-                typed: submission.typed,
+                chosenID: submission.typed == nil && !isDrawing ? submission.chosenID : nil,
+                typed: isDrawing ? nil : submission.typed,
+                drawn: isDrawing ? submission.drawn : nil,
                 isCorrect: isCorrect,
                 answeredAt: submission.answeredAt
             )
