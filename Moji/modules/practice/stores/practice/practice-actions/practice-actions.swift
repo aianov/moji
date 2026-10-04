@@ -39,6 +39,13 @@ final class PracticeActionsStore {
         }
     }
 
+    func markWrittenAction(_ characterIDs: [String]) {
+        Task {
+            let domain = await MojiPracticeDomainRegistry.shared.requireDomain()
+            await domain.repository.markWritten(characterIDs, at: Date())
+        }
+    }
+
     func recordAnswerAction(characterID: String, correct: Bool, steps: Int = 1) {
         Task {
             let domain = await MojiPracticeDomainRegistry.shared.requireDomain()

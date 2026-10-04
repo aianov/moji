@@ -134,11 +134,13 @@ extension MojiPracticeSession {
 
 struct MojiCharacterProgress: Codable, Equatable, Sendable {
     static let masteryLevel = 5
+    static let writingShare = 0.2
 
     var strength: Int
     var seen: Int
     var correct: Int
     var lastSeenAt: Date?
+    var writtenAt: Date? = nil
 
     static let fresh = MojiCharacterProgress(
         strength: 0,
@@ -147,16 +149,33 @@ struct MojiCharacterProgress: Codable, Equatable, Sendable {
         lastSeenAt: nil
     )
 
-    var isMastered: Bool {
+    var isWritten: Bool {
+        writtenAt != nil
+    }
+
+    var isRecognized: Bool {
         strength >= Self.masteryLevel
     }
 
+    var isMastered: Bool {
+        isRecognized && isWritten
+    }
+
+    var recognition: Double {
+        Double(min(max(strength, 0), Self.masteryLevel)) / Double(Self.masteryLevel)
+    }
+
     var mastery: Double {
-        Double(min(strength, Self.masteryLevel)) / Double(Self.masteryLevel)
+        Self.mastery(strength: strength, isWritten: isWritten)
     }
 
     var accuracy: Double? {
         seen > 0 ? Double(correct) / Double(seen) : nil
+    }
+
+    static func mastery(strength: Int, isWritten: Bool) -> Double {
+        let recognition = Double(min(max(strength, 0), masteryLevel)) / Double(masteryLevel)
+        return recognition * (1 - writingShare) + (isWritten ? writingShare : 0)
     }
 
     func recording(correct isCorrect: Bool, at date: Date, steps: Int = 1) -> MojiCharacterProgress {
@@ -164,8 +183,15 @@ struct MojiCharacterProgress: Codable, Equatable, Sendable {
             strength: isCorrect ? min(Self.masteryLevel, strength + max(1, steps)) : max(0, strength - 2),
             seen: seen + 1,
             correct: correct + (isCorrect ? 1 : 0),
-            lastSeenAt: date
+            lastSeenAt: date,
+            writtenAt: writtenAt
         )
+    }
+
+    func writing(at date: Date) -> MojiCharacterProgress {
+        var result = self
+        result.writtenAt = writtenAt ?? date
+        return result
     }
 }
 

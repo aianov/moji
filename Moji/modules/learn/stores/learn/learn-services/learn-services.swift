@@ -13,6 +13,7 @@ final class LearnServicesStore {
     var activeTheme: MojiKanjiTheme
     var detailCharacter: MojiCharacter?
     var bulkMark: LearnBulkMark?
+    var writingPractice: LearnWritingPractice?
 
     var presented: LearnPresentedLesson?
     var stage: LearnStage = .loading
@@ -41,7 +42,6 @@ final class LearnServicesStore {
     @ObservationIgnored var correctCount = 0
     @ObservationIgnored var baseline: [String: MojiCharacterProgress] = [:]
     @ObservationIgnored var startedAt = Date()
-    @ObservationIgnored var writingExerciseID: String?
     @ObservationIgnored var exitTask: Task<Void, Never>?
 
     private init() {
@@ -122,6 +122,10 @@ final class LearnServicesStore {
         practiceSnapshot.progress[characterID]?.strength ?? 0
     }
 
+    func mastery(of characterID: String) -> Double {
+        practiceSnapshot.progress[characterID]?.mastery ?? 0
+    }
+
     func character(_ id: String) -> MojiCharacter? {
         MojiAlphabetCatalog.shared.character(id)
     }
@@ -151,7 +155,6 @@ final class LearnServicesStore {
         matchedIDs = []
         matchMissedIDs = []
         matchShake = nil
-        writingExerciseID = nil
     }
 
     func resetLessonState() {

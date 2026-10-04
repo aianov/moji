@@ -81,7 +81,7 @@ struct LessonBottomPanel: View {
                 action: { interactions.check() }
             )
             .disabled(service.chosenWordIndex == nil)
-        case .match, .write:
+        case .match:
             EmptyView()
         }
     }

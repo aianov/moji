@@ -76,38 +76,6 @@ private enum MojiPreviewData {
         )
     }
 
-    static func writing(_ page: MojiPage) -> LessonExerciseModel? {
-        var generator = SystemRandomNumberGenerator()
-        guard let batch = MojiLearnPlanner.shared.batches(page).first else { return nil }
-        let progress = Dictionary(uniqueKeysWithValues: batch.characterIDs.map {
-            ($0, MojiCharacterProgress(strength: 3, seen: 4, correct: 4, lastSeenAt: Date()))
-        })
-        let state = MojiLearnPageState(
-            introducedIDs: batch.characterIDs,
-            freshIDs: [],
-            lessonsCompleted: 1,
-            lastLessonAt: Date()
-        )
-        guard let lesson = MojiLearnPlanner.shared.makeLesson(
-            page: page,
-            progress: progress,
-            state: state,
-            now: Date(),
-            batchIndex: batch.index,
-            using: &generator
-        ),
-            let index = lesson.items.firstIndex(where: { $0.step.kind == .write }) else {
-            return nil
-        }
-        return LessonExerciseModel.make(
-            lessonID: lesson.id,
-            page: page,
-            position: index,
-            item: lesson.items[index],
-            catalog: .shared
-        )
-    }
-
     static func batchStates(_ page: MojiPage) -> [MojiLearnBatchState] {
         let statuses: [MojiLearnBatchStatus] = [.learned, .current, .review, .new, .new]
         return zip(MojiLearnPlanner.shared.batches(page), statuses).map { batch, status in
@@ -252,14 +220,6 @@ private struct QuestionPreview: View {
 
 #Preview("Lesson · listen and type") {
     LessonExercisePreview(model: MojiPreviewData.exercise(.hiragana, kind: .word))
-}
-
-#Preview("Lesson · write the group") {
-    LessonExercisePreview(model: MojiPreviewData.writing(.kanji(.people)))
-}
-
-#Preview("Lesson · write the group, kana") {
-    LessonExercisePreview(model: MojiPreviewData.writing(.hiragana))
 }
 
 #Preview("Lesson · read it, hard") {

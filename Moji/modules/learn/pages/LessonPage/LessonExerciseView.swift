@@ -4,11 +4,6 @@ struct LessonExerciseView: View {
     let model: LessonExerciseModel
 
     private var theme: AppTheme { ThemeStore.shared.currentTheme }
-    private var service: LearnServicesStore { .shared }
-
-    private var showsBottomPanel: Bool {
-        model.kind != .write || service.feedback != nil
-    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -38,8 +33,6 @@ struct LessonExerciseView: View {
                     LessonListenView(answer: answer, options: options)
                 case .match(let left, let right):
                     LessonMatchView(left: left, right: right)
-                case .write:
-                    LessonWriteView(model: model)
                 case .word(let characters, let options):
                     LessonWordView(characters: characters, options: options)
                 case .read(let characters):
@@ -48,12 +41,8 @@ struct LessonExerciseView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-            if showsBottomPanel {
-                LessonBottomPanel(model: model)
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
-            }
+            LessonBottomPanel(model: model)
         }
-        .animation(.spring(response: 0.36, dampingFraction: 0.86), value: showsBottomPanel)
     }
 
     private var instruction: Text {
@@ -69,10 +58,6 @@ struct LessonExerciseView: View {
             return isKanji ? Text("Which kanji do you hear?") : Text("Which character do you hear?")
         case .match:
             return Text("Match the pairs")
-        case .write(let characters) where characters.count == 1:
-            return isKanji ? Text("Write this kanji") : Text("Write this character")
-        case .write:
-            return isKanji ? Text("Write these kanji") : Text("Write these characters")
         case .word(_, .none):
             return Text("Type what you hear")
         case .word(_, .some):

@@ -226,6 +226,22 @@ actor MojiPracticeRepository {
         await emit()
     }
 
+    func markWritten(_ characterIDs: [String], at date: Date) async {
+        await ensureLoaded()
+        var changed = false
+        for id in characterIDs where catalog.character(id) != nil {
+            let entry = progress[id] ?? .fresh
+            guard !entry.isWritten else { continue }
+            progress[id] = entry.writing(at: date)
+            changed = true
+        }
+        guard changed else { return }
+        recomputeDerived(now: date)
+
+        await resources.saveProgress(progress)
+        await emit()
+    }
+
     func recordAnswer(
         characterID: String,
         correct: Bool,

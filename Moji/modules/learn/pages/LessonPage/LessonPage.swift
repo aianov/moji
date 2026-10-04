@@ -34,6 +34,9 @@ struct LessonPage: View {
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
+            case .writingNotice:
+                LessonWritingNoticeView(onContinue: { interactions.showSummary() })
+                    .transition(.opacity.combined(with: .scale(scale: 0.97)))
             case .finished(let summary):
                 LessonSummaryView(summary: summary)
                     .transition(.opacity.combined(with: .scale(scale: 0.97)))
@@ -65,6 +68,7 @@ struct LessonPage: View {
         switch service.stage {
         case .loading: "loading"
         case .exercise(let model): model.id
+        case .writingNotice: "writing"
         case .finished: "finished"
         case .unavailable: "unavailable"
         }

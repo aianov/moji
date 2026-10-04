@@ -10,6 +10,7 @@ struct LearnPresentedLesson: Identifiable, Equatable {
 enum LearnStage: Equatable {
     case loading
     case exercise(LessonExerciseModel)
+    case writingNotice(LessonSummaryModel)
     case finished(LessonSummaryModel)
     case unavailable
 }
@@ -19,7 +20,6 @@ enum LessonContent: Equatable {
     case choice(prompt: MojiCharacter, direction: MojiLessonDirection, options: [MojiCharacter])
     case listen(answer: MojiCharacter, options: [MojiCharacter])
     case match(left: [MojiCharacter], right: [MojiCharacter])
-    case write(characters: [MojiCharacter])
     case word(characters: [MojiCharacter], options: [[MojiCharacter]]?)
     case read(characters: [MojiCharacter])
 }
@@ -65,9 +65,6 @@ struct LessonExerciseModel: Identifiable, Equatable {
         case .match(let leftIDs, let rightIDs):
             guard let left = resolve(leftIDs), let right = resolve(rightIDs) else { return nil }
             content = .match(left: left, right: right)
-        case .write(_, let ids):
-            guard let characters = resolve(ids), !characters.isEmpty else { return nil }
-            content = .write(characters: characters)
         case .word(let ids, .type):
             guard let characters = resolve(ids) else { return nil }
             content = .word(characters: characters, options: nil)
@@ -106,8 +103,13 @@ struct LessonSummaryCharacter: Identifiable, Equatable {
     let character: MojiCharacter
     let strength: Int
     let isNew: Bool
+    var isWritten = false
 
     var id: String { character.id }
+
+    var mastery: Double {
+        MojiCharacterProgress.mastery(strength: strength, isWritten: isWritten)
+    }
 }
 
 enum LessonSummaryNext: Equatable {
@@ -145,4 +147,11 @@ struct LearnBulkMark: Identifiable, Equatable {
     let isWholeScript: Bool
 
     var id: String { "\(title)#\(characterIDs.count)" }
+}
+
+struct LearnWritingPractice: Identifiable, Equatable {
+    let batch: MojiLearnBatch
+    let request: WritingPracticeRequest
+
+    var id: UUID { request.id }
 }

@@ -652,17 +652,6 @@
         }
       }
     },
-    "%lld of %lld without mistakes" : {
-      "comment" : "Writing block result: characters written without a single mistake, of all characters in the group.",
-      "localizations" : {
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$lld из %2$lld без ошибок"
-          }
-        }
-      }
-    },
     "%lld sessions" : {
       "localizations" : {
         "en" : {
@@ -1367,6 +1356,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "КОМБО ×%lld"
+          }
+        }
+      }
+    },
+    "Complete the writing part to fill this group up to 100%. The pencil is on the right of the group's row." : {
+      "comment" : "Last screen of a lesson: answers filled the group to its maximum, only the writing part is left.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пройди письменную часть, чтобы заполнить группу до 100%. Карандаш справа в строке группы."
           }
         }
       }
@@ -3005,6 +3005,17 @@
         }
       }
     },
+    "Not written yet" : {
+      "comment" : "VoiceOver: the character's writing part is not done yet.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ещё не написан"
+          }
+        }
+      }
+    },
     "Not quite" : {
       "localizations" : {
         "ru" : {
@@ -4631,6 +4642,17 @@
         }
       }
     },
+    "Write it" : {
+      "comment" : "Character card button that opens stroke-by-stroke writing practice for this character.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Написать"
+          }
+        }
+      }
+    },
     "Write these characters" : {
       "localizations" : {
         "ru" : {
@@ -4651,26 +4673,6 @@
         }
       }
     },
-    "Write this character" : {
-      "localizations" : {
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Напиши этот знак"
-          }
-        }
-      }
-    },
-    "Write this kanji" : {
-      "localizations" : {
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Напиши этот кандзи"
-          }
-        }
-      }
-    },
     "Write this sound in hiragana" : {
       "localizations" : {
         "ru" : {
@@ -4687,6 +4689,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Напиши этот звук катаканой"
+          }
+        }
+      }
+    },
+    "Writing is left" : {
+      "comment" : "Last screen of a lesson when a group is fully recognized but not written yet; also the character card status.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Осталось письмо"
+          }
+        }
+      }
+    },
+    "Written" : {
+      "comment" : "VoiceOver: the character's writing part is done.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Написан"
           }
         }
       }

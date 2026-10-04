@@ -159,7 +159,7 @@ struct MojiLearnPlannerTests {
             [id] + optionIDs
         case .match(let leftIDs, let rightIDs):
             leftIDs + rightIDs
-        case .write(_, let ids), .word(let ids, .type), .read(let ids):
+        case .word(let ids, .type), .read(let ids):
             ids
         case .word(let ids, .choose(let options)):
             ids + options.flatMap { $0 }
@@ -377,7 +377,7 @@ struct MojiLearnPlannerTests {
             batchIndex: 6,
             newCharacterIDs: [],
             reviewCharacterIDs: [],
-            items: [MojiLessonItem(step: .write(batchID: batches[6].id, characterIDs: batches[6].characterIDs))]
+            items: [MojiLessonItem(step: .read(characterIDs: batches[6].characterIDs))]
         )
         let consolidated = afterNext.completing(consolidation, at: now)
         #expect(Set(consolidated.freshIDs).isDisjoint(with: batches[6].characterIDs))
@@ -629,7 +629,7 @@ struct MojiLearnPlannerTests {
                         option.compactMap { catalog.character($0) }.map(LessonBuilder.soundKey).joined(separator: "|")
                     }
                     #expect(Set(sounds).count == options.count)
-                case .intro, .write, .word, .read:
+                case .intro, .word, .read:
                     break
                 }
             }

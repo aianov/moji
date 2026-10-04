@@ -29,13 +29,6 @@ final class LearnActionsStore {
         }
     }
 
-    func markWrittenAction(_ batchID: String, on page: MojiPage) {
-        Task {
-            let domain = await MojiLearnDomainRegistry.shared.requireDomain()
-            await domain.repository.markWritten(batchID, on: page)
-        }
-    }
-
     func retryItem(_ item: MojiLessonItem) -> MojiLessonItem {
         var generator = SystemRandomNumberGenerator()
         return MojiLearnPlanner.shared.retry(of: item, using: &generator)

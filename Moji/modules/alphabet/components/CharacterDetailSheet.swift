@@ -3,6 +3,8 @@ import SwiftUI
 struct CharacterDetailSheet: View {
     let character: MojiCharacter
 
+    @State private var writing: WritingPracticeRequest?
+
     private var theme: AppTheme { ThemeStore.shared.currentTheme }
     private var practice: PracticeServicesStore { .shared }
     private var interactions: AlphabetInteractionsStore { .shared }
@@ -39,7 +41,23 @@ struct CharacterDetailSheet: View {
                     }
                 }
 
-                MasteryEditor(character: character, strength: progress.strength)
+                if !WritingPracticeRequest.available([character]).isEmpty {
+                    LiquidGlassButton(
+                        shape: .capsule,
+                        size: 48,
+                        horizontalPadding: 24,
+                        action: {
+                            MojiHaptics.impact()
+                            writing = WritingPracticeRequest(title: character.glyph, characters: [character])
+                        }
+                    ) {
+                        Label("Write it", systemImage: "pencil.and.scribble")
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundStyle(theme.text.primary)
+                    }
+                }
+
+                MasteryEditor(character: character, strength: progress.strength, isWritten: progress.isWritten)
 
                 HStack(spacing: 0) {
                     stat(value: "\(progress.seen)") { Text("Seen") }
@@ -59,6 +77,12 @@ struct CharacterDetailSheet: View {
         .presentationDragIndicator(.visible)
         .onAppear {
             interactions.characterDetailDidAppear(character)
+        }
+        .fullScreenCover(item: $writing) { request in
+            WritingPracticeView(request: request) { cards in
+                PracticeActionsStore.shared.markWrittenAction(cards.map(\.id))
+            }
+            .themedPresentation()
         }
     }
 
@@ -107,6 +131,7 @@ struct CharacterDetailSheet: View {
 private struct MasteryEditor: View {
     let character: MojiCharacter
     let strength: Int
+    let isWritten: Bool
 
     private var theme: AppTheme { ThemeStore.shared.currentTheme }
     private var interactions: AlphabetInteractionsStore { .shared }
@@ -122,14 +147,16 @@ private struct MasteryEditor: View {
                     .foregroundStyle(theme.text.primary)
                 Spacer(minLength: 0)
                 Group {
-                    if strength >= level {
+                    if strength >= level && isWritten {
                         Text("Known")
+                    } else if strength >= level {
+                        Text("Writing is left")
                     } else {
                         Text("\(strength) of \(level)")
                     }
                 }
                 .font(.system(size: 14, weight: .semibold).monospacedDigit())
-                .foregroundStyle(strength >= level ? MojiTint.gold : theme.text.secondary)
+                .foregroundStyle(strength >= level && isWritten ? MojiTint.gold : theme.text.secondary)
                 .contentTransition(.numericText(value: Double(strength)))
             }
 
@@ -148,6 +175,14 @@ private struct MasteryEditor: View {
                     .buttonStyle(.plain)
                     .accessibilityLabel(Text("Set mastery to \(step) of \(level)"))
                 }
+
+                Image(systemName: "pencil")
+                    .font(.system(size: 11, weight: .bold))
+                    .foregroundStyle(isWritten ? Color.white : theme.text.secondary)
+                    .frame(width: 34, height: 18)
+                    .background(Capsule(style: .continuous).fill(isWritten ? MojiTint.gold : theme.bg._600))
+                    .frame(height: 34)
+                    .accessibilityLabel(isWritten ? Text("Written") : Text("Not written yet"))
             }
 
             HStack(spacing: 10) {

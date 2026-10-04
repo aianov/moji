@@ -216,8 +216,7 @@ private struct LessonSummaryChip: View {
     private var interactions: LearnInteractionsStore { .shared }
 
     var body: some View {
-        let mastery = Double(min(entry.strength, MojiCharacterProgress.masteryLevel))
-            / Double(MojiCharacterProgress.masteryLevel)
+        let mastery = entry.mastery
         let meaning = entry.character.shortMeaning
 
         Button {

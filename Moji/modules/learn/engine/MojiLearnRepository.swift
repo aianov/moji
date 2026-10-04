@@ -66,17 +66,6 @@ actor MojiLearnRepository {
         await emit()
     }
 
-    func markWritten(_ batchID: String, on page: MojiPage) async {
-        await ensureLoaded()
-        let current = state.state(for: page)
-        let next = current.writing(batchID)
-        guard next != current else { return }
-        state.pages[page.rawValue] = next
-
-        await resources.save(state)
-        await emit()
-    }
-
     func resetAll() async {
         await ensureLoaded()
         state = .empty

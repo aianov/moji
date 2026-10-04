@@ -5,15 +5,6 @@ struct MojiLearnPageState: Codable, Equatable, Sendable {
     var freshIDs: [String]
     var lessonsCompleted: Int
     var lastLessonAt: Date?
-    var writtenBatchIDs: [String] = []
-
-    enum CodingKeys: String, CodingKey {
-        case introducedIDs
-        case freshIDs
-        case lessonsCompleted
-        case lastLessonAt
-        case writtenBatchIDs
-    }
 
     static let empty = MojiLearnPageState(
         introducedIDs: [],
@@ -33,28 +24,7 @@ struct MojiLearnPageState: Codable, Equatable, Sendable {
             introducedIDs: introduced,
             freshIDs: freshIDs.filter { !covered.contains($0) } + lesson.newCharacterIDs,
             lessonsCompleted: lessonsCompleted + 1,
-            lastLessonAt: date,
-            writtenBatchIDs: writtenBatchIDs
-        )
-    }
-
-    func writing(_ batchID: String) -> MojiLearnPageState {
-        guard !writtenBatchIDs.contains(batchID) else { return self }
-        var result = self
-        result.writtenBatchIDs.append(batchID)
-        return result
-    }
-}
-
-extension MojiLearnPageState {
-    init(from decoder: any Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.init(
-            introducedIDs: try container.decode([String].self, forKey: .introducedIDs),
-            freshIDs: try container.decode([String].self, forKey: .freshIDs),
-            lessonsCompleted: try container.decode(Int.self, forKey: .lessonsCompleted),
-            lastLessonAt: try container.decodeIfPresent(Date.self, forKey: .lastLessonAt),
-            writtenBatchIDs: try container.decodeIfPresent([String].self, forKey: .writtenBatchIDs) ?? []
+            lastLessonAt: date
         )
     }
 }
@@ -129,7 +99,6 @@ enum MojiLessonStepKind: String, Equatable, Sendable {
     case choice
     case listen
     case match
-    case write
     case word
     case read
 }
@@ -139,7 +108,6 @@ enum MojiLessonStep: Equatable, Sendable {
     case choice(characterID: String, direction: MojiLessonDirection, optionIDs: [String])
     case listen(characterID: String, optionIDs: [String])
     case match(leftIDs: [String], rightIDs: [String])
-    case write(batchID: String, characterIDs: [String])
     case word(characterIDs: [String], mode: MojiLessonWordMode)
     case read(characterIDs: [String])
 
@@ -149,7 +117,6 @@ enum MojiLessonStep: Equatable, Sendable {
         case .choice: .choice
         case .listen: .listen
         case .match: .match
-        case .write: .write
         case .word: .word
         case .read: .read
         }
@@ -161,7 +128,7 @@ enum MojiLessonStep: Equatable, Sendable {
             [id]
         case .match(let leftIDs, _):
             leftIDs
-        case .write(_, let ids), .word(let ids, _), .read(let ids):
+        case .word(let ids, _), .read(let ids):
             ids
         }
     }

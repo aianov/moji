@@ -38,11 +38,11 @@ struct GlassChipBar<ID: Hashable>: View {
                         }
                     }
                     .padding(.horizontal, 16)
-                    .padding(.vertical, 2)
+                    .padding(.vertical, 4)
                 }
             }
             .scrollIndicators(.hidden)
-            .scrollClipDisabled()
+            .clipped()
             .onAppear {
                 proxy.scrollTo(selection, anchor: .center)
             }
@@ -52,7 +52,7 @@ struct GlassChipBar<ID: Hashable>: View {
                 }
             }
         }
-        .frame(height: GlassChipMetrics.height + 4)
+        .frame(height: GlassChipMetrics.height + 8)
         .accessibilityElement(children: .contain)
         .modifier(OptionalAccessibilityLabel(text: accessibilityLabel))
     }

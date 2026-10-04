@@ -37,6 +37,21 @@ struct LearnBatchRow: View {
                 }
             }
             .frame(maxWidth: .infinity)
+
+            if !WritingPracticeRequest.available(characters).isEmpty {
+                Button {
+                    interactions.openWriting(state.batch)
+                } label: {
+                    Image(systemName: "pencil.and.scribble")
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundStyle(theme.text.secondary)
+                        .frame(width: 36, height: 36)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(PressableButtonStyle())
+                .disabled(!service.isLoaded)
+                .accessibilityLabel(Text("Write these characters"))
+            }
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 10)
@@ -61,7 +76,7 @@ struct LearnBatchRow: View {
             } label: {
                 LearnGlyphCell(
                     character: character,
-                    strength: service.strength(of: character.id),
+                    mastery: service.mastery(of: character.id),
                     mark: found.mark(character.id, in: state.batch.page.script)
                 )
             }
@@ -127,13 +142,12 @@ struct LearnBatchBadge: View {
 
 struct LearnGlyphCell: View {
     let character: MojiCharacter
-    let strength: Int
+    let mastery: Double
     var mark: CharacterSearchMark = .unmatched
 
     private var theme: AppTheme { ThemeStore.shared.currentTheme }
 
     var body: some View {
-        let mastery = Double(min(strength, MojiCharacterProgress.masteryLevel)) / Double(MojiCharacterProgress.masteryLevel)
         let meaning = character.shortMeaning
 
         VStack(spacing: 3) {

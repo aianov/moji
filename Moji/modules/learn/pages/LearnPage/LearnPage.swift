@@ -20,6 +20,10 @@ struct LearnPage: View {
             get: { service.detailCharacter },
             set: { if $0 == nil { interactions.closeCharacter() } }
         )
+        let writing = Binding(
+            get: { service.writingPractice },
+            set: { if $0 == nil { interactions.closeWriting() } }
+        )
         let isBulkMarkPresented = Binding(
             get: { service.bulkMark != nil },
             set: { if !$0 { interactions.cancelBulkMark() } }
@@ -64,6 +68,12 @@ struct LearnPage: View {
         .sheet(item: detail) { character in
             CharacterDetailSheet(character: character)
                 .themedPresentation()
+        }
+        .fullScreenCover(item: writing) { practice in
+            WritingPracticeView(request: practice.request) { cards in
+                interactions.finishPracticeWriting(practice, cards: cards)
+            }
+            .themedPresentation()
         }
         .alert(
             bulkMarkTitle,

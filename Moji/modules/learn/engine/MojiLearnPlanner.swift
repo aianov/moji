@@ -1,7 +1,7 @@
 import Foundation
 
 struct MojiLearnPlanner: Sendable {
-    static let shared = MojiLearnPlanner(catalog: .shared, strokes: MojiStrokeLibrary.shared)
+    static let shared = MojiLearnPlanner(catalog: .shared)
 
     static let batchTarget = 5
     static let solidAverage = 3
@@ -17,22 +17,14 @@ struct MojiLearnPlanner: Sendable {
 
     let catalog: MojiAlphabetCatalog
     private let batchesByPage: [MojiPage: [MojiLearnBatch]]
-    private let writableIDs: Set<String>
 
-    init(catalog: MojiAlphabetCatalog, strokes: MojiStrokeLibrary? = nil) {
+    init(catalog: MojiAlphabetCatalog) {
         self.catalog = catalog
         var batches: [MojiPage: [MojiLearnBatch]] = [:]
-        var writable: Set<String> = []
         for page in catalog.pages {
             batches[page] = Self.makeBatches(page: page, catalog: catalog)
-            if let strokes {
-                for character in catalog.chart(page) where strokes.canWrite(character.glyph) {
-                    writable.insert(character.id)
-                }
-            }
         }
         batchesByPage = batches
-        writableIDs = writable
     }
 
     func batches(_ page: MojiPage) -> [MojiLearnBatch] {
@@ -41,31 +33,6 @@ struct MojiLearnPlanner: Sendable {
 
     func batch(_ id: String, on page: MojiPage) -> MojiLearnBatch? {
         batches(page).first { $0.id == id }
-    }
-
-    func canWrite(_ id: String) -> Bool {
-        writableIDs.contains(id)
-    }
-
-    func writingStep(
-        for batch: MojiLearnBatch,
-        newIDs: [String],
-        state: MojiLearnPageState
-    ) -> MojiLessonItem? {
-        guard !state.writtenBatchIDs.contains(batch.id),
-              Set(newIDs).isDisjoint(with: batch.characterIDs) else { return nil }
-        let ids = batch.characterIDs.filter(writableIDs.contains)
-        guard !ids.isEmpty else { return nil }
-        return MojiLessonItem(step: .write(batchID: batch.id, characterIDs: ids))
-    }
-
-    func isWritingDue(
-        _ batchID: String,
-        on page: MojiPage,
-        progress: [String: MojiCharacterProgress]
-    ) -> Bool {
-        guard let batch = batch(batchID, on: page) else { return false }
-        return Self.isSolid(batch.characterIDs.map { Self.strength(of: $0, in: progress) })
     }
 
     static func makeBatches(page: MojiPage, catalog: MojiAlphabetCatalog) -> [MojiLearnBatch] {
@@ -187,12 +154,13 @@ struct MojiLearnPlanner: Sendable {
             let isFresh = batch.characterIDs.contains { fresh.contains($0) }
             done.append(!isFresh && Self.isSolid(strengths))
             started.append(batch.characterIDs.contains { introduced.contains($0) })
-            let total = strengths.reduce(0, +)
-            masteries.append(
-                strengths.isEmpty
-                    ? 1
-                    : Double(total) / Double(strengths.count * MojiCharacterProgress.masteryLevel)
-            )
+            let fill = batch.characterIDs.reduce(0.0) { sum, id in
+                sum + MojiCharacterProgress.mastery(
+                    strength: Self.strength(of: id, in: progress),
+                    isWritten: progress[id]?.isWritten ?? false
+                )
+            }
+            masteries.append(batch.characterIDs.isEmpty ? 1 : fill / Double(batch.characterIDs.count))
         }
 
         let currentIndex = batches.indices.first { !done[$0] }
@@ -396,9 +364,7 @@ struct MojiLearnPlanner: Sendable {
             reviewIDs: reviewIDs,
             hasFocus: focus != nil
         )
-        let writing = focus.flatMap { writingStep(for: $0, newIDs: newIDs, state: state) }
-        let closingSlots = writing == nil ? 0 : 1
-        let budget = max(0, Self.targetLength(newCount: newIDs.count) - opening.count - closingSlots)
+        let budget = max(0, Self.targetLength(newCount: newIDs.count) - opening.count)
         var optional: [MojiLessonItem] = []
         for entry in entries where optional.count < budget {
             if let item = builder.item(
@@ -471,7 +437,7 @@ struct MojiLearnPlanner: Sendable {
         var hardTail = hardItems
         hardTail.shuffle(using: &generator)
 
-        let items = opening + middle + match + closing + hardTail + (writing.map { [$0] } ?? [])
+        let items = opening + middle + match + closing + hardTail
         guard !items.isEmpty else { return nil }
 
         return MojiLesson(
@@ -511,7 +477,7 @@ struct MojiLearnPlanner: Sendable {
             )
         case .word(let ids, .choose(let options)):
             step = .word(characterIDs: ids, mode: .choose(options: options.shuffled(using: &generator)))
-        case .intro, .write, .word, .read:
+        case .intro, .word, .read:
             step = item.step
         }
         return MojiLessonItem(step: step, isHard: false, isRetry: true)

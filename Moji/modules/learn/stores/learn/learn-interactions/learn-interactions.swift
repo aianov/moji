@@ -6,8 +6,6 @@ import Observation
 final class LearnInteractionsStore {
     static let shared = LearnInteractionsStore()
 
-    private static let cleanWritingSteps = 2
-
     private var actions: LearnActionsStore { .shared }
     private var service: LearnServicesStore { .shared }
     private var preferences: MojiPreferencesStore { .shared }
@@ -168,7 +166,7 @@ final class LearnInteractionsStore {
             settleWord(model, target: target, options: options)
         case .word(_, .none), .read:
             submitTyped()
-        case .intro, .match, .write:
+        case .intro, .match:
             break
         }
     }
@@ -279,41 +277,26 @@ final class LearnInteractionsStore {
         MojiHaptics.selection()
     }
 
-    func beginWriting(_ model: LessonExerciseModel) {
-        guard case .write(let characters) = model.content,
-              service.writingExerciseID != model.id,
-              service.feedback == nil else { return }
-        service.writingExerciseID = model.id
-        let exerciseID = model.id
-        let started = WritingInteractionsStore.shared.start(characters) { cards in
-            LearnInteractionsStore.shared.finishWriting(exerciseID: exerciseID, cards: cards)
-        }
-        guard !started, service.currentExercise?.id == exerciseID else { return }
-        service.position += 1
-        service.finishedCount += 1
-        showCurrent()
+    func openWriting(_ batch: MojiLearnBatch) {
+        let characters = WritingPracticeRequest.available(batch.characterIDs.compactMap { catalog.character($0) })
+        guard !characters.isEmpty else { return }
+        MojiHaptics.impact()
+        service.writingPractice = LearnWritingPractice(
+            batch: batch,
+            request: WritingPracticeRequest(
+                title: batch.page.isKanji ? String(localized: "Write these kanji") : String(localized: "Write these characters"),
+                characters: characters
+            )
+        )
     }
 
-    private func finishWriting(exerciseID: String, cards: [MojiWritingCard]) {
-        guard let model = service.currentExercise,
-              model.id == exerciseID,
-              service.feedback == nil,
-              case .write(let batchID, _) = model.item.step,
-              !cards.isEmpty else { return }
+    func closeWriting() {
+        service.writingPractice = nil
+    }
 
-        for card in cards {
-            record(card.id, correct: true, steps: card.mistakes == 0 ? Self.cleanWritingSteps : 1)
-        }
-        service.gradedCount += cards.count
-        service.correctCount += cards.count
-        actions.markWrittenAction(batchID, on: model.page)
-
-        let clean = cards.filter { $0.mistakes == 0 }.count
-        service.feedback = LessonFeedback(
-            isCorrect: true,
-            title: String(localized: "All written"),
-            detail: String(localized: "\(clean) of \(cards.count) without mistakes")
-        )
+    func finishPracticeWriting(_ practice: LearnWritingPractice, cards: [MojiWritingCard]) {
+        guard !cards.isEmpty else { return }
+        PracticeActionsStore.shared.markWrittenAction(cards.map(\.id))
     }
 
     func replay() {
@@ -332,7 +315,7 @@ final class LearnInteractionsStore {
         case .read(let characters):
             guard answered else { return }
             MojiSpeech.shared.speak(sequence: characters)
-        case .match, .write:
+        case .match:
             break
         }
     }
@@ -346,9 +329,14 @@ final class LearnInteractionsStore {
         case .exercise:
             MojiHaptics.selection()
             service.isExitAlertPresented = true
-        case .loading, .finished, .unavailable:
+        case .loading, .writingNotice, .finished, .unavailable:
             dismiss()
         }
+    }
+
+    func showSummary() {
+        guard case .writingNotice(let summary) = service.stage else { return }
+        service.stage = .finished(summary)
     }
 
     func keepLearning() {
@@ -380,17 +368,11 @@ final class LearnInteractionsStore {
             return
         }
         while service.position < service.queue.count {
-            let item = service.queue[service.position]
-            if isSkipped(item, on: lesson.page) {
-                service.position += 1
-                service.finishedCount += 1
-                continue
-            }
             if let model = LessonExerciseModel.make(
                 lessonID: lesson.id,
                 page: lesson.page,
                 position: service.position,
-                item: item,
+                item: service.queue[service.position],
                 catalog: catalog
             ) {
                 service.resetExerciseState()
@@ -404,12 +386,6 @@ final class LearnInteractionsStore {
         finishLesson()
     }
 
-    private func isSkipped(_ item: MojiLessonItem, on page: MojiPage) -> Bool {
-        guard case .write(let batchID, _) = item.step else { return false }
-        let progress = MojiLearnPlanner.applying(service.answers, to: service.baseline, at: Date())
-        return !MojiLearnPlanner.shared.isWritingDue(batchID, on: page, progress: progress)
-    }
-
     private func exerciseDidAppear(_ model: LessonExerciseModel) {
         guard preferences.speaksCharacters, !model.isHard else { return }
         switch model.content {
@@ -417,7 +393,7 @@ final class LearnInteractionsStore {
             MojiSpeech.shared.speak(character)
         case .word(let characters, _):
             MojiSpeech.shared.speak(sequence: characters)
-        case .choice, .match, .write, .read:
+        case .choice, .match, .read:
             break
         }
     }
@@ -465,14 +441,7 @@ final class LearnInteractionsStore {
               service.retriesByKey[key, default: 0] < MojiLearnPlanner.maxRetriesPerItem else { return }
         service.retriesByKey[key, default: 0] += 1
         service.retryCount += 1
-        let retry = actions.retryItem(model.item)
-        if let last = service.queue.indices.last,
-           last > service.position,
-           service.queue[last].step.kind == .write {
-            service.queue.insert(retry, at: last)
-        } else {
-            service.queue.append(retry)
-        }
+        service.queue.append(actions.retryItem(model.item))
         service.queueCount = service.queue.count
     }
 
@@ -482,7 +451,7 @@ final class LearnInteractionsStore {
             MojiSpeech.shared.speak(character)
         case .word(let characters, _), .read(let characters):
             MojiSpeech.shared.speak(sequence: characters)
-        case .intro, .match, .write:
+        case .intro, .match:
             break
         }
     }
@@ -530,7 +499,8 @@ final class LearnInteractionsStore {
             dismiss()
             return
         }
-        service.stage = .finished(makeSummary(lesson))
+        let summary = makeSummary(lesson)
+        service.stage = needsWriting(lesson) ? .writingNotice(summary) : .finished(summary)
         actions.completeLessonAction(lesson)
         actions.recordLessonActivityAction(
             page: lesson.page,
@@ -539,6 +509,18 @@ final class LearnInteractionsStore {
             startedAt: service.startedAt
         )
         MojiHaptics.success()
+    }
+
+    private func needsWriting(_ lesson: MojiLesson) -> Bool {
+        guard let index = lesson.batchIndex,
+              let batch = MojiLearnPlanner.shared.batches(lesson.page).first(where: { $0.index == index }) else {
+            return false
+        }
+        let after = MojiLearnPlanner.applying(service.answers, to: service.baseline, at: Date())
+        let writable = Set(WritingPracticeRequest.available(batch.characterIDs.compactMap { catalog.character($0) }).map(\.id))
+        guard !writable.isEmpty,
+              batch.characterIDs.allSatisfy({ after[$0]?.isRecognized ?? false }) else { return false }
+        return writable.contains { !(after[$0]?.isWritten ?? false) }
     }
 
     private func makeSummary(_ lesson: MojiLesson) -> LessonSummaryModel {
@@ -564,7 +546,8 @@ final class LearnInteractionsStore {
                     LessonSummaryCharacter(
                         character: character,
                         strength: after[id]?.strength ?? 0,
-                        isNew: newIDs.contains(id)
+                        isNew: newIDs.contains(id),
+                        isWritten: after[id]?.isWritten ?? false
                     )
                 }
             },

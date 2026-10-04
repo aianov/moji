@@ -15,15 +15,15 @@ struct MojiTraceTolerance: Equatable, Sendable {
     var step: CGFloat
 
     static let standard = MojiTraceTolerance(
-        startRadius: 0.085,
-        corridor: 0.085,
-        backtrack: 0.025,
-        lookAhead: 0.1,
+        startRadius: 0.17,
+        corridor: 0.17,
+        backtrack: 0.05,
+        lookAhead: 0.2,
         finishShare: 0.3,
         finishFloor: 0.012,
         finishCeiling: 0.04,
-        finishRadius: 0.07,
-        finishReach: 0.12,
+        finishRadius: 0.14,
+        finishReach: 0.24,
         tapSlop: 0.02,
         step: 0.008
     )
