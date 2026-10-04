@@ -76,6 +76,7 @@ struct MojiWordStudyCard: Equatable, Sendable {
 }
 
 struct MojiWordSessionSummary: Equatable, Sendable {
+    let deck: MojiWordDeck
     let scope: MojiWordScope
     let answered: Int
     let correct: Int
@@ -131,12 +132,15 @@ actor MojiWordRepository {
     static let undoLimit = 50
     static let cramRetryGap = 2
 
+    nonisolated let deck: MojiWordDeck
+
     private let resources: MojiWordResourceRepository
     private let catalogLoader: @Sendable () -> MojiWordCatalog
     private let calendar: Calendar
     private let learningFuzz: @Sendable () -> Double
 
     private var catalog = MojiWordCatalog.empty
+    private var ownWords: [MojiOwnWord] = []
     private var cards: [String: MojiWordCard] = [:]
     private var history: [String: [MojiWordReview]] = [:]
     private var days: [Int: MojiWordDayStats] = [:]
@@ -162,6 +166,7 @@ actor MojiWordRepository {
         calendar: Calendar = .current,
         learningFuzz: @escaping @Sendable () -> Double = { Double.random(in: 0..<1) }
     ) {
+        self.deck = resources.deck
         self.resources = resources
         self.catalogLoader = catalogLoader
         self.calendar = calendar
@@ -445,8 +450,84 @@ actor MojiWordRepository {
         await ensureLoaded()
         let trimmed = note.trimmingCharacters(in: .whitespacesAndNewlines)
         guard notes[wordID] != (trimmed.isEmpty ? nil : trimmed) else { return }
+        if deck == .mine {
+            guard let index = ownWords.firstIndex(where: { $0.id == wordID }) else { return }
+            var input = ownWords[index].input
+            input.note = trimmed
+            ownWords[index].apply(input, at: now)
+            notes = Self.notes(of: ownWords)
+            await resources.saveOwnWords(ownWords)
+            await emit(now: now)
+            return
+        }
         notes[wordID] = trimmed.isEmpty ? nil : trimmed
         await resources.saveNotes(notes)
+        await emit(now: now)
+    }
+
+    func ownWord(_ wordID: String) async -> MojiOwnWord? {
+        await ensureLoaded()
+        return ownWords.first { $0.id == wordID }
+    }
+
+    func addOwnWord(_ input: MojiOwnWordInput, now: Date) async -> MojiOwnWord? {
+        await ensureLoaded()
+        guard deck == .mine else { return nil }
+        let clean = input.cleaned()
+        guard clean.isValid else { return nil }
+        let word = MojiOwnWord(input: clean, at: now)
+        ownWords.append(word)
+        await commitOwnWords(now: now)
+        return word
+    }
+
+    func updateOwnWord(_ wordID: String, with input: MojiOwnWordInput, now: Date) async -> MojiOwnWord? {
+        await ensureLoaded()
+        guard deck == .mine, let index = ownWords.firstIndex(where: { $0.id == wordID }) else { return nil }
+        let clean = input.cleaned()
+        guard clean.isValid else { return nil }
+        guard ownWords[index].apply(clean, at: now) else { return ownWords[index] }
+        await commitOwnWords(now: now)
+        return ownWords[index]
+    }
+
+    @discardableResult
+    func deleteOwnWords(_ wordIDs: [String], now: Date) async -> Int {
+        await ensureLoaded()
+        guard deck == .mine else { return 0 }
+        let doomed = Set(wordIDs)
+        let before = ownWords.count
+        ownWords.removeAll { doomed.contains($0.id) }
+        let removed = before - ownWords.count
+        guard removed > 0 else { return 0 }
+
+        for wordID in doomed {
+            for kind in MojiWordCardKind.allCases {
+                let key = MojiWordCardID(wordID: wordID, kind: kind).key
+                cards[key] = nil
+                history[key] = nil
+            }
+        }
+        if var state = session {
+            state.cramQueue.removeAll { doomed.contains($0.wordID) }
+            state.undo.removeAll { doomed.contains($0.id.wordID) }
+            if let pinned = state.pinned, doomed.contains(pinned.wordID) {
+                state.pinned = nil
+            }
+            session = state
+        }
+        await resources.saveCards(cards)
+        await flushHistory()
+        await commitOwnWords(now: now)
+        return removed
+    }
+
+    func reloadFromDisk(now: Date = Date()) async {
+        await ensureLoaded()
+        historySave?.cancel()
+        historySave = nil
+        session = nil
+        install(await resources.load())
         await emit(now: now)
     }
 
@@ -520,6 +601,21 @@ actor MojiWordRepository {
         await resources.saveCards(cards)
         scheduleHistorySave()
         await emit(now: now)
+    }
+
+    private func commitOwnWords(now: Date) async {
+        catalog = MojiOwnWord.catalog(of: ownWords)
+        notes = Self.notes(of: ownWords)
+        await resources.saveOwnWords(ownWords)
+        await emit(now: now)
+    }
+
+    private static func notes(of words: [MojiOwnWord]) -> [String: String] {
+        var notes: [String: String] = [:]
+        for word in words where !word.note.isEmpty {
+            notes[word.id] = word.note
+        }
+        return notes
     }
 
     private func record(card: MojiWordCard, button: MojiWordButton, into stats: inout MojiWordDayStats) {
@@ -671,6 +767,7 @@ actor MojiWordRepository {
         )
         let counters = session?.counters ?? MojiWordSessionCounters()
         return MojiWordSessionSummary(
+            deck: deck,
             scope: session?.scope ?? .deck,
             answered: counters.answered,
             correct: counters.correct,
@@ -751,16 +848,28 @@ actor MojiWordRepository {
     }
 
     private func load() async {
-        let loader = catalogLoader
-        catalog = await Task.detached(priority: .userInitiated) { loader() }.value
-        let cache = await resources.load()
+        if deck == .frequent {
+            let loader = catalogLoader
+            catalog = await Task.detached(priority: .userInitiated) { loader() }.value
+        }
+        install(await resources.load())
+        isLoaded = true
+        recomputeDerived(now: Date())
+    }
+
+    private func install(_ cache: MojiWordCache) {
         cards = cache.cards
         history = cache.history
         days = cache.days
         options = cache.options.sanitized()
-        notes = cache.notes
-        isLoaded = true
-        recomputeDerived(now: Date())
+        switch deck {
+        case .frequent:
+            notes = cache.notes
+        case .mine:
+            ownWords = cache.ownWords
+            catalog = MojiOwnWord.catalog(of: ownWords)
+            notes = Self.notes(of: ownWords)
+        }
     }
 
     private func recomputeDerived(now: Date) {

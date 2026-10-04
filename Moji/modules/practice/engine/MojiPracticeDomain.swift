@@ -36,6 +36,10 @@ actor MojiPracticeDomain {
     func refreshClock() async {
         await repository.refreshClock()
     }
+
+    func reloadFromDisk() async {
+        await repository.reloadFromDisk()
+    }
 }
 
 @MainActor

@@ -7,7 +7,10 @@ final class MojiEngineRuntime {
     private var practiceActivation: Task<MojiPracticeDomain, Never>?
     private var learnActivation: Task<MojiLearnDomain, Never>?
     private var wordsActivation: Task<MojiWordDomain, Never>?
+    private var notesActivation: Task<MojiNoteDomain, Never>?
     private var dayChangeObserver: NSObjectProtocol?
+    private var reloads: [MojiEngineReload] = []
+    private var isReplacingData = false
 
     private init() {}
 
@@ -15,6 +18,7 @@ final class MojiEngineRuntime {
         _ = preparePractice()
         _ = prepareLearn()
         _ = prepareWords()
+        _ = prepareNotes()
         observeDayChanges()
     }
 
@@ -33,6 +37,7 @@ final class MojiEngineRuntime {
             return domain
         }
         practiceActivation = task
+        registerReload("practice") { await task.value.reloadFromDisk() }
         return task
     }
 
@@ -51,6 +56,7 @@ final class MojiEngineRuntime {
             return domain
         }
         learnActivation = task
+        registerReload("learn") { await task.value.reloadFromDisk() }
         return task
     }
 
@@ -66,10 +72,70 @@ final class MojiEngineRuntime {
             return domain
         }
         wordsActivation = task
+        registerReload(
+            "words",
+            flush: { await task.value.flush() },
+            reload: { await task.value.reloadFromDisk() }
+        )
         return task
     }
 
+    @discardableResult
+    func prepareNotes() -> Task<MojiNoteDomain, Never> {
+        if let notesActivation {
+            return notesActivation
+        }
+
+        let task = Task { @MainActor in
+            let domain = MojiNoteDomain(store: .shared)
+            await domain.activate()
+            return domain
+        }
+        notesActivation = task
+        registerReload("notes") { await task.value.reloadFromDisk() }
+        return task
+    }
+
+    func registerReload(
+        _ name: String,
+        flush: (@Sendable () async -> Void)? = nil,
+        reload: @escaping @Sendable () async -> Void
+    ) {
+        reloads.removeAll { $0.name == name }
+        reloads.append(MojiEngineReload(name: name, flush: flush, reload: reload))
+    }
+
+    func flushAll() async {
+        for flush in reloads.compactMap(\.flush) {
+            await flush()
+        }
+    }
+
+    func reloadAll() async {
+        await MojiDiskStore.shared.clearMemory()
+        let pending = reloads.map(\.reload)
+        await withTaskGroup(of: Void.self) { group in
+            for reload in pending {
+                group.addTask {
+                    await reload()
+                }
+            }
+        }
+    }
+
+    func replaceData<Value: Sendable>(
+        _ replace: @Sendable () async throws -> Value
+    ) async throws -> Value {
+        isReplacingData = true
+        defer { isReplacingData = false }
+        await flushAll()
+        let result = try await replace()
+        await reloadAll()
+        return result
+    }
+
     func clockDidMove() {
+        guard !isReplacingData else { return }
         if let practice = MojiPracticeDomainRegistry.shared.active {
             Task {
                 await practice.refreshClock()
@@ -88,9 +154,11 @@ final class MojiEngineRuntime {
     }
 
     func appDidLeaveForeground() {
+        guard !isReplacingData else { return }
         if let words = MojiWordDomainRegistry.shared.active {
             Task {
                 await words.repository.flush()
+                await words.mine.flush()
             }
         }
     }
@@ -108,4 +176,10 @@ final class MojiEngineRuntime {
             }
         }
     }
+}
+
+private struct MojiEngineReload {
+    let name: String
+    let flush: (@Sendable () async -> Void)?
+    let reload: @Sendable () async -> Void
 }

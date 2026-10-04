@@ -13,11 +13,13 @@ struct WordsCustomStudySheet: View {
     }
 
     var body: some View {
+        let deck = service.sheetDeck
         let draft = service.customStudy
         let counts = service.customStudyCounts
         let forgotten = counts[.forgotten(days: draft.forgottenDays)]?.total
         let ahead = counts[.reviewAhead(days: draft.aheadDays)]?.total
         let section = counts[.sectionOnly(draft.section)]
+        let sections = service.catalog(deck).sections
 
         NavigationStack {
             Form {
@@ -45,7 +47,7 @@ struct WordsCustomStudySheet: View {
                         Text(WordsCustomStudyText.lastDays(draft.forgottenDays))
                     }
                     WordsCustomStudyStart(count: forgotten) {
-                        interactions.startCustomStudy(.forgotten(days: draft.forgottenDays))
+                        interactions.startCustomStudy(.forgotten(days: draft.forgottenDays), deck: deck)
                     }
                 } header: {
                     Text("Review forgotten cards")
@@ -58,7 +60,7 @@ struct WordsCustomStudySheet: View {
                         Text(WordsCustomStudyText.nextDays(draft.aheadDays))
                     }
                     WordsCustomStudyStart(count: ahead) {
-                        interactions.startCustomStudy(.reviewAhead(days: draft.aheadDays))
+                        interactions.startCustomStudy(.reviewAhead(days: draft.aheadDays), deck: deck)
                     }
                 } header: {
                     Text("Review ahead")
@@ -66,15 +68,15 @@ struct WordsCustomStudySheet: View {
                     Text("Reviews due soon, studied now. Early answers grow the interval a little less, like in Anki.")
                 }
 
-                if !service.catalog.sections.isEmpty {
+                if deck == .frequent, !sections.isEmpty {
                     Section {
                         Picker(String(localized: "Section"), selection: field(\.section)) {
-                            ForEach(service.catalog.sections) { section in
+                            ForEach(sections) { section in
                                 Text("Section \(section.number)").tag(section.number)
                             }
                         }
                         WordsCustomStudyStart(count: section?.total) {
-                            interactions.startCustomStudy(.sectionOnly(draft.section))
+                            interactions.startCustomStudy(.sectionOnly(draft.section), deck: deck)
                         }
                     } header: {
                         Text("One section only")
@@ -86,6 +88,9 @@ struct WordsCustomStudySheet: View {
             .navigationTitle("Custom study")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                ToolbarItem(placement: .principal) {
+                    WordsSheetTitle(title: String(localized: "Custom study"), deck: deck)
+                }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {
                         interactions.closeSheet()

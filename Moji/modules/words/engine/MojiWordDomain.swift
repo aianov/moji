@@ -2,6 +2,7 @@ import Foundation
 
 actor MojiWordDomain {
     nonisolated let repository: MojiWordRepository
+    nonisolated let mine: MojiWordRepository
 
     private var isActive = false
 
@@ -9,6 +10,16 @@ actor MojiWordDomain {
         repository = MojiWordRepository(
             resources: MojiWordResourceRepository(store: store)
         )
+        mine = MojiWordRepository(
+            resources: MojiWordResourceRepository(store: store, deck: .mine)
+        )
+    }
+
+    nonisolated func repository(for deck: MojiWordDeck) -> MojiWordRepository {
+        switch deck {
+        case .frequent: repository
+        case .mine: mine
+        }
     }
 
     func activate() async {
@@ -18,19 +29,42 @@ actor MojiWordDomain {
         await MainActor.run {
             MojiWordDomainRegistry.shared.install(self)
         }
-        await repository.setPublisher { snapshot in
-            await MainActor.run {
-                MojiWordPresentation.shared.publish(snapshot)
+        for deck in MojiWordDeck.allCases {
+            await repository(for: deck).setPublisher { snapshot in
+                await MainActor.run {
+                    MojiWordPresentation.shared.publish(snapshot, deck: deck)
+                }
             }
         }
-        let seed = await repository.activate()
-        await MainActor.run {
-            MojiWordPresentation.shared.publish(seed)
+        await withTaskGroup(of: Void.self) { group in
+            for deck in MojiWordDeck.allCases {
+                let target = repository(for: deck)
+                group.addTask {
+                    let seed = await target.activate()
+                    await MainActor.run {
+                        MojiWordPresentation.shared.publish(seed, deck: deck)
+                    }
+                }
+            }
         }
     }
 
     func refreshClock() async {
-        await repository.refreshClock()
+        for deck in MojiWordDeck.allCases {
+            await repository(for: deck).refreshClock()
+        }
+    }
+
+    func flush() async {
+        for deck in MojiWordDeck.allCases {
+            await repository(for: deck).flush()
+        }
+    }
+
+    func reloadFromDisk() async {
+        for deck in MojiWordDeck.allCases {
+            await repository(for: deck).reloadFromDisk()
+        }
     }
 }
 

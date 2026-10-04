@@ -93,6 +93,15 @@ actor MojiDiskStore {
         }
     }
 
+    func clearMemory() {
+        memory = [:]
+    }
+
+    func withExclusiveAccess<T: Sendable>(_ body: @Sendable (URL) throws -> T) throws -> T {
+        defer { memory = [:] }
+        return try body(directory)
+    }
+
     private func data(for key: MojiDiskKey) -> Data? {
         if let cached = memory[key] {
             return cached

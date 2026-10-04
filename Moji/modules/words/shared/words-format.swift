@@ -82,6 +82,22 @@ enum WordsFormat {
     }
 }
 
+extension MojiWordDeck {
+    var title: String {
+        switch self {
+        case .frequent: String(localized: "Frequent words")
+        case .mine: String(localized: "My cards")
+        }
+    }
+}
+
+extension MojiWord {
+    var readingLine: String {
+        let parts = hasKanji ? [reading, romaji] : [romaji]
+        return parts.filter { !$0.isEmpty }.joined(separator: " · ")
+    }
+}
+
 extension MojiWordButton {
     var title: String {
         switch self {
@@ -205,6 +221,13 @@ extension MojiWordNewOrder {
         case .random: String(localized: "Random")
         }
     }
+
+    func title(for deck: MojiWordDeck) -> String {
+        switch (self, deck) {
+        case (.frequency, .mine): String(localized: "In the order you added them")
+        default: title
+        }
+    }
 }
 
 extension MojiWordReviewOrder {
@@ -215,6 +238,13 @@ extension MojiWordReviewOrder {
         case .ascendingIntervals: String(localized: "Shortest intervals first")
         case .descendingIntervals: String(localized: "Longest intervals first")
         case .random: String(localized: "Random")
+        }
+    }
+
+    func title(for deck: MojiWordDeck) -> String {
+        switch (self, deck) {
+        case (.dueThenFrequency, .mine): String(localized: "Due date, then order added")
+        default: title
         }
     }
 }

@@ -22,4 +22,10 @@ final class MojiPreferencesStore {
         speaksCharacters = value
         UserDefaults.standard.set(value, forKey: MojiPreferenceKey.speaksCharacters)
     }
+
+    func reloadFromDefaults() {
+        let stored = UserDefaults.standard.object(forKey: MojiPreferenceKey.speaksCharacters) as? Bool ?? true
+        guard stored != speaksCharacters else { return }
+        speaksCharacters = stored
+    }
 }

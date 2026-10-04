@@ -4,6 +4,7 @@ enum MainTab: Hashable {
     case learn
     case practice
     case words
+    case notes
     case profile
 }
 

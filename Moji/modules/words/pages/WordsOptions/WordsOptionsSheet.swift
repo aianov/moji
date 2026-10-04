@@ -8,22 +8,30 @@ struct WordsOptionsSheet: View {
     private var service: WordsServicesStore { .shared }
     private var interactions: WordsInteractionsStore { .shared }
 
+    private var deck: MojiWordDeck {
+        service.sheetDeck
+    }
+
     private func binding<Value: Equatable>(_ keyPath: WritableKeyPath<MojiWordOptions, Value>) -> Binding<Value> {
-        Binding(
-            get: { service.options[keyPath: keyPath] },
-            set: { value in interactions.updateOptions { $0[keyPath: keyPath] = value } }
+        let deck = deck
+        return Binding(
+            get: { service.options(deck)[keyPath: keyPath] },
+            set: { value in interactions.updateOptions(deck: deck) { $0[keyPath: keyPath] = value } }
         )
     }
 
     private func percent(_ keyPath: WritableKeyPath<MojiWordOptions, Double>) -> Binding<Int> {
-        Binding(
-            get: { Int((service.options[keyPath: keyPath] * 100).rounded()) },
-            set: { value in interactions.updateOptions { $0[keyPath: keyPath] = Double(value) / 100 } }
+        let deck = deck
+        return Binding(
+            get: { Int((service.options(deck)[keyPath: keyPath] * 100).rounded()) },
+            set: { value in interactions.updateOptions(deck: deck) { $0[keyPath: keyPath] = Double(value) / 100 } }
         )
     }
 
     var body: some View {
-        let options = service.options
+        let deck = deck
+        let options = service.options(deck)
+        let credits = service.catalog(deck).credits
         let isResetPresented = Binding(
             get: { service.isResetAllPresented },
             set: { if !$0 { interactions.cancelResetAll() } }
@@ -63,7 +71,7 @@ struct WordsOptionsSheet: View {
                     }
                     Picker(String(localized: "New card order"), selection: binding(\.newOrder)) {
                         ForEach(MojiWordNewOrder.allCases) { order in
-                            Text(order.title).tag(order)
+                            Text(order.title(for: deck)).tag(order)
                         }
                     }
                     Picker(String(localized: "New cards and reviews"), selection: binding(\.newReviewMix)) {
@@ -109,7 +117,7 @@ struct WordsOptionsSheet: View {
                 Section {
                     Picker(String(localized: "Review order"), selection: binding(\.reviewOrder)) {
                         ForEach(MojiWordReviewOrder.allCases) { order in
-                            Text(order.title).tag(order)
+                            Text(order.title(for: deck)).tag(order)
                         }
                     }
                     Toggle(String(localized: "Reverse cards"), isOn: binding(\.reverseCards))
@@ -180,16 +188,23 @@ struct WordsOptionsSheet: View {
                     Button(String(localized: "Restore Anki's defaults")) {
                         interactions.restoreDefaultOptions()
                     }
-                    Button(String(localized: "Erase all word progress"), role: .destructive) {
+                    Button(
+                        deck == .mine ? String(localized: "Erase the progress of my cards") : String(localized: "Erase all word progress"),
+                        role: .destructive
+                    ) {
                         interactions.requestResetAll()
                     }
                 } footer: {
-                    Text("Erasing removes the state of every card, their history and the daily counts. Notes and options stay.")
+                    if deck == .mine {
+                        Text("These options are only for My cards. Erasing removes the progress of your cards, their history and the daily counts. The cards themselves stay.")
+                    } else {
+                        Text("Erasing removes the state of every card, their history and the daily counts. Notes and options stay.")
+                    }
                 }
 
-                if !service.catalog.credits.isEmpty {
+                if !credits.isEmpty {
                     Section {
-                        ForEach(service.catalog.credits, id: \.self) { credit in
+                        ForEach(credits, id: \.self) { credit in
                             Text(verbatim: credit.text(in: MojiLanguage.current))
                                 .font(.system(size: 13))
                                 .foregroundStyle(theme.text.secondary)
@@ -202,6 +217,9 @@ struct WordsOptionsSheet: View {
             .navigationTitle("Deck options")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                ToolbarItem(placement: .principal) {
+                    WordsSheetTitle(title: String(localized: "Deck options"), deck: deck)
+                }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {
                         interactions.commitLearningSteps()
@@ -210,7 +228,10 @@ struct WordsOptionsSheet: View {
                     }
                 }
             }
-            .alert("Erase all word progress?", isPresented: isResetPresented) {
+            .alert(
+                deck == .mine ? String(localized: "Erase the progress of my cards?") : String(localized: "Erase all word progress?"),
+                isPresented: isResetPresented
+            ) {
                 Button("Erase", role: .destructive) {
                     interactions.confirmResetAll()
                 }
@@ -218,7 +239,11 @@ struct WordsOptionsSheet: View {
                     interactions.cancelResetAll()
                 }
             } message: {
-                Text("Every word becomes new again. This can't be undone.")
+                if deck == .mine {
+                    Text("Every card becomes new again. Your cards stay. This can't be undone.")
+                } else {
+                    Text("Every word becomes new again. This can't be undone.")
+                }
             }
         }
         .tint(theme.text.primary)

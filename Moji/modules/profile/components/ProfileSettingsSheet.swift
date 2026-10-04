@@ -47,6 +47,8 @@ struct ProfileSettingsSheet: View {
                     Text("Characters are read by native Japanese speakers. The recordings are inside the app, so it works offline.")
                 }
 
+                BackupSettingsSection()
+
                 Section {
                     Button("Erase all progress", role: .destructive) {
                         interactions.requestReset()
@@ -85,6 +87,7 @@ struct ProfileSettingsSheet: View {
             } message: {
                 Text("Lessons, sessions, mastery and your streak history will be gone. This can't be undone.")
             }
+            .backupPresentations()
         }
         .tint(theme.text.primary)
     }

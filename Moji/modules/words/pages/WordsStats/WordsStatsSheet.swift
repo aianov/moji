@@ -9,7 +9,8 @@ struct WordsStatsSheet: View {
     private var interactions: WordsInteractionsStore { .shared }
 
     var body: some View {
-        let snapshot = service.snapshot
+        let deck = service.sheetDeck
+        let snapshot = service.snapshot(deck)
         let today = snapshot.today
         let todayStats = snapshot.todayStats
 
@@ -45,6 +46,9 @@ struct WordsStatsSheet: View {
             .navigationTitle("Statistics")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                ToolbarItem(placement: .principal) {
+                    WordsSheetTitle(title: String(localized: "Statistics"), deck: deck)
+                }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {
                         interactions.closeSheet()

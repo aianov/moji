@@ -268,6 +268,57 @@
     "voice: %@" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "голос: %@"}}}},
     "young" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "молодое"}}}},
     "食べる, taberu, eat" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "食べる, taberu, есть"}}}},
+    "%lld cards, newest last" : {"localizations" : {"en" : {"variations" : {"plural" : {"one" : {"stringUnit" : {"state" : "translated", "value" : "%lld card, newest last"}}, "other" : {"stringUnit" : {"state" : "translated", "value" : "%lld cards, newest last"}}}}}, "ru" : {"variations" : {"plural" : {"few" : {"stringUnit" : {"state" : "translated", "value" : "%lld карточки, новые в конце"}}, "many" : {"stringUnit" : {"state" : "translated", "value" : "%lld карточек, новые в конце"}}, "one" : {"stringUnit" : {"state" : "translated", "value" : "%lld карточка, новые в конце"}}, "other" : {"stringUnit" : {"state" : "translated", "value" : "%lld карточки, новые в конце"}}}}}}},
+    "A card needs a meaning." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Без значения карточку не сохранить."}}}},
+    "A sentence in Japanese" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Предложение на японском"}}}},
+    "Actions for %@" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Действия: %@"}}}},
+    "Add a card" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Добавить карточку"}}}},
+    "Added: %@" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Добавлено: %@"}}}},
+    "Browse my cards" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Обзор моих карточек"}}}},
+    "Card details" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Подробнее о карточке"}}}},
+    "Delete %@?" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Удалить %@?"}}}},
+    "Delete the card" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Удалить карточку"}}}},
+    "Discard the changes?" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Отменить изменения?"}}}},
+    "Discard this card?" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Закрыть без сохранения?"}}}},
+    "Don't save" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Не сохранять"}}}},
+    "Due date, then order added" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "По сроку, затем по порядку добавления"}}}},
+    "Edit card" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Правка карточки"}}}},
+    "Edit the card" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Изменить карточку"}}}},
+    "Erase the progress of my cards" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Стереть прогресс моих карточек"}}}},
+    "Erase the progress of my cards?" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Стереть прогресс моих карточек?"}}}},
+    "Every card becomes new again. Your cards stay. This can't be undone." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Все карточки снова станут новыми, а сами карточки останутся. Это нельзя отменить."}}}},
+    "Example" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Пример"}}}},
+    "Fix a reading" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Исправить чтение"}}}},
+    "Frequent words" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Частые слова"}}}},
+    "In Russian or English" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "По-русски или по-английски"}}}},
+    "In hiragana" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Хираганой"}}}},
+    "In the order you added them" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "В порядке добавления"}}}},
+    "Kanji or kana" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Кандзи или кана"}}}},
+    "Keep editing" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Продолжить"}}}},
+    "Meaning" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Значение"}}}},
+    "My card" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Моя карточка"}}}},
+    "My cards" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Мои карточки"}}}},
+    "My cards: %lld · due now: %lld" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Мои карточки: %1$lld · повторить сейчас: %2$lld"}}}},
+    "New card" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Новая карточка"}}}},
+    "No cards found" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Карточки не найдены"}}}},
+    "No cards here" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Здесь нет карточек"}}}},
+    "Optional. Furigana fills in by itself. Tap a word to see its romaji." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Необязательно. Фуригана появится сама. Тапни по слову, чтобы увидеть ромадзи."}}}},
+    "Reading" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Чтение"}}}},
+    "Save and add another" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Сохранить и добавить ещё"}}}},
+    "Search my cards" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Поиск по моим карточкам"}}}},
+    "The card, its progress and its history go away. This can't be undone." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Карточка, её прогресс и история удалятся. Это нельзя отменить."}}}},
+    "The reading and romaji fill in by themselves. Fix the reading if it's wrong." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Чтение и ромадзи заполняются сами. Если чтение неверное, исправь его."}}}},
+    "The word and its meaning are enough. Everything else can wait." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Хватит слова и значения, остальное можно дописать потом."}}}},
+    "These options are only for My cards. Erasing removes the progress of your cards, their history and the daily counts. The cards themselves stay." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Эти настройки только для моих карточек. Стирание удаляет прогресс твоих карточек, их историю и дневные счётчики. Сами карточки останутся."}}}},
+    "This card is no longer in your cards." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Этой карточки больше нет среди твоих."}}}},
+    "Translation, if you like" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Перевод, если хочешь"}}}},
+    "Use the reading found for %@" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Вернуть найденное чтение для %@"}}}},
+    "Use the reading from the word" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Взять чтение из слова"}}}},
+    "What you wrote here isn't saved yet." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Написанное здесь ещё не сохранено."}}}},
+    "Word" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Слово"}}}},
+    "Write a word, its reading and meaning, and a sentence if you like. Your cards flip and come back on the same schedule as the deck, and you can study only them." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Запиши слово, его чтение и значение, а если хочешь, и пример. Твои карточки переворачиваются и возвращаются по тому же расписанию, что и колода, и их можно учить отдельно."}}}},
+    "Write the word in kanji or kana." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Напиши слово кандзи или каной."}}}},
+    "Your own cards" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Свои карточки"}}}},
     "%@ · %@ in %@" : {
       "comment" : "Activity summary: days, sessions, year.",
       "localizations" : {
@@ -1199,6 +1250,50 @@
         }
       }
     },
+    "%lld notes" : {"localizations" : {"en" : {"variations" : {"plural" : {"one" : {"stringUnit" : {"state" : "translated", "value" : "%lld note"}}, "other" : {"stringUnit" : {"state" : "translated", "value" : "%lld notes"}}}}}, "ru" : {"variations" : {"plural" : {"few" : {"stringUnit" : {"state" : "translated", "value" : "%lld записи"}}, "many" : {"stringUnit" : {"state" : "translated", "value" : "%lld записей"}}, "one" : {"stringUnit" : {"state" : "translated", "value" : "%lld запись"}}, "other" : {"stringUnit" : {"state" : "translated", "value" : "%lld записи"}}}}}}},
+    "%lld notes from this folder stay in All." : {"localizations" : {"en" : {"variations" : {"plural" : {"one" : {"stringUnit" : {"state" : "translated", "value" : "%lld note from this folder stays in All."}}, "other" : {"stringUnit" : {"state" : "translated", "value" : "%lld notes from this folder stay in All."}}}}}, "ru" : {"variations" : {"plural" : {"few" : {"stringUnit" : {"state" : "translated", "value" : "%lld записи из этой папки останутся во вкладке «Все»."}}, "many" : {"stringUnit" : {"state" : "translated", "value" : "%lld записей из этой папки останутся во вкладке «Все»."}}, "one" : {"stringUnit" : {"state" : "translated", "value" : "%lld запись из этой папки останется во вкладке «Все»."}}, "other" : {"stringUnit" : {"state" : "translated", "value" : "%lld записи из этой папки останутся во вкладке «Все»."}}}}}}},
+    "A note lives in one folder at most. All shows every note." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Запись может лежать только в одной папке. Во вкладке «Все» видны все записи."}}}},
+    "Create" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Создать"}}}},
+    "Delete" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Удалить"}}}},
+    "Delete folder" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Удалить папку"}}}},
+    "Delete note" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Удалить запись"}}}},
+    "Delete the folder “%@”?" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Удалить папку «%@»?"}}}},
+    "Drag to change the order, tap a folder to rename it. Notes from a deleted folder stay in All." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Перетащи, чтобы поменять порядок, нажми на папку, чтобы переименовать её. Записи из удалённой папки останутся во вкладке «Все»."}}}},
+    "Edit folders" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Изменить папки"}}}},
+    "Folder name" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Название папки"}}}},
+    "Folders" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Папки"}}}},
+    "Folders sort notes like chat folders in Telegram. All always shows every note." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Папки раскладывают записи, как папки чатов в Telegram. Во вкладке «Все» всегда видны все записи."}}}},
+    "Move" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Переместить"}}}},
+    "Move left" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Сдвинуть влево"}}}},
+    "Move right" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Сдвинуть вправо"}}}},
+    "Move to folder" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Переместить в папку"}}}},
+    "New folder" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Новая папка"}}}},
+    "New note" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Новая запись"}}}},
+    "New notes you start here go into this folder." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Новые записи, начатые здесь, попадут в эту папку."}}}},
+    "No folder" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Без папки"}}}},
+    "No folders yet" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Папок пока нет"}}}},
+    "No notes found" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Ничего не нашлось"}}}},
+    "No notes yet" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Записей пока нет"}}}},
+    "Note actions" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Действия с записью"}}}},
+    "Note deleted" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Запись удалена"}}}},
+    "Note text" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Текст записи"}}}},
+    "Notes" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Записи"}}}},
+    "Notes menu" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Меню записей"}}}},
+    "Pin" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Закрепить"}}}},
+    "Pinned" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Закреплённые"}}}},
+    "Pinned note" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Закреплённая запись"}}}},
+    "Rename" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Переименовать"}}}},
+    "Rename folder" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Переименовать папку"}}}},
+    "Save" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Сохранить"}}}},
+    "Search looks through the titles and text of all notes." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Поиск идёт по заголовкам и тексту всех записей."}}}},
+    "Search notes" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Поиск по записям"}}}},
+    "This folder has no notes." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "В этой папке нет записей."}}}},
+    "This folder is empty" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "В этой папке пусто"}}}},
+    "Title" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Заголовок"}}}},
+    "Undo" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Отменить"}}}},
+    "Unpin" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Открепить"}}}},
+    "Write anything you like" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Пиши что хочешь"}}}},
+    "Write down grammar, new words or anything else. Tap + to start." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Записывай грамматику, новые слова или что угодно. Нажми +, чтобы начать."}}}},
     "Cancel" : {
       "localizations" : {
         "ru" : {
@@ -1360,6 +1455,10 @@
         }
       }
     },
+    "Can't export" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Не получилось экспортировать"}}}},
+    "Can't import" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Не получилось импортировать"}}}},
+    "Can't undo the import" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Не получилось отменить импорт"}}}},
+    "Characters with progress: %lld" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Знаков с прогрессом: %lld"}}}},
     "Complete the writing part to fill this group up to 100%. The pencil is on the right of the group's row." : {
       "comment" : "Last screen of a lesson: answers filled the group to its maximum, only the writing part is left.",
       "localizations" : {
@@ -1422,6 +1521,9 @@
         }
       }
     },
+    "Couldn't bring back the earlier data. Nothing was changed." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Не получилось вернуть прежние данные. Ничего не изменилось."}}}},
+    "Couldn't open the file. Nothing was changed." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Не получилось открыть файл. Ничего не изменилось."}}}},
+    "Couldn't save the file. Try again." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Не получилось сохранить файл. Попробуй ещё раз."}}}},
     "Couldn't start this lesson" : {
       "localizations" : {
         "ru" : {
@@ -1442,6 +1544,7 @@
         }
       }
     },
+    "Couldn't write the data. Nothing was changed." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Не получилось записать данные. Ничего не изменилось."}}}},
     "Counters & units" : {
       "localizations" : {
         "ru" : {
@@ -1533,6 +1636,7 @@
         }
       }
     },
+    "Data" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Данные"}}}},
     "Day %lld of your streak" : {
       "localizations" : {
         "ru" : {
@@ -1866,6 +1970,9 @@
         }
       }
     },
+    "Export my data" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Экспортировать мои данные"}}}},
+    "Export saves your progress, word cards, notes and settings to one file. Import it on another iPhone to move everything over." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Экспорт сохраняет прогресс, карточки слов, заметки и настройки в один файл. Импортируй его на другом iPhone, чтобы перенести всё."}}}},
+    "Exported %@" : {"comment" : "Date and time the backup file was made.", "localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Экспорт от %@"}}}},
     "Fabric, sewing, pottery and jewels" : {
       "localizations" : {
         "ru" : {
@@ -2328,6 +2435,8 @@
         }
       }
     },
+    "Import data" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Импортировать данные"}}}},
+    "Import this backup?" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Импортировать эту резервную копию?"}}}},
     "In names" : {
       "localizations" : {
         "ru" : {
@@ -3088,6 +3197,7 @@
         }
       }
     },
+    "Notes: %lld" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Заметок: %lld"}}}},
     "Numbers & counting" : {
       "localizations" : {
         "ru" : {
@@ -3108,6 +3218,7 @@
         }
       }
     },
+    "OK" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "ОК"}}}},
     "Off the line" : {
       "localizations" : {
         "ru" : {
@@ -3208,6 +3319,7 @@
         }
       }
     },
+    "Own cards: %lld" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Своих карточек: %lld"}}}},
     "People" : {
       "localizations" : {
         "ru" : {
@@ -3478,6 +3590,7 @@
         }
       }
     },
+    "Replace data" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Заменить данные"}}}},
     "Research, matter and machines" : {
       "localizations" : {
         "ru" : {
@@ -4175,6 +4288,8 @@
         }
       }
     },
+    "The data from before the import is gone, so there is nothing to bring back." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Данных, которые были до импорта, больше нет, вернуть нечего."}}}},
+    "The data this iPhone had before the import on %@ comes back. Anything changed since then is lost." : {"comment" : "The date and time of the import.", "localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Вернутся данные, которые были на этом iPhone до импорта %@. Всё, что изменилось после него, пропадёт."}}}},
     "The next lesson goes over these characters once more." : {
       "localizations" : {
         "ru" : {
@@ -4245,6 +4360,10 @@
         }
       }
     },
+    "This backup is damaged or incomplete. Nothing was changed." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Копия повреждена или записана не до конца. Ничего не изменилось."}}}},
+    "This backup was made by a newer version of Moji. Update the app and try again." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Эта копия сделана более новой версией Moji. Обнови приложение и попробуй снова."}}}},
+    "This file isn't a Moji backup. Nothing was changed." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Это не резервная копия Moji. Ничего не изменилось."}}}},
+    "This replaces all data on this iPhone. The current data is kept, so you can undo the import here." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Это заменит все данные на этом iPhone. Текущие данные сохранятся, и импорт можно будет отменить здесь же."}}}},
     "This stroke starts elsewhere" : {
       "localizations" : {
         "ru" : {
@@ -4466,6 +4585,9 @@
         }
       }
     },
+    "Undo import" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Отменить импорт"}}}},
+    "Undo import brings back the data this iPhone had before the last import." : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "«Отменить импорт» вернёт данные, которые были на этом iPhone до последнего импорта."}}}},
+    "Undo the import?" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Отменить импорт?"}}}},
     "Up next: batch %lld" : {
       "localizations" : {
         "ru" : {
@@ -4696,6 +4818,7 @@
         }
       }
     },
+    "Word cards studied: %lld" : {"localizations" : {"ru" : {"stringUnit" : {"state" : "translated", "value" : "Изучено карточек слов: %lld"}}}},
     "Words from messages, games and comics" : {
       "localizations" : {
         "ru" : {

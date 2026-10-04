@@ -147,7 +147,7 @@ private struct WordsTopCard: View {
 
     var body: some View {
         let angle: Double = service.isFlipped ? 180 : 0
-        let canSwipe = service.isFlipped && service.options.swipeToGrade && !service.isBusy
+        let canSwipe = service.isFlipped && service.options(service.studyDeck).swipeToGrade && !service.isBusy
 
         ZStack {
             WordsCardSurface {
@@ -241,6 +241,36 @@ private struct WordsSwipeStamp: View {
     }
 }
 
+struct WordsHeadword: View {
+    let token: MojiWordToken
+    let size: CGFloat
+    var furigana: FuriganaVisibility = .all
+    var onOpenCharacter: ((MojiCharacter) -> Void)? = nil
+
+    var body: some View {
+        ViewThatFits(in: .horizontal) {
+            headword(size)
+            headword(size * 0.8)
+            headword(size * 0.64)
+            headword(size * 0.5)
+            headword(size * 0.4)
+        }
+    }
+
+    private func headword(_ size: CGFloat) -> some View {
+        FuriganaTextView(
+            tokens: [token],
+            size: size,
+            weight: .semibold,
+            furigana: furigana,
+            alignment: .center,
+            maxScale: FuriganaTextView.headwordMaxScale,
+            onOpenCharacter: onOpenCharacter
+        )
+        .fixedSize()
+    }
+}
+
 struct WordsCardTopRow: View {
     let card: MojiWordStudyCard
 
@@ -308,7 +338,7 @@ private struct WordsCardFront: View {
     private var interactions: WordsInteractionsStore { .shared }
 
     var body: some View {
-        let options = service.options
+        let options = service.options(service.studyDeck)
 
         VStack(spacing: 0) {
             WordsCardTopRow(card: card)
@@ -337,13 +367,10 @@ private struct WordsCardFront: View {
         VStack(spacing: compact ? 18 : 26) {
             switch card.id.kind {
             case .recognition:
-                FuriganaTextView(
-                    tokens: [card.word.token],
+                WordsHeadword(
+                    token: card.word.token,
                     size: card.word.written.count > 4 ? 40 : 50,
-                    weight: .semibold,
                     furigana: .none,
-                    alignment: .center,
-                    maxScale: FuriganaTextView.headwordMaxScale,
                     onOpenCharacter: { interactions.openStudyCharacter($0) }
                 )
                 if let sentence = card.sentence {
@@ -367,8 +394,8 @@ private struct WordsCardFront: View {
                         .font(.system(size: 14, weight: .medium))
                         .foregroundStyle(theme.text.secondary)
                 }
-                if let sentence = card.sentence {
-                    Text(sentence.translation(in: MojiLanguage.current))
+                if let translation = card.sentence?.translation(in: MojiLanguage.current), !translation.isEmpty {
+                    Text(translation)
                         .font(.system(size: 17))
                         .foregroundStyle(theme.text.secondary)
                         .multilineTextAlignment(.center)
@@ -425,7 +452,7 @@ private struct WordsCardBack: View {
     private var interactions: WordsInteractionsStore { .shared }
 
     var body: some View {
-        let options = service.options
+        let options = service.options(service.studyDeck)
         let word = card.word
 
         VStack(spacing: 0) {
@@ -437,26 +464,24 @@ private struct WordsCardBack: View {
                 VStack(spacing: 16) {
                     VStack(spacing: 6) {
                         HStack(alignment: .center, spacing: 10) {
-                            FuriganaTextView(
-                                tokens: [word.token],
+                            WordsHeadword(
+                                token: word.token,
                                 size: word.written.count > 4 ? 38 : 46,
-                                weight: .semibold,
-                                furigana: .all,
-                                alignment: .center,
-                                maxScale: FuriganaTextView.headwordMaxScale,
                                 onOpenCharacter: { interactions.openStudyCharacter($0) }
                             )
-                            .fixedSize()
                             if options.replayButtons {
                                 WordsSpeakerButton(label: String(localized: "Play the word")) {
                                     interactions.replayWord()
                                 }
                             }
                         }
-                        Text(verbatim: word.hasKanji ? "\(word.reading) · \(word.romaji)" : word.romaji)
-                            .font(.system(size: 16, weight: .medium))
-                            .typesettingLanguage(Locale.Language(identifier: "ja"))
-                            .foregroundStyle(theme.text.secondary)
+                        if !word.readingLine.isEmpty {
+                            Text(verbatim: word.readingLine)
+                                .font(.system(size: 16, weight: .medium))
+                                .typesettingLanguage(Locale.Language(identifier: "ja"))
+                                .foregroundStyle(theme.text.secondary)
+                                .multilineTextAlignment(.center)
+                        }
                         Text(word.meaning(in: MojiLanguage.current))
                             .font(.system(size: 23, weight: .bold))
                             .foregroundStyle(theme.text.primary)
@@ -481,11 +506,14 @@ private struct WordsCardBack: View {
                                 alignment: .center,
                                 onOpenCharacter: { interactions.openStudyCharacter($0) }
                             )
-                            Text(sentence.translation(in: MojiLanguage.current))
-                                .font(.system(size: 15))
-                                .foregroundStyle(theme.text.secondary)
-                                .multilineTextAlignment(.center)
-                                .fixedSize(horizontal: false, vertical: true)
+                            let translation = sentence.translation(in: MojiLanguage.current)
+                            if !translation.isEmpty {
+                                Text(translation)
+                                    .font(.system(size: 15))
+                                    .foregroundStyle(theme.text.secondary)
+                                    .multilineTextAlignment(.center)
+                                    .fixedSize(horizontal: false, vertical: true)
+                            }
                             if options.replayButtons {
                                 WordsSpeakerButton(
                                     label: String(localized: "Play the sentence"),

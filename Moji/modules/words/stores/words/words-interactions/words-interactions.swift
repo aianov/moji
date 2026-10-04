@@ -14,6 +14,12 @@ final class WordsInteractionsStore {
 
     private init() {}
 
+    func selectDeck(_ deck: MojiWordDeck) {
+        guard service.selectedDeck != deck else { return }
+        service.selectedDeck = deck
+        UserDefaults.standard.set(deck.rawValue, forKey: WordsServicesStore.deckKey)
+    }
+
     func setQuery(_ query: String) {
         guard service.query != query else { return }
         service.query = query
@@ -23,8 +29,29 @@ final class WordsInteractionsStore {
         service.query = ""
     }
 
+    func setMyQuery(_ query: String) {
+        guard service.myQuery != query else { return }
+        service.myQuery = query
+    }
+
     func refreshClock() {
         actions.refreshClockAction()
+    }
+
+    func syncAfterReload() {
+        service.reloadFromDefaults()
+        service.histories = [:]
+        service.optionsOverrides = [:]
+        service.customStudyCounts = [:]
+        if let detail = service.detail, service.word(detail.wordID) == nil {
+            service.detail = nil
+        }
+        if let wordID = service.editor?.wordID, service.word(wordID) == nil {
+            closeCardEditor()
+        }
+        if let request = service.deleteRequest, service.word(request.wordID) == nil {
+            service.deleteRequest = nil
+        }
     }
 
     func openProfile() {
@@ -32,26 +59,30 @@ final class WordsInteractionsStore {
         MainTabRouter.shared.select(.profile)
     }
 
-    func openSheet(_ sheet: WordsSheet) {
+    func openSheet(_ sheet: WordsSheet, deck: MojiWordDeck) {
         MojiHaptics.selection()
+        service.sheetDeck = deck
         if sheet == .customStudy {
-            if let first = service.catalog.sections.first, service.catalog.section(service.customStudy.section) == nil {
+            let catalog = service.catalog(deck)
+            if let first = catalog.sections.first, catalog.section(service.customStudy.section) == nil {
                 service.customStudy.section = first.number
             }
+            service.customStudyCounts = [:]
             refreshCustomStudyCounts()
         }
         if sheet == .options {
-            service.stepDraft = MojiWordStepsText.format(service.options.learningSteps)
-            service.relearnStepDraft = MojiWordStepsText.format(service.options.relearningSteps)
+            let options = service.options(deck)
+            service.stepDraft = MojiWordStepsText.format(options.learningSteps)
+            service.relearnStepDraft = MojiWordStepsText.format(options.relearningSteps)
         }
         service.sheet = sheet
     }
 
-    func openBrowser(section: Int? = nil, filter: WordsBrowserFilter = .all) {
-        service.browserSection = section
+    func openBrowser(deck: MojiWordDeck, section: Int? = nil, filter: WordsBrowserFilter = .all) {
+        service.browserSection = deck == .frequent ? section : nil
         service.browserFilter = filter
         service.browserQuery = ""
-        openSheet(.browser)
+        openSheet(.browser, deck: deck)
     }
 
     func closeSheet() {
@@ -139,7 +170,7 @@ final class WordsInteractionsStore {
 
     func confirmResetAll() {
         service.isResetAllPresented = false
-        actions.resetAllAction()
+        actions.resetDeckAction(service.sheetDeck)
         MojiHaptics.impact()
     }
 
@@ -147,60 +178,66 @@ final class WordsInteractionsStore {
         service.isResetAllPresented = false
     }
 
-    func updateOptions(_ change: (inout MojiWordOptions) -> Void) {
-        var options = service.options
+    func updateOptions(deck: MojiWordDeck, _ change: (inout MojiWordOptions) -> Void) {
+        let current = service.options(deck)
+        var options = current
         change(&options)
         options = options.sanitized()
-        guard options != service.options else { return }
-        service.optionsOverride = options
+        guard options != current else { return }
+        service.optionsOverrides[deck] = options
         Task {
-            await actions.setOptionsAction(options)
-            if service.optionsOverride == options {
-                service.optionsOverride = nil
+            await actions.setOptionsAction(options, deck: deck)
+            if service.optionsOverrides[deck] == options {
+                service.optionsOverrides[deck] = nil
             }
         }
     }
 
     func commitLearningSteps() {
+        let deck = service.sheetDeck
         guard let steps = MojiWordStepsText.parse(service.stepDraft) else {
-            service.stepDraft = MojiWordStepsText.format(service.options.learningSteps)
+            service.stepDraft = MojiWordStepsText.format(service.options(deck).learningSteps)
             MojiHaptics.error()
             return
         }
-        updateOptions { $0.learningSteps = steps }
+        updateOptions(deck: deck) { $0.learningSteps = steps }
         service.stepDraft = MojiWordStepsText.format(steps)
     }
 
     func commitRelearningSteps() {
+        let deck = service.sheetDeck
         guard let steps = MojiWordStepsText.parse(service.relearnStepDraft) else {
-            service.relearnStepDraft = MojiWordStepsText.format(service.options.relearningSteps)
+            service.relearnStepDraft = MojiWordStepsText.format(service.options(deck).relearningSteps)
             MojiHaptics.error()
             return
         }
-        updateOptions { $0.relearningSteps = steps }
+        updateOptions(deck: deck) { $0.relearningSteps = steps }
         service.relearnStepDraft = MojiWordStepsText.format(steps)
     }
 
     func restoreDefaultOptions() {
         MojiHaptics.selection()
-        updateOptions { $0 = .standard }
+        updateOptions(deck: service.sheetDeck) { $0 = .standard }
         service.stepDraft = MojiWordStepsText.format(MojiWordOptions.standard.learningSteps)
         service.relearnStepDraft = MojiWordStepsText.format(MojiWordOptions.standard.relearningSteps)
     }
 
     func refreshCustomStudyCounts() {
+        let deck = service.sheetDeck
         let draft = service.customStudy
-        let scopes: [MojiWordScope] = [
+        var scopes: [MojiWordScope] = [
             .forgotten(days: draft.forgottenDays),
-            .reviewAhead(days: draft.aheadDays),
-            .sectionOnly(draft.section)
+            .reviewAhead(days: draft.aheadDays)
         ]
+        if deck == .frequent {
+            scopes.append(.sectionOnly(draft.section))
+        }
         Task {
             var counts: [MojiWordScope: MojiWordQueueCounts] = [:]
             for scope in scopes {
-                counts[scope] = await actions.studyCountAction(scope)
+                counts[scope] = await actions.studyCountAction(scope, deck: deck)
             }
-            guard service.customStudy == draft else { return }
+            guard service.customStudy == draft, service.sheetDeck == deck else { return }
             service.customStudyCounts = counts
         }
     }
@@ -215,8 +252,9 @@ final class WordsInteractionsStore {
 
     func addExtraNew() {
         let extra = service.customStudy.extraNew
+        let deck = service.sheetDeck
         Task {
-            await actions.addTodayAction(extraNew: extra, extraReviews: 0)
+            await actions.addTodayAction(extraNew: extra, extraReviews: 0, deck: deck)
             MojiHaptics.success()
             service.sheet = nil
         }
@@ -224,23 +262,24 @@ final class WordsInteractionsStore {
 
     func addExtraReviews() {
         let extra = service.customStudy.extraReviews
+        let deck = service.sheetDeck
         Task {
-            await actions.addTodayAction(extraNew: 0, extraReviews: extra)
+            await actions.addTodayAction(extraNew: 0, extraReviews: extra, deck: deck)
             MojiHaptics.success()
             service.sheet = nil
         }
     }
 
-    func startCustomStudy(_ scope: MojiWordScope) {
+    func startCustomStudy(_ scope: MojiWordScope, deck: MojiWordDeck) {
         service.sheet = nil
         Task {
             try? await Task.sleep(for: Self.sheetHandoff)
-            study(scope)
+            study(scope, deck: deck)
         }
     }
 
     func studySectionFromBrowser(_ section: Int) {
-        startCustomStudy(.section(section))
+        startCustomStudy(.section(section), deck: .frequent)
     }
 
     func setSuspended(_ suspended: Bool, cards: [MojiWordCardID]) {

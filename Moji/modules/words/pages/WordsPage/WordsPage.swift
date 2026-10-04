@@ -3,11 +3,21 @@ import SwiftUI
 struct WordsPage: View {
     static let refreshInterval: Duration = .seconds(30)
 
+    @State private var liveTabs = AnimatedTabsLiveState()
+
+    private static let tabs = MojiWordDeck.allCases.map {
+        TabHeaderConfig(id: $0, text: $0.title)
+    }
+
     private var theme: AppTheme { ThemeStore.shared.currentTheme }
     private var service: WordsServicesStore { .shared }
     private var interactions: WordsInteractionsStore { .shared }
 
     var body: some View {
+        let selection = Binding(
+            get: { service.selectedDeck },
+            set: { interactions.selectDeck($0) }
+        )
         let sheet = Binding(
             get: { service.sheet },
             set: { if $0 == nil { interactions.closeSheet() } }
@@ -20,31 +30,45 @@ struct WordsPage: View {
             get: { service.sheet == nil && service.detail == nil ? service.detailCharacter : nil },
             set: { if $0 == nil { interactions.closeCharacter() } }
         )
+        let editor = Binding(
+            get: { service.sheet == nil && service.detail == nil && service.editor?.origin == .page ? service.editor : nil },
+            set: { if $0 == nil { interactions.closeCardEditor() } }
+        )
         let sectionAction = Binding(
             get: { service.sectionAction != nil },
             set: { if !$0 { interactions.cancelSectionAction() } }
         )
+        let deleteRequest = Binding(
+            get: { service.detail == nil && service.deleteRequest?.origin == .page },
+            set: { if !$0 { interactions.cancelDeleteCard() } }
+        )
 
-        ScrollView {
-            VStack(alignment: .leading, spacing: 14) {
+        GeometryReader { geometry in
+            let bottomInset = geometry.safeAreaInsets.bottom
+
+            VStack(spacing: 14) {
                 WordsHeader()
+                    .padding(.horizontal, 16)
 
-                WordsSearchField(text: service.query) { interactions.setQuery($0) }
+                AnimatedTabsHeader(
+                    tabs: Self.tabs,
+                    selection: service.selectedDeck,
+                    liveState: liveTabs,
+                    onSelect: { interactions.selectDeck($0) }
+                )
+                .padding(.horizontal, 16)
 
-                if service.query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                    WordsOverviewCard()
-                    sections
-                    credits
-                } else {
-                    results
+                AnimatedTabsPager(
+                    ids: MojiWordDeck.allCases,
+                    selection: selection,
+                    liveState: liveTabs
+                ) { deck in
+                    WordsDeckPage(deck: deck, bottomInset: bottomInset)
                 }
+                .ignoresSafeArea(edges: .bottom)
             }
-            .padding(.horizontal, 16)
             .padding(.top, 6)
-            .padding(.bottom, 28)
         }
-        .scrollIndicators(.hidden)
-        .scrollDismissesKeyboard(.immediately)
         .background {
             AppBackground()
         }
@@ -86,6 +110,10 @@ struct WordsPage: View {
             CharacterDetailSheet(character: character)
                 .themedPresentation()
         }
+        .sheet(item: editor) { editor in
+            WordsCardFormSheet(editor: editor)
+                .themedPresentation()
+        }
         .alert(
             sectionActionTitle,
             isPresented: sectionAction,
@@ -112,6 +140,20 @@ struct WordsPage: View {
                 Text("All \(action.section.count) words become new again. Notes and flags stay.")
             }
         }
+        .alert(
+            deleteTitle,
+            isPresented: deleteRequest,
+            presenting: service.deleteRequest
+        ) { _ in
+            Button("Delete", role: .destructive) {
+                interactions.confirmDeleteCard()
+            }
+            Button("Cancel", role: .cancel) {
+                interactions.cancelDeleteCard()
+            }
+        } message: { _ in
+            Text("The card, its progress and its history go away. This can't be undone.")
+        }
     }
 
     private var sectionActionTitle: Text {
@@ -122,9 +164,55 @@ struct WordsPage: View {
         }
     }
 
+    private var deleteTitle: Text {
+        guard let request = service.deleteRequest else { return Text(verbatim: "") }
+        return Text("Delete \(request.written)?")
+    }
+}
+
+private struct WordsDeckPage: View {
+    let deck: MojiWordDeck
+    let bottomInset: CGFloat
+
+    var body: some View {
+        ScrollView {
+            Group {
+                switch deck {
+                case .frequent: WordsFrequentDeckContent()
+                case .mine: WordsMyCardsContent()
+                }
+            }
+            .padding(.horizontal, 16)
+            .padding(.top, 2)
+        }
+        .scrollIndicators(.hidden)
+        .scrollDismissesKeyboard(.immediately)
+        .contentMargins(.bottom, bottomInset + 28, for: .scrollContent)
+    }
+}
+
+private struct WordsFrequentDeckContent: View {
+    private var theme: AppTheme { ThemeStore.shared.currentTheme }
+    private var service: WordsServicesStore { .shared }
+    private var interactions: WordsInteractionsStore { .shared }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            WordsSearchField(text: service.query) { interactions.setQuery($0) }
+
+            if service.query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                WordsOverviewCard(deck: .frequent)
+                sections
+                credits
+            } else {
+                results
+            }
+        }
+    }
+
     @ViewBuilder
     private var sections: some View {
-        let catalog = service.catalog
+        let catalog = service.catalog(.frequent)
         if !catalog.sections.isEmpty {
             HStack(alignment: .firstTextBaseline) {
                 Text("Sections")
@@ -147,7 +235,7 @@ struct WordsPage: View {
 
     @ViewBuilder
     private var credits: some View {
-        let credits = service.catalog.credits
+        let credits = service.catalog(.frequent).credits
         if !credits.isEmpty {
             VStack(alignment: .leading, spacing: 4) {
                 ForEach(credits, id: \.self) { credit in
@@ -163,7 +251,7 @@ struct WordsPage: View {
 
     @ViewBuilder
     private var results: some View {
-        let found = service.searchResults(service.query)
+        let found = service.searchResults(service.query, deck: .frequent)
         if found.isEmpty {
             Text("No words found")
                 .font(.system(size: 15, weight: .medium))
@@ -185,6 +273,61 @@ struct WordsPage: View {
                 }
             }
             .wordsCard()
+        }
+    }
+}
+
+private struct WordsMyCardsContent: View {
+    private var theme: AppTheme { ThemeStore.shared.currentTheme }
+    private var service: WordsServicesStore { .shared }
+    private var interactions: WordsInteractionsStore { .shared }
+
+    var body: some View {
+        let catalog = service.catalog(.mine)
+        let isSearching = !service.myQuery.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+
+        VStack(alignment: .leading, spacing: 14) {
+            if !service.isLoaded(.mine) {
+                ProgressView()
+                    .tint(theme.text.secondary)
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, 40)
+            } else if catalog.isEmpty {
+                WordsMyCardsEmptyCard()
+            } else {
+                WordsSearchField(
+                    placeholder: String(localized: "Search my cards"),
+                    text: service.myQuery
+                ) { interactions.setMyQuery($0) }
+
+                if isSearching {
+                    let found = service.myCards()
+                    if found.isEmpty {
+                        Text("No cards found")
+                            .font(.system(size: 15, weight: .medium))
+                            .foregroundStyle(theme.text.secondary)
+                            .frame(maxWidth: .infinity)
+                            .padding(.top, 30)
+                    } else {
+                        WordsMyCardsList(words: found)
+                    }
+                } else {
+                    WordsOverviewCard(deck: .mine)
+
+                    HStack(alignment: .firstTextBaseline) {
+                        Text("Cards")
+                            .font(.system(size: 20, weight: .bold))
+                            .foregroundStyle(theme.text.primary)
+                        Spacer(minLength: 0)
+                        Text("\(catalog.words.count) cards, newest last")
+                            .font(.system(size: 12, weight: .medium))
+                            .foregroundStyle(theme.text.secondary)
+                    }
+                    .padding(.top, 10)
+
+                    WordsMyCardsList(words: catalog.words)
+                }
+            }
         }
     }
 }

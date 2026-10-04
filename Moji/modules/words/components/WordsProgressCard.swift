@@ -5,10 +5,11 @@ struct WordsProgressCard: View {
     private var service: WordsServicesStore { .shared }
 
     var body: some View {
-        let snapshot = service.snapshot
+        let snapshot = service.snapshot(.frequent)
+        let mine = service.snapshot(.mine)
         let progress = snapshot.progress
         let total = max(1, progress.words)
-        let isDoneToday = snapshot.todayStats.answers > 0
+        let isDoneToday = snapshot.todayStats.answers > 0 || mine.todayStats.answers > 0
 
         Button {
             MojiHaptics.selection()
@@ -51,6 +52,11 @@ struct WordsProgressCard: View {
                         Text("Due now: \(snapshot.queue.review + snapshot.queue.learning) · new today: \(snapshot.queue.new)")
                             .font(.system(size: 12))
                             .foregroundStyle(theme.text.secondary)
+                        if !mine.catalog.isEmpty {
+                            Text("My cards: \(mine.catalog.words.count) · due now: \(mine.queue.review + mine.queue.learning)")
+                                .font(.system(size: 12))
+                                .foregroundStyle(theme.text.secondary)
+                        }
                     }
                 }
             }

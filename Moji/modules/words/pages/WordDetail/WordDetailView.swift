@@ -3,6 +3,7 @@ import SwiftUI
 struct WordDetailView: View {
     let wordID: String
 
+    @Environment(\.dismiss) private var dismiss
     @State private var noteDraft = ""
     @State private var noteLoaded = false
 
@@ -10,14 +11,26 @@ struct WordDetailView: View {
     private var service: WordsServicesStore { .shared }
     private var interactions: WordsInteractionsStore { .shared }
 
+    private var isOwn: Bool {
+        MojiWordDeck.of(wordID: wordID) == .mine
+    }
+
     var body: some View {
         let character = Binding(
             get: { service.detailCharacter },
             set: { if $0 == nil { interactions.closeCharacter() } }
         )
+        let editor = Binding(
+            get: { service.editor?.origin == .detail && service.editor?.wordID == wordID ? service.editor : nil },
+            set: { if $0 == nil { interactions.closeCardEditor() } }
+        )
+        let deleteRequest = Binding(
+            get: { service.deleteRequest?.origin == .detail && service.deleteRequest?.wordID == wordID },
+            set: { if !$0 { interactions.cancelDeleteCard() } }
+        )
 
         Group {
-            if let word = service.catalog.word(wordID) {
+            if let word = service.word(wordID) {
                 content(word)
                     .navigationTitle(Text(verbatim: word.written))
                     .navigationBarTitleDisplayMode(.inline)
@@ -29,18 +42,18 @@ struct WordDetailView: View {
                         }
                     }
                     .task(id: noteDraft) {
-                        guard noteLoaded, noteDraft != (service.note(for: word) ?? "") else { return }
+                        guard !isOwn, noteLoaded, noteDraft != (service.note(for: word) ?? "") else { return }
                         try? await Task.sleep(for: .milliseconds(700))
                         guard !Task.isCancelled else { return }
                         interactions.setNote(noteDraft, for: word)
                     }
                     .onDisappear {
-                        if noteLoaded, noteDraft != (service.note(for: word) ?? "") {
+                        if !isOwn, noteLoaded, noteDraft != (service.note(for: word) ?? "") {
                             interactions.setNote(noteDraft, for: word)
                         }
                     }
             } else {
-                Text("This word is no longer in the deck.")
+                Text(isOwn ? String(localized: "This card is no longer in your cards.") : String(localized: "This word is no longer in the deck."))
                     .font(.system(size: 15))
                     .foregroundStyle(theme.text.secondary)
             }
@@ -49,6 +62,33 @@ struct WordDetailView: View {
             CharacterDetailSheet(character: character)
                 .themedPresentation()
         }
+        .sheet(item: editor) { editor in
+            WordsCardFormSheet(editor: editor)
+                .themedPresentation()
+        }
+        .alert(
+            deleteTitle,
+            isPresented: deleteRequest,
+            presenting: service.deleteRequest
+        ) { _ in
+            Button("Delete", role: .destructive) {
+                let isDetailSheet = service.detail?.wordID == wordID
+                interactions.confirmDeleteCard()
+                if !isDetailSheet {
+                    dismiss()
+                }
+            }
+            Button("Cancel", role: .cancel) {
+                interactions.cancelDeleteCard()
+            }
+        } message: { _ in
+            Text("The card, its progress and its history go away. This can't be undone.")
+        }
+    }
+
+    private var deleteTitle: Text {
+        guard let request = service.deleteRequest else { return Text(verbatim: "") }
+        return Text("Delete \(request.written)?")
     }
 
     private func content(_ word: MojiWord) -> some View {
@@ -59,13 +99,27 @@ struct WordDetailView: View {
                     .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
             }
 
+            if isOwn {
+                Section {
+                    Button {
+                        interactions.editCard(word, from: .detail)
+                    } label: {
+                        Label("Edit the card", systemImage: "pencil")
+                    }
+                }
+            }
+
             if !word.sentences.isEmpty {
                 Section {
                     ForEach(Array(word.sentences.enumerated()), id: \.offset) { _, sentence in
                         WordDetailSentence(sentence: sentence)
                     }
                 } header: {
-                    Text("Examples")
+                    if isOwn {
+                        Text("Example")
+                    } else {
+                        Text("Examples")
+                    }
                 }
             }
 
@@ -78,11 +132,22 @@ struct WordDetailView: View {
                 }
             }
 
-            Section {
-                TextField(String(localized: "Mnemonic, nuance, anything that helps"), text: $noteDraft, axis: .vertical)
-                    .lineLimit(2...6)
-            } header: {
-                Text("Your note")
+            if isOwn {
+                if let note = service.note(for: word) {
+                    Section {
+                        Text(note)
+                            .fixedSize(horizontal: false, vertical: true)
+                    } header: {
+                        Text("Your note")
+                    }
+                }
+            } else {
+                Section {
+                    TextField(String(localized: "Mnemonic, nuance, anything that helps"), text: $noteDraft, axis: .vertical)
+                        .lineLimit(2...6)
+                } header: {
+                    Text("Your note")
+                }
             }
 
             ForEach(service.allCardIDs(of: word), id: \.self) { id in
@@ -99,6 +164,13 @@ struct WordDetailView: View {
                     interactions.forget(word)
                 } label: {
                     Label("Forget: make it new again", systemImage: "arrow.counterclockwise")
+                }
+                if isOwn {
+                    Button(role: .destructive) {
+                        interactions.requestDeleteCard(word, from: .detail)
+                    } label: {
+                        Label("Delete the card", systemImage: "trash")
+                    }
                 }
             }
 
@@ -117,34 +189,36 @@ private struct WordDetailHero: View {
     var body: some View {
         VStack(spacing: 8) {
             HStack(spacing: 10) {
-                FuriganaTextView(
-                    tokens: [word.token],
+                WordsHeadword(
+                    token: word.token,
                     size: 44,
-                    weight: .semibold,
-                    furigana: .all,
-                    alignment: .center,
-                    maxScale: FuriganaTextView.headwordMaxScale,
                     onOpenCharacter: { interactions.openCharacter($0) }
                 )
-                .fixedSize()
                 WordsSpeakerButton(label: String(localized: "Play the word")) {
                     interactions.playWord(word)
                 }
             }
-            Text(verbatim: word.hasKanji ? "\(word.reading) · \(word.romaji)" : word.romaji)
-                .font(.system(size: 16, weight: .medium))
-                .typesettingLanguage(Locale.Language(identifier: "ja"))
-                .foregroundStyle(theme.text.secondary)
+            if !word.readingLine.isEmpty {
+                Text(verbatim: word.readingLine)
+                    .font(.system(size: 16, weight: .medium))
+                    .typesettingLanguage(Locale.Language(identifier: "ja"))
+                    .foregroundStyle(theme.text.secondary)
+                    .multilineTextAlignment(.center)
+            }
             Text(word.meaning(in: MojiLanguage.current))
                 .font(.system(size: 22, weight: .bold))
                 .foregroundStyle(theme.text.primary)
                 .multilineTextAlignment(.center)
             HStack(spacing: 8) {
-                if let partOfSpeech = word.partOfSpeech {
-                    WordsChip(text: partOfSpeech.title)
+                if MojiWordDeck.of(wordID: word.id) == .mine {
+                    WordsChip(text: String(localized: "My card"))
+                } else {
+                    if let partOfSpeech = word.partOfSpeech {
+                        WordsChip(text: partOfSpeech.title)
+                    }
+                    WordsChip(text: String(localized: "No. \(word.rank)"))
+                    WordsChip(text: String(localized: "Section \(word.section)"))
                 }
-                WordsChip(text: String(localized: "No. \(word.rank)"))
-                WordsChip(text: String(localized: "Section \(word.section)"))
             }
         }
         .frame(maxWidth: .infinity)
@@ -167,9 +241,12 @@ private struct WordDetailSentence: View {
                     highlightsTarget: true,
                     onOpenCharacter: { interactions.openCharacter($0) }
                 )
-                Text(sentence.translation(in: MojiLanguage.current))
-                    .font(.system(size: 14))
-                    .foregroundStyle(theme.text.secondary)
+                let translation = sentence.translation(in: MojiLanguage.current)
+                if !translation.isEmpty {
+                    Text(translation)
+                        .font(.system(size: 14))
+                        .foregroundStyle(theme.text.secondary)
+                }
                 if let credit = WordsSentenceCredit.text(for: sentence) {
                     Text(verbatim: credit)
                         .font(.system(size: 11))
@@ -198,7 +275,7 @@ private struct WordDetailCardSection: View {
 
     var body: some View {
         let card = service.card(id)
-        let today = service.snapshot.today
+        let today = service.today(of: word.id)
         let state = MojiWordCardState.of(card, today: today)
         let due = Binding(
             get: { service.dueDraft },

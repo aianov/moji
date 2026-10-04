@@ -38,6 +38,22 @@ final class AlphabetServicesStore {
             .flatMap(MojiKanjiTheme.init(rawValue:)) ?? .people
     }
 
+    func reloadFromDefaults() {
+        let defaults = UserDefaults.standard
+        let script = defaults
+            .string(forKey: Self.activeScriptKey)
+            .flatMap(MojiScript.init(storedValue:)) ?? .hiragana
+        let theme = defaults
+            .string(forKey: Self.activeThemeKey)
+            .flatMap(MojiKanjiTheme.init(rawValue:)) ?? .people
+        if activeScript != script {
+            activeScript = script
+        }
+        if activeTheme != theme {
+            activeTheme = theme
+        }
+    }
+
     var activePage: MojiPage {
         page(for: activeScript)
     }

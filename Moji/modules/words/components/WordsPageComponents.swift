@@ -7,6 +7,7 @@ struct WordsHeader: View {
 
     var body: some View {
         let activity = service.activity
+        let addsCards = service.selectedDeck == .mine && service.isLoaded(.mine)
 
         HStack(alignment: .center, spacing: 10) {
             Text("Words")
@@ -16,7 +17,21 @@ struct WordsHeader: View {
 
             Spacer(minLength: 0)
 
-            WordsMenu()
+            if addsCards {
+                LiquidGlassButton(
+                    shape: .circle,
+                    size: 40,
+                    accessibilityLabel: String(localized: "Add a card"),
+                    action: { interactions.newCard() }
+                ) {
+                    Image(systemName: "plus")
+                        .font(.system(size: 17, weight: .semibold))
+                        .foregroundStyle(theme.text.primary)
+                }
+                .transition(.scale(scale: 0.6).combined(with: .opacity))
+            }
+
+            WordsMenu(deck: service.selectedDeck)
 
             StreakPill(
                 streak: activity.currentStreak,
@@ -25,33 +40,47 @@ struct WordsHeader: View {
             )
         }
         .frame(height: 44)
+        .animation(.snappy(duration: 0.25), value: addsCards)
     }
 }
 
 struct WordsMenu: View {
+    let deck: MojiWordDeck
+
     private var theme: AppTheme { ThemeStore.shared.currentTheme }
     private var interactions: WordsInteractionsStore { .shared }
 
     var body: some View {
         Menu {
-            Button {
-                interactions.openBrowser()
-            } label: {
-                Label("Browse words", systemImage: "list.bullet.rectangle")
+            if deck == .mine {
+                Button {
+                    interactions.newCard()
+                } label: {
+                    Label("Add a card", systemImage: "plus")
+                }
             }
             Button {
-                interactions.openSheet(.stats)
+                interactions.openBrowser(deck: deck)
+            } label: {
+                if deck == .mine {
+                    Label("Browse my cards", systemImage: "list.bullet.rectangle")
+                } else {
+                    Label("Browse words", systemImage: "list.bullet.rectangle")
+                }
+            }
+            Button {
+                interactions.openSheet(.stats, deck: deck)
             } label: {
                 Label("Statistics", systemImage: "chart.bar")
             }
             Button {
-                interactions.openSheet(.customStudy)
+                interactions.openSheet(.customStudy, deck: deck)
             } label: {
                 Label("Custom study", systemImage: "slider.horizontal.3")
             }
             Divider()
             Button {
-                interactions.openSheet(.options)
+                interactions.openSheet(.options, deck: deck)
             } label: {
                 Label("Deck options", systemImage: "gearshape")
             }
@@ -149,12 +178,15 @@ extension View {
 }
 
 struct WordsOverviewCard: View {
+    let deck: MojiWordDeck
+
     private var theme: AppTheme { ThemeStore.shared.currentTheme }
     private var service: WordsServicesStore { .shared }
     private var interactions: WordsInteractionsStore { .shared }
 
     var body: some View {
-        let snapshot = service.snapshot
+        let snapshot = service.snapshot(deck)
+        let isLoaded = snapshot.isLoaded
         let queue = snapshot.queue
         let today = snapshot.todayStats
 
@@ -183,29 +215,29 @@ struct WordsOverviewCard: View {
                     detail: "\(queue.total)",
                     systemImage: "play.fill",
                     role: .primary,
-                    action: { interactions.study() }
+                    action: { interactions.study(deck: deck) }
                 )
-                .disabled(!service.isLoaded)
+                .disabled(!isLoaded)
             } else if let next = snapshot.nextLearningAt {
                 ProgressCapsuleButton(
                     title: String(localized: "Learning cards at \(next.formatted(date: .omitted, time: .shortened))"),
                     systemImage: "clock",
                     role: .secondary,
-                    action: { interactions.study() }
+                    action: { interactions.study(deck: deck) }
                 )
             } else {
                 VStack(alignment: .leading, spacing: 10) {
-                    Text(service.isLoaded ? doneText(snapshot) : String(localized: "Loading the deck…"))
+                    Text(isLoaded ? doneText(snapshot) : String(localized: "Loading the deck…"))
                         .font(.system(size: 15))
                         .foregroundStyle(theme.text.secondary)
                         .fixedSize(horizontal: false, vertical: true)
-                    if service.isLoaded, !snapshot.catalog.isEmpty {
+                    if isLoaded, !snapshot.catalog.isEmpty {
                         ProgressCapsuleButton(
                             title: String(localized: "Custom study"),
                             systemImage: "slider.horizontal.3",
                             role: .secondary,
                             height: 50,
-                            action: { interactions.openSheet(.customStudy) }
+                            action: { interactions.openSheet(.customStudy, deck: deck) }
                         )
                     }
                 }
@@ -213,17 +245,22 @@ struct WordsOverviewCard: View {
 
             ScrollView(.horizontal) {
                 HStack(spacing: 8) {
+                    if deck == .mine {
+                        WordsQuickButton(title: String(localized: "Add a card"), systemImage: "plus") {
+                            interactions.newCard()
+                        }
+                    }
                     WordsQuickButton(title: String(localized: "Browse"), systemImage: "list.bullet.rectangle") {
-                        interactions.openBrowser()
+                        interactions.openBrowser(deck: deck)
                     }
                     WordsQuickButton(title: String(localized: "Statistics"), systemImage: "chart.bar") {
-                        interactions.openSheet(.stats)
+                        interactions.openSheet(.stats, deck: deck)
                     }
                     WordsQuickButton(title: String(localized: "Custom study"), systemImage: "slider.horizontal.3") {
-                        interactions.openSheet(.customStudy)
+                        interactions.openSheet(.customStudy, deck: deck)
                     }
                     WordsQuickButton(title: String(localized: "Options"), systemImage: "gearshape") {
-                        interactions.openSheet(.options)
+                        interactions.openSheet(.options, deck: deck)
                     }
                 }
                 .padding(.vertical, 2)
@@ -341,13 +378,14 @@ struct WordsSectionRow: View {
     private var interactions: WordsInteractionsStore { .shared }
 
     var body: some View {
-        let stats = service.sectionStats(section)
-        let preview = section.wordIDs.prefix(4).compactMap { service.catalog.word($0)?.written }.joined(separator: "、")
+        let catalog = service.catalog(.frequent)
+        let stats = service.sectionStats(section, deck: .frequent)
+        let preview = section.wordIDs.prefix(4).compactMap { catalog.word($0)?.written }.joined(separator: "、")
         let shape = RoundedRectangle(cornerRadius: 18, style: .continuous)
 
         HStack(spacing: 12) {
             Button {
-                interactions.openBrowser(section: section.number)
+                interactions.openBrowser(deck: .frequent, section: section.number)
             } label: {
                 HStack(spacing: 12) {
                     WordsProgressRing(
@@ -386,7 +424,7 @@ struct WordsSectionRow: View {
                 LiquidGlassButton(
                     shape: .circle,
                     size: 40,
-                    disabled: !service.isLoaded,
+                    disabled: !service.isLoaded(.frequent),
                     accessibilityLabel: String(localized: "Study section \(section.number)"),
                     action: { interactions.studySection(section) }
                 ) {
@@ -464,12 +502,12 @@ private struct WordsSectionMenuItems: View {
             Label("Study this section", systemImage: "play.fill")
         }
         Button {
-            interactions.startCustomStudy(.sectionOnly(section.number))
+            interactions.startCustomStudy(.sectionOnly(section.number), deck: .frequent)
         } label: {
             Label("Only this section", systemImage: "scope")
         }
         Button {
-            interactions.openBrowser(section: section.number)
+            interactions.openBrowser(deck: .frequent, section: section.number)
         } label: {
             Label("Show the words", systemImage: "list.bullet")
         }
@@ -497,7 +535,8 @@ struct WordsWordRow: View {
 
     var body: some View {
         let card = service.card(MojiWordCardID(wordID: word.id))
-        let state = MojiWordCardState.of(card, today: service.snapshot.today)
+        let state = MojiWordCardState.of(card, today: service.today(of: word.id))
+        let gloss = [word.romaji, word.meaning(in: MojiLanguage.current)].filter { !$0.isEmpty }.joined(separator: " · ")
 
         HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 2) {
@@ -506,14 +545,16 @@ struct WordsWordRow: View {
                         .font(.system(size: 20, weight: .semibold))
                         .typesettingLanguage(Locale.Language(identifier: "ja"))
                         .foregroundStyle(theme.text.primary)
-                    if word.hasKanji {
+                        .lineLimit(1)
+                    if word.hasKanji, !word.reading.isEmpty {
                         Text(verbatim: word.reading)
                             .font(.system(size: 14))
                             .typesettingLanguage(Locale.Language(identifier: "ja"))
                             .foregroundStyle(theme.text.secondary)
+                            .lineLimit(1)
                     }
                 }
-                Text(verbatim: "\(word.romaji) · \(word.meaning(in: MojiLanguage.current))")
+                Text(verbatim: gloss)
                     .font(.system(size: 13))
                     .foregroundStyle(theme.text.secondary)
                     .lineLimit(1)

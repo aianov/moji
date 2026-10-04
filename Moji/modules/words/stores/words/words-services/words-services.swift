@@ -6,8 +6,13 @@ import Observation
 final class WordsServicesStore {
     static let shared = WordsServicesStore()
 
+    static let deckKey = "moji.words.deck.v1"
+
+    var selectedDeck: MojiWordDeck
     var query = ""
+    var myQuery = ""
     var sheet: WordsSheet?
+    var sheetDeck: MojiWordDeck = .frequent
     var detail: WordsDetailTarget?
     var detailCharacter: MojiCharacter?
     var histories: [String: [MojiWordCardID: [MojiWordReview]]] = [:]
@@ -20,10 +25,17 @@ final class WordsServicesStore {
 
     var customStudy = WordsCustomStudyDraft()
     var customStudyCounts: [MojiWordScope: MojiWordQueueCounts] = [:]
-    var optionsOverride: MojiWordOptions?
+    var optionsOverrides: [MojiWordDeck: MojiWordOptions] = [:]
     var stepDraft = ""
     var relearnStepDraft = ""
     var dueDraft = 1
+
+    var editor: WordsCardEditor?
+    var draft = WordsCardDraft()
+    var isSavingCard = false
+    var isDiscardCardPresented = false
+    var cardFocusToken = 0
+    var deleteRequest: WordsDeleteRequest?
 
     var presented: WordsPresentedStudy?
     var stage: WordsStudyStage = .loading
@@ -39,24 +51,48 @@ final class WordsServicesStore {
 
     @ObservationIgnored var flyCount = 0
     @ObservationIgnored private var segmentCache: [String: [MojiRubySegment]] = [:]
-    @ObservationIgnored private var searchCache: (query: String, catalog: MojiWordCatalog, ids: [String])?
+    @ObservationIgnored private var searchCache: [MojiWordDeck: (query: String, catalog: MojiWordCatalog, ids: [String])] = [:]
+    @ObservationIgnored private var dictionaryCache: (catalog: MojiWordCatalog, dictionary: MojiWordReadingDictionary)?
 
-    private init() {}
-
-    var snapshot: MojiWordRepositorySnapshot {
-        MojiWordPresentation.shared.snapshot
+    private init() {
+        selectedDeck = Self.storedDeck()
     }
 
-    var catalog: MojiWordCatalog {
-        snapshot.catalog
+    func reloadFromDefaults() {
+        let stored = Self.storedDeck()
+        guard stored != selectedDeck else { return }
+        selectedDeck = stored
     }
 
-    var options: MojiWordOptions {
-        optionsOverride ?? snapshot.options
+    private static func storedDeck() -> MojiWordDeck {
+        UserDefaults.standard
+            .string(forKey: deckKey)
+            .flatMap(MojiWordDeck.init(rawValue:)) ?? .frequent
     }
 
-    var isLoaded: Bool {
-        snapshot.isLoaded
+    func snapshot(_ deck: MojiWordDeck) -> MojiWordRepositorySnapshot {
+        MojiWordPresentation.shared.snapshot(for: deck)
+    }
+
+    func catalog(_ deck: MojiWordDeck) -> MojiWordCatalog {
+        snapshot(deck).catalog
+    }
+
+    func options(_ deck: MojiWordDeck) -> MojiWordOptions {
+        optionsOverrides[deck] ?? snapshot(deck).options
+    }
+
+    func isLoaded(_ deck: MojiWordDeck) -> Bool {
+        snapshot(deck).isLoaded
+    }
+
+    func canStudy(_ deck: MojiWordDeck) -> Bool {
+        let snapshot = snapshot(deck)
+        return snapshot.isLoaded && (snapshot.queue.total > 0 || snapshot.nextLearningAt != nil)
+    }
+
+    var studyDeck: MojiWordDeck {
+        presented?.deck ?? selectedDeck
     }
 
     var activity: MojiActivitySummary {
@@ -68,37 +104,51 @@ final class WordsServicesStore {
         return card
     }
 
-    var detailWord: MojiWord? {
-        detail.flatMap { catalog.word($0.wordID) }
+    var readingDictionary: MojiWordReadingDictionary {
+        let catalog = catalog(.frequent)
+        if let dictionaryCache, dictionaryCache.catalog === catalog {
+            return dictionaryCache.dictionary
+        }
+        let dictionary = MojiWordReadingDictionary(catalog: catalog)
+        dictionaryCache = (catalog, dictionary)
+        return dictionary
+    }
+
+    func word(_ wordID: String) -> MojiWord? {
+        catalog(MojiWordDeck.of(wordID: wordID)).word(wordID)
     }
 
     func card(_ id: MojiWordCardID) -> MojiWordCard {
-        snapshot.card(id)
+        snapshot(MojiWordDeck.of(wordID: id.wordID)).card(id)
+    }
+
+    func today(of wordID: String) -> Int {
+        snapshot(MojiWordDeck.of(wordID: wordID)).today
     }
 
     func cardIDs(of word: MojiWord) -> [MojiWordCardID] {
-        MojiWordStats.cardIDs(of: word, options: options)
+        MojiWordStats.cardIDs(of: word, options: options(MojiWordDeck.of(wordID: word.id)))
     }
 
     func allCardIDs(of word: MojiWord) -> [MojiWordCardID] {
         let ids = cardIDs(of: word)
         let reverse = MojiWordCardID(wordID: word.id, kind: .recall)
-        if !ids.contains(reverse), snapshot.cards[reverse.key] != nil {
+        if !ids.contains(reverse), snapshot(MojiWordDeck.of(wordID: word.id)).cards[reverse.key] != nil {
             return ids + [reverse]
         }
         return ids
     }
 
     func state(of word: MojiWord) -> MojiWordCardState {
-        MojiWordCardState.of(card(MojiWordCardID(wordID: word.id)), today: snapshot.today)
+        MojiWordCardState.of(card(MojiWordCardID(wordID: word.id)), today: today(of: word.id))
     }
 
-    func sectionStats(_ section: MojiWordSection) -> MojiWordSectionStats {
-        snapshot.sections[section.number] ?? MojiWordSectionStats(number: section.number)
+    func sectionStats(_ section: MojiWordSection, deck: MojiWordDeck) -> MojiWordSectionStats {
+        snapshot(deck).sections[section.number] ?? MojiWordSectionStats(number: section.number)
     }
 
     func note(for word: MojiWord) -> String? {
-        snapshot.notes[word.id]
+        snapshot(MojiWordDeck.of(wordID: word.id)).notes[word.id]
     }
 
     func kanjiCharacters(of word: MojiWord) -> [MojiCharacter] {
@@ -115,22 +165,30 @@ final class WordsServicesStore {
         return segments
     }
 
-    func searchResults(_ query: String) -> [MojiWord] {
+    func searchResults(_ query: String, deck: MojiWordDeck) -> [MojiWord] {
         let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return [] }
-        if let searchCache, searchCache.query == trimmed, searchCache.catalog === catalog {
-            return searchCache.ids.compactMap { catalog.word($0) }
+        let catalog = catalog(deck)
+        if let cached = searchCache[deck], cached.query == trimmed, cached.catalog === catalog {
+            return cached.ids.compactMap { catalog.word($0) }
         }
         let ids = catalog.search.matches(trimmed)
-        searchCache = (trimmed, catalog, ids)
+        searchCache[deck] = (trimmed, catalog, ids)
         return ids.compactMap { catalog.word($0) }
     }
 
+    func myCards() -> [MojiWord] {
+        myQuery.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+            ? catalog(.mine).words
+            : searchResults(myQuery, deck: .mine)
+    }
+
     func browserWords() -> [MojiWord] {
+        let deck = sheetDeck
         let base = browserQuery.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-            ? catalog.words
-            : searchResults(browserQuery)
-        let today = snapshot.today
+            ? catalog(deck).words
+            : searchResults(browserQuery, deck: deck)
+        let today = snapshot(deck).today
         return base.filter { word in
             if let browserSection, word.section != browserSection {
                 return false
@@ -138,14 +196,6 @@ final class WordsServicesStore {
             guard browserFilter != .all else { return true }
             return allCardIDs(of: word).contains { browserFilter.matches(card($0), today: today) }
         }
-    }
-
-    var studiedToday: MojiWordDayStats {
-        snapshot.todayStats
-    }
-
-    var canStudy: Bool {
-        isLoaded && (snapshot.queue.total > 0 || snapshot.nextLearningAt != nil)
     }
 
     func resetStudyState() {

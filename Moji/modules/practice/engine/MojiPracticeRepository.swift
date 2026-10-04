@@ -319,6 +319,16 @@ actor MojiPracticeRepository {
         await emit()
     }
 
+    func reloadFromDisk() async {
+        if let loadTask {
+            await loadTask.value
+        }
+        loadTask = nil
+        isLoaded = false
+        await ensureLoaded()
+        await emit()
+    }
+
     private func appendToLog(_ record: MojiCompletedSession) {
         activity.completed.append(record)
         if activity.completed.count > MojiActivityLog.maxEntries {

@@ -2,6 +2,7 @@ import Foundation
 
 struct WordsPresentedStudy: Identifiable, Equatable {
     let scope: MojiWordScope
+    let deck: MojiWordDeck
     let token: UUID
 
     var id: UUID { token }
@@ -117,4 +118,90 @@ struct WordsCustomStudyDraft: Equatable {
     var forgottenDays = 1
     var aheadDays = 3
     var section = 1
+}
+
+enum WordsCardOrigin: Equatable {
+    case page
+    case detail
+}
+
+struct WordsCardEditor: Identifiable, Equatable {
+    let wordID: String?
+    let origin: WordsCardOrigin
+    let token: UUID
+
+    var id: UUID { token }
+
+    var isNew: Bool {
+        wordID == nil
+    }
+}
+
+enum WordsCardField: Hashable {
+    case word
+    case reading
+    case meaning
+    case sentence
+    case translation
+    case note
+    case fix(String)
+}
+
+struct WordsCardDraft: Equatable {
+    var word = ""
+    var reading = ""
+    var autoReading = ""
+    var isReadingEdited = false
+    var meaning = ""
+    var sentence = ""
+    var autoTokens: [MojiWordToken] = []
+    var tokens: [MojiWordToken] = []
+    var fixes: [String: String] = [:]
+    var translation = ""
+    var note = ""
+    var lastAdded: String?
+    var original: MojiOwnWordInput?
+
+    var input: MojiOwnWordInput {
+        MojiOwnWordInput(
+            written: word,
+            reading: reading,
+            meaning: meaning,
+            sentence: tokens,
+            translation: translation,
+            note: note
+        )
+    }
+
+    var problems: [MojiOwnWordProblem] {
+        input.problems
+    }
+
+    var isEmpty: Bool {
+        [word, meaning, sentence, translation, note].allSatisfy {
+            $0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        }
+    }
+
+    var hasChanges: Bool {
+        guard let original else { return !isEmpty }
+        return input.cleaned() != original.cleaned()
+    }
+
+    var fixableTokens: [MojiWordToken] {
+        var seen: Set<String> = []
+        return tokens.filter { $0.hasKanji && seen.insert($0.surface).inserted }
+    }
+
+    func autoReading(of surface: String) -> String? {
+        autoTokens.first { $0.surface == surface }?.reading
+    }
+}
+
+struct WordsDeleteRequest: Identifiable, Equatable {
+    let wordID: String
+    let written: String
+    let origin: WordsCardOrigin
+
+    var id: String { wordID }
 }

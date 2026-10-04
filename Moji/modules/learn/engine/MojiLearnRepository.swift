@@ -80,6 +80,16 @@ actor MojiLearnRepository {
         await emit()
     }
 
+    func reloadFromDisk() async {
+        if let loadTask {
+            await loadTask.value
+        }
+        loadTask = nil
+        isLoaded = false
+        await ensureLoaded()
+        await emit()
+    }
+
     static func restore(_ stored: MojiLearnState, catalog: MojiAlphabetCatalog) -> MojiLearnState {
         var pages: [String: MojiLearnPageState] = [:]
         for (key, value) in stored.pages {

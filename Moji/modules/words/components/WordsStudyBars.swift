@@ -24,7 +24,7 @@ struct WordsStudyTopBar: View {
 
             VStack(spacing: 4) {
                 WordsQueueCounts(counts: card.counts, current: card.isCram ? nil : card.kind, isCram: card.isCram)
-                if service.options.showTimer {
+                if service.options(service.studyDeck).showTimer {
                     WordsCardTimer(since: service.cardShownAt)
                 }
             }
@@ -117,13 +117,15 @@ struct WordsAnswerBar: View {
     private var interactions: WordsInteractionsStore { .shared }
 
     var body: some View {
+        let showsIntervals = service.options(service.studyDeck).showNextIntervals
+
         Group {
             if service.isFlipped {
                 HStack(spacing: 8) {
                     ForEach(MojiWordButton.allCases) { button in
                         WordsGradeButton(
                             button: button,
-                            interval: service.options.showNextIntervals ? card.delays[button].map(WordsFormat.interval) : nil,
+                            interval: showsIntervals ? card.delays[button].map(WordsFormat.interval) : nil,
                             action: { interactions.grade(button) }
                         )
                     }

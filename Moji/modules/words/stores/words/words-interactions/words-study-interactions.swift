@@ -7,24 +7,24 @@ extension WordsInteractionsStore {
     static let leechNoticeTime: Duration = .seconds(3)
     static let pauseBeforeSentence = 0.35
 
-    func study(_ scope: MojiWordScope = .deck) {
-        guard service.presented == nil, service.isLoaded else { return }
+    func study(_ scope: MojiWordScope = .deck, deck: MojiWordDeck) {
+        guard service.presented == nil, service.isLoaded(deck) else { return }
         speech.stop()
         service.resetStudyState()
         let token = UUID()
-        service.presented = WordsPresentedStudy(scope: scope, token: token)
+        service.presented = WordsPresentedStudy(scope: scope, deck: deck, token: token)
         WordsHaptics.prepare()
         MojiHaptics.impact()
 
         Task {
-            let step = await actions.startSessionAction(scope)
+            let step = await actions.startSessionAction(scope, deck: deck)
             guard service.presented?.token == token else { return }
             await apply(step)
         }
     }
 
     func studySection(_ section: MojiWordSection) {
-        study(.section(section.number))
+        study(.section(section.number), deck: .frequent)
     }
 
     func setTypedReading(_ text: String) {
@@ -34,20 +34,22 @@ extension WordsInteractionsStore {
 
     func showAnswer() {
         guard let card = service.currentCard, !service.isFlipped, !service.isBusy else { return }
-        if service.options.typeReading {
+        let options = service.options(service.studyDeck)
+        if options.typeReading {
             service.typedVerdict = verdict(for: service.typedReading, word: card.word)
         }
         withAnimation(Self.flipAnimation) {
             service.isFlipped = true
         }
         WordsHaptics.flip()
-        if service.options.autoplayAudio {
+        if options.autoplayAudio {
             playAnswer(card)
         }
     }
 
     func grade(_ button: MojiWordButton) {
         guard let card = service.currentCard, service.isFlipped, !service.isBusy else { return }
+        let deck = service.studyDeck
         service.isBusy = true
         let seconds = Date().timeIntervalSince(service.cardShownAt)
         let wasLeech = card.card.isLeech
@@ -58,12 +60,12 @@ extension WordsInteractionsStore {
 
         Task {
             try? await Task.sleep(for: Self.flightLead)
-            let next = await actions.answerAction(card.id, button: button, seconds: seconds)
+            let next = await actions.answerAction(card.id, button: button, seconds: seconds, deck: deck)
             guard service.currentCard?.id == card.id, let next else {
                 service.isBusy = false
                 return
             }
-            let after = service.snapshot.card(card.id)
+            let after = service.snapshot(deck).card(card.id)
             if !card.isCram, after.isLeech, !wasLeech || (button == .again && after.isSuspended) {
                 showLeechNotice(card.word, suspended: after.isSuspended)
             }
@@ -73,12 +75,13 @@ extension WordsInteractionsStore {
 
     func undo() {
         guard case .card(let card) = service.stage, card.canUndo, !service.isBusy else { return }
+        let deck = service.studyDeck
         service.isBusy = true
         speech.stop()
         service.flyAway = nil
         Task {
             try? await Task.sleep(for: Self.flightLead)
-            guard let step = await actions.undoAction() else {
+            guard let step = await actions.undoAction(deck: deck) else {
                 service.isBusy = false
                 return
             }
@@ -112,13 +115,14 @@ extension WordsInteractionsStore {
     }
 
     func close() {
+        let deck = service.studyDeck
         switch service.stage {
         case .card(let card) where card.answered > 0:
             MojiHaptics.selection()
             service.isExitAlertPresented = true
         case .card, .loading:
             Task {
-                _ = await actions.endSessionAction()
+                _ = await actions.endSessionAction(deck: deck)
                 dismissStudy()
             }
         case .finished:
@@ -131,9 +135,10 @@ extension WordsInteractionsStore {
     }
 
     func stopStudying() {
+        let deck = service.studyDeck
         service.isExitAlertPresented = false
         Task {
-            _ = await actions.endSessionAction()
+            _ = await actions.endSessionAction(deck: deck)
             dismissStudy()
         }
     }
@@ -143,10 +148,11 @@ extension WordsInteractionsStore {
     }
 
     func openCustomStudyAfterSession() {
+        let deck = service.studyDeck
         dismissStudy()
         Task {
             try? await Task.sleep(for: Self.sheetHandoff)
-            openSheet(.customStudy)
+            openSheet(.customStudy, deck: deck)
         }
     }
 

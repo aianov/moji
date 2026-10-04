@@ -13,7 +13,7 @@ struct WordsStudySummaryView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 26) {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(WordsScopeTitle.text(summary.scope))
+                    Text(WordsScopeTitle.text(summary.scope, deck: summary.deck))
                         .font(.system(size: 15, weight: .medium))
                         .foregroundStyle(theme.text.secondary)
                     Group {
@@ -40,7 +40,7 @@ struct WordsStudySummaryView: View {
                 }
 
                 if !summary.leeches.isEmpty {
-                    leeches(summary.leeches)
+                    leeches(summary.leeches, deck: summary.deck)
                 }
 
                 if summary.isComplete, summary.remaining.total == 0, summary.learningLater == 0 {
@@ -126,8 +126,10 @@ struct WordsStudySummaryView: View {
         }
     }
 
-    private func leeches(_ wordIDs: [String]) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
+    private func leeches(_ wordIDs: [String], deck: MojiWordDeck) -> some View {
+        let catalog = service.catalog(deck)
+
+        return VStack(alignment: .leading, spacing: 10) {
             Text("Leeches")
                 .font(.system(size: 20, weight: .bold))
                 .foregroundStyle(theme.text.primary)
@@ -137,7 +139,7 @@ struct WordsStudySummaryView: View {
                 .fixedSize(horizontal: false, vertical: true)
             MojiFlowLayout(spacing: 8, lineSpacing: 8) {
                 ForEach(wordIDs, id: \.self) { wordID in
-                    if let word = service.catalog.word(wordID) {
+                    if let word = catalog.word(wordID) {
                         Text(verbatim: word.written)
                             .font(.system(size: 18, weight: .semibold))
                             .typesettingLanguage(Locale.Language(identifier: "ja"))
@@ -194,10 +196,10 @@ struct WordsSummaryNote: View {
 }
 
 enum WordsScopeTitle {
-    static func text(_ scope: MojiWordScope) -> String {
+    static func text(_ scope: MojiWordScope, deck: MojiWordDeck) -> String {
         switch scope {
         case .deck:
-            String(localized: "Words")
+            deck == .mine ? String(localized: "My cards") : String(localized: "Words")
         case .section(let number):
             String(localized: "Section \(number)")
         case .sectionOnly(let number):

@@ -19,6 +19,9 @@ struct MainTabs: View {
             Tab("Words", systemImage: "rectangle.stack", value: MainTab.words) {
                 WordsPage()
             }
+            Tab("Notes", systemImage: "note.text", value: MainTab.notes) {
+                NotesPage()
+            }
             Tab("Profile", systemImage: "person.crop.circle", value: MainTab.profile) {
                 ProfilePage()
             }

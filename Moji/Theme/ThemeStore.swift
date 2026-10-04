@@ -85,6 +85,15 @@ final class ThemeStore {
         commit()
     }
 
+    func reloadFromDefaults() {
+        let stored = UserDefaults.standard
+            .string(forKey: ThemePersistenceKey.appearancePreference)
+            .flatMap(ThemeAppearancePreference.init(rawValue:)) ?? .system
+        guard stored != preference else { return }
+        preference = stored
+        commit()
+    }
+
     func systemColorSchemeDidChange(_ colorScheme: ColorScheme) {
         guard preference == .system else { return }
         systemAppearance = colorScheme == .light ? .light : .dark
