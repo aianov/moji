@@ -84,8 +84,7 @@ private struct NotesFolderChip: View {
                 .contentShape(Capsule(style: .continuous))
         }
         .buttonStyle(.plain)
-        .liquidChromeCapsule(tint: isSelected ? theme.text.primary : nil, interactive: true)
-        .animation(GlassChipMetrics.selectAnimation, value: isSelected)
+        .glassChip(isSelected: isSelected, theme: theme)
         .accessibilityAddTraits(isSelected ? [.isButton, .isSelected] : [.isButton])
     }
 }

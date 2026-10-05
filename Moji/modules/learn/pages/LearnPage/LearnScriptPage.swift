@@ -40,10 +40,11 @@ struct LearnScriptPage: View {
                         }
                         ForEach(section.batches) { state in
                             LearnBatchRow(state: state)
-                                .id(state.batch.index)
+                                .id(state.batch.id)
                         }
                     }
                 }
+                .id(page)
                 .padding(.horizontal, 16)
                 .padding(.top, 14)
             }
@@ -76,19 +77,24 @@ struct LearnScriptPage: View {
         }
     }
 
+    private static func currentTarget(in path: MojiLearnPath) -> String? {
+        guard let index = path.currentIndex, index > 2, path.batches.indices.contains(index) else { return nil }
+        return path.batches[index].id
+    }
+
     private func scrollToCurrent(_ path: MojiLearnPath, with proxy: ScrollViewProxy) {
         guard !didScroll, service.isLoaded else { return }
         didScroll = true
-        guard let index = path.currentIndex, index > 2 else { return }
-        proxy.scrollTo(index, anchor: .center)
+        guard let target = Self.currentTarget(in: path) else { return }
+        proxy.scrollTo(target, anchor: .center)
     }
 
     private func pageDidChange(_ page: MojiPage, with proxy: ScrollViewProxy) {
         Task { @MainActor in
             if let focus = search.learn.focus, focus.page == page {
                 scrollToMatch(focus, on: page, with: proxy)
-            } else if let index = service.path(for: page).currentIndex, index > 2 {
-                proxy.scrollTo(index, anchor: .center)
+            } else if let target = Self.currentTarget(in: service.path(for: page)) {
+                proxy.scrollTo(target, anchor: .center)
             } else {
                 proxy.scrollTo(Self.topID, anchor: .top)
             }
@@ -97,11 +103,11 @@ struct LearnScriptPage: View {
 
     private func scrollToMatch(_ focus: CharacterSearchFocus?, on page: MojiPage, with proxy: ScrollViewProxy) {
         guard let focus, focus.page == page,
-              let index = service.batchIndex(containing: focus.characterID, in: page) else { return }
+              let target = service.batchID(containing: focus.characterID, in: page) else { return }
         didScroll = true
         let anchor = CharacterSearchField.scrollAnchor(isEditing: search.isEditing(.learn))
         withAnimation(.smooth(duration: 0.4)) {
-            proxy.scrollTo(index, anchor: anchor)
+            proxy.scrollTo(target, anchor: anchor)
         }
     }
 }

@@ -46,6 +46,7 @@ struct AlphabetScriptPage: View {
                         }
                     }
                 }
+                .id(page)
                 .padding(.horizontal, 16)
                 .padding(.top, 14)
             }

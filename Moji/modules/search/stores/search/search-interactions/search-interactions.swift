@@ -6,7 +6,11 @@ import Observation
 final class SearchInteractionsStore {
     static let shared = SearchInteractionsStore()
 
+    static let revealDelay: Duration = .milliseconds(450)
+
     private var service: SearchServicesStore { .shared }
+
+    @ObservationIgnored private var revealTasks: [CharacterSearchSurface: Task<Void, Never>] = [:]
 
     private init() {}
 
@@ -16,10 +20,11 @@ final class SearchInteractionsStore {
         state.query = query
         refresh(&state, on: surface, restart: false)
         service.setState(state, on: surface)
-        reveal(state.focus, on: surface)
+        revealLater(on: surface)
     }
 
     func clear(on surface: CharacterSearchSurface) {
+        cancelReveal(on: surface)
         guard !service.state(surface).query.isEmpty else { return }
         service.setState(CharacterSearchState(), on: surface)
     }
@@ -30,6 +35,7 @@ final class SearchInteractionsStore {
         state.position = (state.position + 1) % state.ordered.count
         state.focus = service.makeFocus(characterID: state.ordered[state.position])
         service.setState(state, on: surface)
+        cancelReveal(on: surface)
         reveal(state.focus, on: surface)
         MojiHaptics.selection()
     }
@@ -45,6 +51,7 @@ final class SearchInteractionsStore {
     }
 
     func activeScriptDidChange(on surface: CharacterSearchSurface) {
+        cancelReveal(on: surface)
         var state = service.state(surface)
         guard !state.query.isEmpty else { return }
         refresh(&state, on: surface, restart: true)
@@ -53,6 +60,7 @@ final class SearchInteractionsStore {
     }
 
     func activePageDidChange(on surface: CharacterSearchSurface) {
+        cancelReveal(on: surface)
         var state = service.state(surface)
         guard !state.query.isEmpty else { return }
         let script = service.activeScript(surface)
@@ -84,6 +92,21 @@ final class SearchInteractionsStore {
         state.found = Set(ordered)
         state.position = 0
         state.focus = ordered.first.flatMap { service.makeFocus(characterID: $0) }
+    }
+
+    private func revealLater(on surface: CharacterSearchSurface) {
+        revealTasks[surface]?.cancel()
+        revealTasks[surface] = Task {
+            try? await Task.sleep(for: Self.revealDelay)
+            guard !Task.isCancelled else { return }
+            revealTasks[surface] = nil
+            reveal(service.state(surface).focus, on: surface)
+        }
+    }
+
+    private func cancelReveal(on surface: CharacterSearchSurface) {
+        revealTasks[surface]?.cancel()
+        revealTasks[surface] = nil
     }
 
     private func reveal(_ focus: CharacterSearchFocus?, on surface: CharacterSearchSurface) {

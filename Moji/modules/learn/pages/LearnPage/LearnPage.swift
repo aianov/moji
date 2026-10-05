@@ -59,6 +59,7 @@ struct LearnPage: View {
             }
             .padding(.top, 6)
         }
+        .ignoresSafeArea(.keyboard)
         .background {
             AppBackground()
         }

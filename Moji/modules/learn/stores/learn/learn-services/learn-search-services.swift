@@ -5,7 +5,7 @@ extension LearnServicesStore {
         planner.batches(page).flatMap(\.characterIDs)
     }
 
-    func batchIndex(containing characterID: String, in page: MojiPage) -> Int? {
-        planner.batches(page).first { $0.characterIDs.contains(characterID) }?.index
+    func batchID(containing characterID: String, in page: MojiPage) -> String? {
+        planner.batches(page).first { $0.characterIDs.contains(characterID) }?.id
     }
 }

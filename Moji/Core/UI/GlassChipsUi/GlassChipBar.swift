@@ -84,8 +84,19 @@ private struct GlassChipButton<ID: Hashable>: View {
             .contentShape(Capsule(style: .continuous))
         }
         .buttonStyle(.plain)
-        .liquidChromeCapsule(tint: isSelected ? theme.text.primary : nil, interactive: true)
-        .animation(GlassChipMetrics.selectAnimation, value: isSelected)
+        .glassChip(isSelected: isSelected, theme: theme)
         .accessibilityAddTraits(isSelected ? [.isButton, .isSelected] : [.isButton])
+    }
+}
+
+extension View {
+    func glassChip(isSelected: Bool, theme: AppTheme) -> some View {
+        background {
+            Capsule(style: .continuous)
+                .fill(theme.text.primary)
+                .opacity(isSelected ? 1 : 0)
+        }
+        .liquidChromeCapsule(interactive: true)
+        .animation(GlassChipMetrics.selectAnimation, value: isSelected)
     }
 }

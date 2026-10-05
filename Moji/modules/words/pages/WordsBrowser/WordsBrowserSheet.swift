@@ -113,7 +113,7 @@ struct WordsFilterChip: View {
                 .contentShape(Capsule(style: .continuous))
         }
         .buttonStyle(.plain)
-        .liquidChromeCapsule(tint: isSelected ? theme.text.primary : nil, interactive: true)
+        .glassChip(isSelected: isSelected, theme: theme)
         .accessibilityAddTraits(isSelected ? [.isButton, .isSelected] : .isButton)
     }
 }
